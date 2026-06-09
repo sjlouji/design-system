@@ -84,6 +84,7 @@ export const AllVariantsCheck: Story = {
     const alerts = canvas.getAllByRole('alert')
     expect(alerts).toHaveLength(2)
     expect(alerts[0]).toHaveAttribute('data-slot', 'alert')
-    expect(alerts[1]).toHaveAttribute('data-variant', 'destructive')
+    // variant is applied via className, not a DOM attribute — check class presence
+    expect(alerts[1].className).toContain('text-destructive')
   },
 }

@@ -1,0 +1,92 @@
+name: Prerelease
+
+# Runs when code is pushed to feature, fix, or bugfix branches.
+# Publishes a dev version to npm tagged with the sanitised branch name.
+#
+# Version format: {current-base-version}-{branch-slug}.{run-number}
+# Example:        0.1.0-feature-add-button.42
+
+on:
+  push:
+    branches:
+      - 'feature/**'
+      - 'feat/**'
+      - 'fix/**'
+      - 'bugfix/**'
+      - 'hotfix/**'
+
+jobs:
+  prerelease:
+    name: Build & Publish dev version
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write   # npm provenance
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build library
+        run: npm run build
+
+      # ── Compute dev version ───────────────────────────────────────────────────
+
+      - name: Set dev version
+        id: version
+        run: |
+          # Strip refs/heads/ prefix
+          BRANCH="${GITHUB_REF#refs/heads/}"
+
+          # Sanitise: lowercase, replace / and _ with -, strip other chars
+          SLUG=$(echo "$BRANCH" \
+            | tr '[:upper:]' '[:lower:]' \
+            | tr '/' '-' | tr '_' '-' \
+            | sed 's/[^a-z0-9-]//g' \
+            | sed 's/--*/-/g')
+
+          # Base version (strip any existing prerelease suffix)
+          BASE=$(node -p "require('./package.json').version.replace(/-.*$/, '')")
+
+          DEV_VERSION="${BASE}-${SLUG}.${{ github.run_number }}"
+
+          # Patch package.json in-place (not committed — build artifact only)
+          node -e "
+            const fs = require('fs');
+            const p  = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+            p.version = '${DEV_VERSION}';
+            fs.writeFileSync('package.json', JSON.stringify(p, null, 2) + '\n');
+          "
+
+          echo "version=${DEV_VERSION}" >> "$GITHUB_OUTPUT"
+          echo "tag=${SLUG}"            >> "$GITHUB_OUTPUT"
+
+      # ── npm Publish ───────────────────────────────────────────────────────────
+
+      - name: Publish to npm (dev tag)
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm publish \
+            --access public \
+            --provenance \
+            --tag "${{ steps.version.outputs.tag }}"
+
+      - name: Summary
+        run: |
+          echo "### Prerelease published :rocket:" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "| | |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|---|---|" >> "$GITHUB_STEP_SUMMARY"
+          echo "| **Version** | \`${{ steps.version.outputs.version }}\` |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| **npm tag** | \`${{ steps.version.outputs.tag }}\` |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| **Install** | \`npm install @sjlouji/design-system@${{ steps.version.outputs.tag }}\` |" >> "$GITHUB_STEP_SUMMARY"

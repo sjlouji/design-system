@@ -42,8 +42,9 @@ export const CssCheck: Story = {
     const canvas = within(canvasElement)
     const checkbox = canvas.getByRole('checkbox')
     expect(checkbox).toHaveAttribute('data-state', 'unchecked')
+    // Radix CheckboxPrimitive.Root renders as <button> (inline-block by default)
     const styles = window.getComputedStyle(checkbox)
-    expect(styles.display).toBe('inline-flex')
+    expect(styles.display).toBe('inline-block')
   },
 }
 

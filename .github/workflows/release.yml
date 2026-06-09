@@ -1,0 +1,81 @@
+name: Release
+
+# Runs when a commit lands on main (direct push or merged PR).
+# Skips if the commit message contains [skip ci] or was made by the bot itself.
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  release:
+    name: Version · Tag · Publish
+    runs-on: ubuntu-latest
+    # Don't run on the version-bump commit the bot itself pushes
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+
+    permissions:
+      contents: write   # push tag + release
+      id-token: write   # npm provenance
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0                      # full history for commit analysis
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Unit tests
+        run: npm run test
+
+      - name: Build library
+        run: npm run build
+
+      # ── Versioning ────────────────────────────────────────────────────────────
+
+      - name: Bump version (conventional commits)
+        id: version
+        run: |
+          NEW_VERSION=$(node scripts/bump-version.mjs)
+          echo "version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Commit version bump & push tag
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add package.json
+          git commit -m "chore: release v${{ steps.version.outputs.version }} [skip ci]"
+          git tag "v${{ steps.version.outputs.version }}"
+          git push
+          git push --tags
+
+      # ── GitHub Release ────────────────────────────────────────────────────────
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "v${{ steps.version.outputs.version }}" \
+            --title "v${{ steps.version.outputs.version }}" \
+            --generate-notes
+
+      # ── npm Publish ───────────────────────────────────────────────────────────
+
+      - name: Publish to npm (latest)
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public --provenance --tag latest
