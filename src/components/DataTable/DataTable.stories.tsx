@@ -1,16 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { createColumnHelper } from '@tanstack/react-table'
-import { DataTable } from './DataTable'
-
-const meta: Meta<typeof DataTable> = {
-  title: 'DataDisplay/DataTable',
-  component: DataTable,
-  tags: ['autodocs'],
-  parameters: { layout: 'padded' },
-}
-
-export default meta
-type Story = StoryObj<typeof DataTable>
+import { DataTable, type DataTableProps } from './DataTable'
 
 interface User {
   id: number
@@ -19,6 +9,16 @@ interface User {
   role: string
   status: string
 }
+
+const meta: Meta<DataTableProps<User>> = {
+  title: 'DataDisplay/DataTable',
+  component: DataTable,
+  tags: ['autodocs'],
+  parameters: { layout: 'padded' },
+}
+
+export default meta
+type Story = StoryObj<DataTableProps<User>>
 
 const columnHelper = createColumnHelper<User>()
 

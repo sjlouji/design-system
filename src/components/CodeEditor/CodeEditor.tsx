@@ -1,4 +1,3 @@
-import * as React from 'react'
 import ReactCodeMirror from '@uiw/react-codemirror'
 import { javascript } from '@codemirror/lang-javascript'
 import { css } from '@codemirror/lang-css'

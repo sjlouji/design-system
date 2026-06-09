@@ -6,6 +6,7 @@ const meta = {
   component: LayoutRow,
   tags: ['autodocs'],
   parameters: { layout: 'fullscreen' },
+  args: { children: null },
 } satisfies Meta<typeof LayoutRow>
 
 export default meta

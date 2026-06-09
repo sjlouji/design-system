@@ -8,6 +8,7 @@ const meta = {
   component: FieldGroup,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
+  args: { children: null },
 } satisfies Meta<typeof FieldGroup>
 
 export default meta

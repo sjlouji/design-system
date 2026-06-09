@@ -8,6 +8,7 @@ const meta = {
   component: SplitLayout,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
+  args: { label: '', children: null },
 } satisfies Meta<typeof SplitLayout>
 
 export default meta

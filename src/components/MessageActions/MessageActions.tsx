@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { CopyIcon, RefreshCwIcon, ThumbsUpIcon, ThumbsDownIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/Button'

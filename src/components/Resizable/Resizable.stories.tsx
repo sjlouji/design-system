@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>
 
 export const TwoPanels: Story = {
   render: () => (
-    <ResizablePanelGroup direction="horizontal" style={{ height: '200px', border: '1px solid #ccc' }}>
+    <ResizablePanelGroup orientation="horizontal" style={{ height: '200px', border: '1px solid #ccc' }}>
       <ResizablePanel defaultSize={50}>
         <div style={{ padding: '1rem', height: '100%', background: '#f5f5f5' }}>
           Left Panel
@@ -31,7 +31,7 @@ export const TwoPanels: Story = {
 
 export const ThreePanels: Story = {
   render: () => (
-    <ResizablePanelGroup direction="horizontal" style={{ height: '200px', border: '1px solid #ccc' }}>
+    <ResizablePanelGroup orientation="horizontal" style={{ height: '200px', border: '1px solid #ccc' }}>
       <ResizablePanel defaultSize={33}>
         <div style={{ padding: '1rem', height: '100%', background: '#f5f5f5' }}>
           Panel 1
@@ -55,7 +55,7 @@ export const ThreePanels: Story = {
 
 export const Vertical: Story = {
   render: () => (
-    <ResizablePanelGroup direction="vertical" style={{ height: '300px', border: '1px solid #ccc' }}>
+    <ResizablePanelGroup orientation="vertical" style={{ height: '300px', border: '1px solid #ccc' }}>
       <ResizablePanel defaultSize={50}>
         <div style={{ padding: '1rem', height: '100%', background: '#f5f5f5' }}>
           Top Panel

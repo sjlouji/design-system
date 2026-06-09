@@ -42,6 +42,7 @@ export const WithOverflow: Story = {
 }
 
 export const Sizes: Story = {
+  args: { avatars: sampleAvatars },
   render: () => (
     <div className="flex flex-col gap-6">
       <AvatarGroup avatars={sampleAvatars} size="sm" />

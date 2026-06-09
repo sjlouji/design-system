@@ -68,7 +68,7 @@ function AvatarBadge({ className, ...props }: React.ComponentProps<"span">) {
   )
 }
 
-function AvatarGroup({ className, ...props }: React.ComponentProps<"div">) {
+function AvatarStack({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="avatar-group"
@@ -81,7 +81,7 @@ function AvatarGroup({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-function AvatarGroupCount({
+function AvatarStackCount({
   className,
   ...props
 }: React.ComponentProps<"div">) {
@@ -102,6 +102,6 @@ export {
   AvatarImage,
   AvatarFallback,
   AvatarBadge,
-  AvatarGroup,
-  AvatarGroupCount,
+  AvatarStack,
+  AvatarStackCount,
 }

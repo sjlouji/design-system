@@ -7,6 +7,7 @@ const meta = {
   component: Field,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
+  args: { children: null },
 } satisfies Meta<typeof Field>
 
 export default meta

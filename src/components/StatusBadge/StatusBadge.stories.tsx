@@ -6,6 +6,7 @@ const meta = {
   component: StatusBadge,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
+  args: { status: 'online' as const },
 } satisfies Meta<typeof StatusBadge>
 
 export default meta

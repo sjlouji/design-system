@@ -7,6 +7,7 @@ const meta = {
   component: ChatThread,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
+  args: { children: null },
 } satisfies Meta<typeof ChatThread>
 
 export default meta

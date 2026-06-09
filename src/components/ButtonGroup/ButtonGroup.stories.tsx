@@ -8,6 +8,8 @@ const meta = {
   component: ButtonGroup,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
+  // children is required by type but always provided via render
+  args: { children: null },
 } satisfies Meta<typeof ButtonGroup>
 
 export default meta

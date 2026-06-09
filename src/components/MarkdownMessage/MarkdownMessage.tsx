@@ -1,4 +1,3 @@
-import * as React from 'react'
 import ReactMarkdown from 'react-markdown'
 import { cn } from '@/lib/utils'
 import { CodeBlock } from '@/components/CodeBlock'

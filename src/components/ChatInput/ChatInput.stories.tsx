@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import * as React from 'react'
 import { PaperclipIcon } from 'lucide-react'
 import { ChatInput } from './ChatInput'
 import { Button } from '@/components/Button'

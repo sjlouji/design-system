@@ -16,6 +16,7 @@ export const Default: Story = {
 }
 
 export const WithLabel: Story = {
+  args: { value: 'npm install @design-system/react' },
   render: () => (
     <div className="flex items-center gap-2 rounded-md border border-border bg-muted px-3 py-2 font-mono text-sm">
       <span className="flex-1 text-foreground">npm install @design-system/react</span>

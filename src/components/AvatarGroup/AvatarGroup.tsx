@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/Avatar'
 import { cn } from '@/lib/utils'
 

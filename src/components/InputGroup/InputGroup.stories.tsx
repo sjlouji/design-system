@@ -8,6 +8,7 @@ const meta = {
   component: InputGroup,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
+  args: { children: null },
 } satisfies Meta<typeof InputGroup>
 
 export default meta

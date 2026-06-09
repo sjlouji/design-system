@@ -1,5 +1,5 @@
+import { useState, useEffect } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import * as React from 'react'
 import { StreamingText } from './StreamingText'
 
 const meta = {
@@ -7,6 +7,7 @@ const meta = {
   component: StreamingText,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
+  args: { text: '' },
 } satisfies Meta<typeof StreamingText>
 
 export default meta
@@ -22,9 +23,9 @@ export const Static: Story = {
 export const Streaming: Story = {
   render: () => {
     const fullText = 'Hello! I am streaming text character by character...'
-    const [displayed, setDisplayed] = React.useState('')
+    const [displayed, setDisplayed] = useState('')
 
-    React.useEffect(() => {
+    useEffect(() => {
       let i = 0
       const interval = setInterval(() => {
         if (i < fullText.length) {

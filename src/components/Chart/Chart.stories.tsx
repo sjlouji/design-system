@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { Meta } from '@storybook/react-vite'
 import {
   Bar,
   BarChart,
@@ -17,7 +17,6 @@ const meta = {
 } satisfies Meta<typeof ChartContainer>
 
 export default meta
-type Story = StoryObj<typeof meta>
 
 const barData = [
   { month: 'Jan', sales: 186 },
@@ -35,7 +34,7 @@ const barConfig = {
   },
 } satisfies ChartConfig
 
-export const BarChartStory: Story = {
+export const BarChartStory = {
   name: 'BarChart',
   render: () => (
     <ChartContainer config={barConfig} className="h-[300px] w-[500px]">
@@ -64,7 +63,7 @@ const lineConfig = {
   },
 } satisfies ChartConfig
 
-export const LineChartStory: Story = {
+export const LineChartStory = {
   name: 'LineChart',
   render: () => (
     <ChartContainer config={lineConfig} className="h-[300px] w-[500px]">

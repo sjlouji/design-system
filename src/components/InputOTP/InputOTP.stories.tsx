@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { Meta } from '@storybook/react-vite'
 import { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from './InputOTP'
 
 const meta = {
@@ -6,12 +6,12 @@ const meta = {
   component: InputOTP,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
+  args: { maxLength: 6 },
 } satisfies Meta<typeof InputOTP>
 
 export default meta
-type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
+export const Default = {
   render: () => (
     <InputOTP maxLength={6}>
       <InputOTPGroup>
@@ -26,7 +26,7 @@ export const Default: Story = {
   ),
 }
 
-export const TwoGroups: Story = {
+export const TwoGroups = {
   render: () => (
     <InputOTP maxLength={6}>
       <InputOTPGroup>

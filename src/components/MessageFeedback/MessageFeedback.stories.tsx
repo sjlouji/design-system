@@ -6,18 +6,13 @@ const meta = {
   component: MessageFeedback,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
+  args: { onSubmit: () => {} },
 } satisfies Meta<typeof MessageFeedback>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {
-    onSubmit: (rating, comment) => {
-      console.log('Feedback:', rating, comment)
-    },
-  },
-}
+export const Default: Story = {}
 
 export const FeedbackSelected: Story = {
   render: () => {

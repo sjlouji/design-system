@@ -13,6 +13,7 @@ const meta = {
   component: ChatShell,
   tags: ['autodocs'],
   parameters: { layout: 'fullscreen' },
+  args: { children: null },
 } satisfies Meta<typeof ChatShell>
 
 export default meta

@@ -7,6 +7,7 @@ const meta = {
   component: ToggleGroup,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
+  args: { type: 'single' as const },
 } satisfies Meta<typeof ToggleGroup>
 
 export default meta

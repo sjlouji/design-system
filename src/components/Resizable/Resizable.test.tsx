@@ -5,7 +5,7 @@ import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from './Resizabl
 describe('Resizable', () => {
   it('renders panels', () => {
     render(
-      <ResizablePanelGroup direction="horizontal">
+      <ResizablePanelGroup orientation="horizontal">
         <ResizablePanel defaultSize={50}>
           <div>Left</div>
         </ResizablePanel>
@@ -21,7 +21,7 @@ describe('Resizable', () => {
 
   it('renders the panel group', () => {
     render(
-      <ResizablePanelGroup direction="horizontal">
+      <ResizablePanelGroup orientation="horizontal">
         <ResizablePanel defaultSize={100}>
           <div>Content</div>
         </ResizablePanel>
