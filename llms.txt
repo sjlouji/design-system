@@ -1,0 +1,2274 @@
+# @sjlouji/design-system — Component Catalog
+> Auto-generated 2026-06-09. Refresh with `npm run generate:llm-context`.
+
+## Import
+```ts
+import { Button, Field, Input, ... } from '@sjlouji/design-system'
+```
+
+## Stack
+- React 19 + TypeScript + Tailwind CSS v4
+- Radix UI primitives, class-variance-authority (CVA) for variants
+- `cn()` = clsx + tailwind-merge for className merging
+
+## Design Tokens
+CSS custom properties available globally:
+```
+--background  --foreground
+--primary     --primary-foreground
+--secondary   --secondary-foreground
+--muted       --muted-foreground
+--accent      --accent-foreground
+--destructive
+--border  --input  --ring  --radius
+```
+
+## Rules
+- Always import from `@sjlouji/design-system` — never reimplement components
+- Wrap every form input with `Field` (handles label, error, helperText, aria)
+- Use `variant` / `size` props for styling, not raw className overrides
+- Use `cn()` when composing classNames
+
+---
+
+## Accordion
+**Category:** Components/Accordion
+
+```tsx
+<Accordion {...args}>
+      <AccordionItem value="item-1">
+        <AccordionTrigger>What is a design system?</AccordionTrigger>
+        <AccordionContent>
+          A design system is a collection of reusable components guided by clear
+          standards.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Why use Tailwind CSS?</AccordionTrigger>
+        <AccordionContent>
+          Tailwind CSS provides utility-first styling that makes it easy to build
+          consistent UIs rapidly.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger>What is Radix UI?</AccordionTrigger>
+        <AccordionContent>
+          Radix UI provides accessible, unstyled component primitives for React.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+```
+
+**Variants/Stories:** Default, Single, Multiple, CssCheck, ExpandInteraction
+
+---
+
+## Alert
+**Category:** Components/Alert
+
+```ts
+interface AlertProps {
+  variant?: 'default' | 'destructive' // default: 'default'
+  // ...extends React.HTMLAttributes<HTMLElement>
+}
+```
+
+```tsx
+<Alert className="w-[400px]">
+      <AlertTitle>Heads up!</AlertTitle>
+      <AlertDescription>
+        You can add components to your app using the CLI.
+      </AlertDescription>
+    </Alert>
+```
+
+**Variants/Stories:** Default, Destructive, WithIcon, CssCheck, AllVariantsCheck
+
+---
+
+## AlertDialog
+**Category:** Components/AlertDialog
+
+```tsx
+<AlertDialog>
+      <AlertDialogTrigger asChild>
+        <button className="rounded-md bg-destructive px-4 py-2 text-sm text-white">
+          Delete account
+        </button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Delete account?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently delete your
+            account and remove your data from our servers.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction variant="destructive">Delete</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+```
+
+---
+
+## AspectRatio
+**Category:** Components/AspectRatio
+
+```tsx
+<div className="w-[400px]">
+      <AspectRatio ratio={16 / 9}>
+        <div className="flex h-full w-full items-center justify-center rounded-md bg-muted text-sm text-muted-foreground">
+          16:9
+        </div>
+      </AspectRatio>
+    </div>
+```
+
+**Variants/Stories:** Ratio16by9, Ratio4by3, Square
+
+---
+
+## AutoSuggest
+**Category:** Components/AutoSuggest
+
+```ts
+interface AutoSuggestOption {
+  value: string
+  label: string
+  description?: string
+}
+
+interface AutoSuggestProps {
+  options: AutoSuggestOption[]
+  value?: string
+  onChange?: (value: string) => void
+  onSelect?: (option: AutoSuggestOption) => void
+  placeholder?: string
+  loading?: boolean
+  emptyMessage?: string
+  filterOptions?: boolean
+  className?: string
+}
+```
+
+```tsx
+<AutoSuggest placeholder="Search frameworks…" />
+```
+
+**Variants/Stories:** Default, WithDescriptions, Loading, EmptyState, WithDefaultValue, NoFilter, Disabled
+
+---
+
+## Avatar
+**Category:** Components/Avatar
+
+```tsx
+<Avatar>
+      <AvatarImage src="https://i.pravatar.cc/40" alt="User avatar" />
+      <AvatarFallback>JD</AvatarFallback>
+    </Avatar>
+```
+
+**Variants/Stories:** WithImage, WithFallback, Fallback
+
+---
+
+## AvatarGroup
+**Category:** Primitives/AvatarGroup
+
+```ts
+interface AvatarItem {
+  src?: string
+  fallback: string
+  alt?: string
+}
+
+interface AvatarGroupProps {
+  avatars: AvatarItem[]
+  max?: number
+  size?: 'sm' | 'md' | 'lg'
+  className?: string
+}
+```
+
+```tsx
+<AvatarGroup max={4} size="md" />
+```
+
+**Variants/Stories:** Default, WithOverflow, Sizes
+
+---
+
+## Badge
+**Category:** Components/Badge
+
+```ts
+interface BadgeProps {
+  variant?: 'default' | 'secondary' | 'destructive' | 'outline' | 'ghost' | 'link' // default: 'default'
+  asChild?: boolean
+  // ...extends React.HTMLAttributes<HTMLElement>
+}
+```
+
+```tsx
+<Badge>Default</Badge>
+```
+
+**Variants/Stories:** Default, Secondary, Destructive, Outline, CssCheck, AllVariants
+
+---
+
+## BoardLayout
+**Category:** DataDisplay/BoardLayout
+
+```ts
+interface BoardCard {
+  id: string
+  title: string
+  description?: string
+  badge?: string
+  assignee?: { name: string; avatar?: string }
+  priority?: 'low' | 'medium' | 'high' | 'critical'
+}
+
+interface BoardColumn {
+  id: string
+  title: string
+  cards: BoardCard[]
+  color?: string
+}
+
+interface BoardLayoutProps {
+  columns: BoardColumn[]
+  onCardMove?: (
+    cardId: string,
+    fromColumnId: string,
+    toColumnId: string,
+    newIndex: number,
+  ) => void
+  onColumnsChange?: (columns: BoardColumn[]) => void
+  className?: string
+}
+```
+
+```tsx
+<BoardLayout />
+```
+
+**Variants/Stories:** Default, EmptyColumns, SingleColumn
+
+---
+
+## Branding
+**Category:** Navigation/Branding
+
+```tsx
+<Branding name="Acme" />
+```
+
+**Variants/Stories:** Default, WithTagline, Small, Large, WithCustomLogo, AsLink
+
+---
+
+## Breadcrumb
+**Category:** Components/Breadcrumb
+
+```tsx
+<Breadcrumb>
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/">Home</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/products">Products</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbPage>Item</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+```
+
+**Variants/Stories:** Default, WithEllipsis
+
+---
+
+## BreadcrumbGroup
+**Category:** Navigation/BreadcrumbGroup
+
+```tsx
+<BreadcrumbGroup label="Home" href="/" label="Projects" href="/projects" label="Design System" current />
+```
+
+**Variants/Stories:** Default, LongPath, SingleItem, WithCurrentPage
+
+---
+
+## Button
+**Category:** Components/Button
+
+```ts
+interface ButtonProps {
+  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link' // default: 'default'
+  size?: 'default' | 'xs' | 'sm' | 'lg' | 'icon' // default: 'default'
+  asChild?: boolean
+  // ...extends React.HTMLAttributes<HTMLElement>
+}
+```
+
+```tsx
+<Button>Button</Button>
+```
+
+**Variants/Stories:** Default, Secondary, Destructive, Outline, Ghost, Link, WithIcon, Loading, AllSizes, CssCheck, DisabledOpacity, ClickInteraction
+
+---
+
+## ButtonDropdown
+**Category:** Components/ButtonDropdown
+
+```ts
+interface DropdownAction {
+  label: string
+  onClick?: () => void
+  icon?: React.ReactNode
+  disabled?: boolean
+  destructive?: boolean
+}
+
+interface ButtonDropdownProps {
+  label: string
+  onClick?: () => void
+  actions: DropdownAction[]
+  variant?: 'default' | 'outline' | 'secondary'
+  size?: 'sm' | 'default' | 'lg'
+  disabled?: boolean
+  loading?: boolean
+  className?: string
+}
+```
+
+```tsx
+<ButtonDropdown label="Save" />
+```
+
+**Variants/Stories:** Default, Outline, Secondary, Loading, Disabled, SmallSize, LargeSize, WithDisabledAction
+
+---
+
+## ButtonGroup
+**Category:** Forms/ButtonGroup
+
+```ts
+interface ButtonGroupProps {
+  children: React.ReactNode
+  orientation?: 'horizontal' | 'vertical'
+  className?: string
+}
+```
+
+```tsx
+<ButtonGroup {...args}>
+      <Button variant="outline">One</Button>
+      <Button variant="outline">Two</Button>
+      <Button variant="outline">Three</Button>
+    </ButtonGroup>
+```
+
+**Variants/Stories:** Default, WithIcons, Vertical, Sizes
+
+---
+
+## Calendar
+**Category:** Components/Calendar
+
+```tsx
+<Calendar mode="single" />
+```
+
+**Variants/Stories:** Default, Selected
+
+---
+
+## Card
+**Category:** Components/Card
+
+```tsx
+<Card className="w-[380px]">
+      <CardHeader>
+        <CardTitle>Card Title</CardTitle>
+        <CardDescription>Card description goes here.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p>This is the main card content area.</p>
+      </CardContent>
+      <CardFooter className="gap-2">
+        <Button variant="outline">Cancel</Button>
+        <Button>Save</Button>
+      </CardFooter>
+    </Card>
+```
+
+**Variants/Stories:** Default, Simple
+
+---
+
+## Carousel
+**Category:** Components/Carousel
+
+```tsx
+<Carousel className="w-full max-w-xs">
+      <CarouselContent>
+        {[1, 2, 3, 4, 5].map((item) => (
+          <CarouselItem key={item}>
+            <div className="flex aspect-square items-center justify-center rounded-lg border bg-muted p-6 text-2xl font-semibold">
+              {item}
+            </div>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious />
+      <CarouselNext />
+    </Carousel>
+```
+
+---
+
+## Chart
+**Category:** Components/Chart
+
+---
+
+## ChatInput
+**Category:** AI/ChatInput
+
+```ts
+interface ChatInputProps {
+  value?: string
+  onChange?: (value: string) => void
+  onSubmit?: (value: string) => void
+  placeholder?: string
+  disabled?: boolean
+  loading?: boolean
+  maxLength?: number
+  attachSlot?: React.ReactNode
+  className?: string
+}
+```
+
+```tsx
+<ChatInput placeholder="Message the AI…" />
+```
+
+**Variants/Stories:** Default, Loading, WithMaxLength, WithAttachSlot
+
+---
+
+## ChatMessage
+**Category:** AI/ChatMessage
+
+```ts
+interface ChatMessageProps {
+  role: 'user' | 'assistant' | 'system'
+  content: string
+  avatar?: { src?: string; fallback: string }
+  timestamp?: string
+  streaming?: boolean
+  actions?: React.ReactNode
+  className?: string
+}
+```
+
+```tsx
+<ChatMessage role="user" content="Hello! Can you explain how React hooks work?" fallback="U" timestamp="2:34 PM" />
+```
+
+**Variants/Stories:** UserMessage, AssistantMessage, Streaming, SystemMessage, WithActions
+
+---
+
+## ChatShell
+**Category:** AI/ChatShell
+
+```ts
+interface ChatShellProps {
+  sidebar?: React.ReactNode
+  header?: React.ReactNode
+  children: React.ReactNode
+  footer?: React.ReactNode
+  className?: string
+}
+```
+
+```tsx
+<ChatShell
+      sidebar={
+        <ConversationList
+          conversations={conversations}
+          onSelect={(id) => console.log('Select:', id)}
+          onDelete={(id) => console.log('Delete:', id)}
+        />
+      }
+      header={
+        <div className="flex items-center justify-between">
+          <span className="font-medium text-sm">React performance tips</span>
+          <ModelSelector models={models} value="claude-sonnet-4" />
+        </div>
+      }
+      footer={<ChatInput placeholder="Message Claude…" onSubmit={(v) => console.log(v)} />}
+    >
+      <ChatThread className="h-full">
+        <ChatMessage role="user" content="How can I optimise React rendering?" avatar={{ fallback: 'U' }} timestamp="2:00 PM" />
+        <ChatMessage
+          role="assistant"
+          content="There are several techniques to optimise React rendering:\n\n- **React.memo** — prevents re-renders when props haven't changed\n- **useMemo / useCallback** — memoize expensive computations\n- **Code splitting** — lazy load components with `React.lazy`"
+          avatar={{ fallback: 'AI' }}
+          timestamp="2:01 PM"
+        />
+      </ChatThread>
+    </ChatShell>
+```
+
+**Variants/Stories:** Default, WithoutSidebar
+
+---
+
+## ChatThread
+**Category:** AI/ChatThread
+
+```ts
+interface ChatThreadProps {
+  children: React.ReactNode
+  className?: string
+}
+```
+
+```tsx
+<ChatThread className="h-[400px] border rounded-lg">
+      <ChatMessage role="user" content="Hello! How are you?" avatar={{ fallback: 'U' }} timestamp="2:00 PM" />
+      <ChatMessage role="assistant" content="I'm doing great, thanks for asking! How can I help you today?" avatar={{ fallback: 'AI' }} timestamp="2:00 PM" />
+      <ChatMessage role="user" content="Can you write a hello world in TypeScript?" avatar={{ fallback: 'U' }} timestamp="2:01 PM" />
+      <ChatMessage
+        role="assistant"
+        content={`Sure! Here's hello world in TypeScript:\n\n\`\`\`typescript\nconst greeting: string = "Hello, World!";\nconsole.log(greeting);\n\`\`\``}
+        avatar={{ fallback: 'AI' }}
+        timestamp="2:01 PM"
+      />
+    </ChatThread>
+```
+
+**Variants/Stories:** WithMessages, Empty
+
+---
+
+## Checkbox
+**Category:** Components/Checkbox
+
+```tsx
+<Checkbox id="default" />
+```
+
+**Variants/Stories:** Default, Checked, Disabled, WithLabel, CssCheck, ToggleInteraction
+
+---
+
+## CodeBlock
+**Category:** DataDisplay/CodeBlock
+
+```ts
+interface CodeBlockProps {
+  code: string
+  language?: string
+  filename?: string
+  showLineNumbers?: boolean
+  className?: string
+}
+```
+
+```tsx
+<CodeBlock />
+```
+
+**Variants/Stories:** Default, WithFilename, WithLanguage, WithLineNumbers, LongCode
+
+---
+
+## CodeEditor
+**Category:** Components/CodeEditor
+
+```ts
+interface CodeEditorProps {
+  value?: string
+  onChange?: (value: string) => void
+  language?: CodeLanguage
+  theme?: 'light' | 'dark'
+  readOnly?: boolean
+  lineNumbers?: boolean
+  placeholder?: string
+  height?: string
+  minHeight?: string
+  maxHeight?: string
+  filename?: string
+  className?: string
+}
+```
+
+```tsx
+<CodeEditor language="javascript" height="200px" />
+```
+
+**Variants/Stories:** JavaScript, TypeScript, Python, JSON, DarkTheme, WithFilename, ReadOnly, NoLineNumbers, WithPlaceholder
+
+---
+
+## Collapsible
+**Category:** Components/Collapsible
+
+```tsx
+<Collapsible className="w-[350px] space-y-2">
+      <div className="flex items-center justify-between">
+        <h4 className="text-sm font-semibold">Starred repositories</h4>
+        <CollapsibleTrigger asChild>
+          <button className="flex items-center rounded-md p-1 text-sm hover:bg-muted">
+            <ChevronDownIcon className="size-4" />
+            <span className="sr-only">Toggle</span>
+          </button>
+        </CollapsibleTrigger>
+      </div>
+      <div className="rounded-md border px-4 py-2 text-sm">@radix-ui/primitives</div>
+      <CollapsibleContent className="space-y-2">
+        <div className="rounded-md border px-4 py-2 text-sm">@radix-ui/colors</div>
+        <div className="rounded-md border px-4 py-2 text-sm">@stitches/react</div>
+      </CollapsibleContent>
+    </Collapsible>
+```
+
+---
+
+## Combobox
+**Category:** Forms/Combobox
+
+```tsx
+<Combobox placeholder="Select a framework..." searchPlaceholder="Search frameworks..." emptyMessage="No framework found." />
+```
+
+**Variants/Stories:** Default, WithDescription, Disabled, Controlled
+
+---
+
+## Command
+**Category:** Components/Command
+
+```tsx
+<Command className="rounded-lg border shadow-md w-[400px]">
+      <CommandInput placeholder="Type a command or search..." />
+      <CommandList>
+        <CommandEmpty>No results found.</CommandEmpty>
+        <CommandGroup heading="Suggestions">
+          <CommandItem>
+            <CalendarIcon />
+            Calendar
+          </CommandItem>
+          <CommandItem>
+            <SearchIcon />
+            Search
+          </CommandItem>
+          <CommandItem>
+            <SettingsIcon />
+            Settings
+          </CommandItem>
+        </CommandGroup>
+      </CommandList>
+    </Command>
+```
+
+**Variants/Stories:** Default, WithGroups
+
+---
+
+## ContextMenu
+**Category:** Components/ContextMenu
+
+```tsx
+<ContextMenu>
+      <ContextMenuTrigger asChild>
+        <div className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm text-muted-foreground">
+          Right-click here
+        </div>
+      </ContextMenuTrigger>
+      <ContextMenuContent>
+        <ContextMenuLabel>Actions</ContextMenuLabel>
+        <ContextMenuSeparator />
+        <ContextMenuItem>Back</ContextMenuItem>
+        <ContextMenuItem>Reload</ContextMenuItem>
+        <ContextMenuSeparator />
+        <ContextMenuItem>Save as...</ContextMenuItem>
+        <ContextMenuItem variant="destructive">Delete</ContextMenuItem>
+      </ContextMenuContent>
+    </ContextMenu>
+```
+
+---
+
+## ConversationList
+**Category:** AI/ConversationList
+
+```ts
+interface Conversation {
+  id: string
+  title: string
+  preview?: string
+  timestamp?: string
+  active?: boolean
+}
+
+interface ConversationListProps {
+  conversations: Conversation[]
+  onSelect?: (id: string) => void
+  onDelete?: (id: string) => void
+  onRename?: (id: string, newTitle: string) => void
+  className?: string
+}
+```
+
+```tsx
+<ConversationList />
+```
+
+**Variants/Stories:** Default, WithActiveItem, Empty
+
+---
+
+## CopyButton
+**Category:** Primitives/CopyButton
+
+```ts
+interface CopyButtonProps {
+  value: string
+  size?: 'sm' | 'md'
+  className?: string
+}
+```
+
+```tsx
+<CopyButton value="npm install @design-system/react" />
+```
+
+**Variants/Stories:** Default, WithLabel, SmallSize
+
+---
+
+## DataTable
+**Category:** DataDisplay/DataTable
+
+```ts
+interface DataTableProps {
+  data: TData[]
+  columns: ColumnDef<TData, any>[]
+  searchable?: boolean
+  searchPlaceholder?: string
+  selectable?: boolean
+  pagination?: boolean
+  pageSize?: number
+  loading?: boolean
+  emptyMessage?: string
+  className?: string
+}
+```
+
+```tsx
+<DataTable />
+```
+
+**Variants/Stories:** Default, WithSearch, WithSelection, Loading, Empty
+
+---
+
+## DateInput
+**Category:** Components/DateInput
+
+```ts
+interface DateInputProps {
+  value?: Date
+  onChange?: (date: Date | undefined) => void
+  placeholder?: string
+  format?: string
+  disabled?: boolean
+  error?: boolean
+  min?: Date
+  max?: Date
+  className?: string
+}
+```
+
+```tsx
+<DateInput />
+```
+
+**Variants/Stories:** Default, WithValue, USFormat, ISOFormat, WithMinMax, ErrorState, Disabled
+
+---
+
+## DatePicker
+**Category:** Forms/DatePicker
+
+```tsx
+<DatePicker placeholder="Pick a date" />
+```
+
+**Variants/Stories:** Default, WithValue, Disabled, Controlled
+
+---
+
+## DateRangeInput
+**Category:** Components/DateRangeInput
+
+```ts
+interface DateRange {
+  from?: Date
+  to?: Date
+}
+
+interface DateRangeInputProps {
+  value?: DateRange
+  onChange?: (range: DateRange | undefined) => void
+  placeholder?: string
+  format?: string
+  disabled?: boolean
+  className?: string
+}
+```
+
+```tsx
+<DateRangeInput />
+```
+
+**Variants/Stories:** Default, WithValue, StartOnly, USFormat, Disabled, CustomPlaceholder
+
+---
+
+## Dialog
+**Category:** Components/Dialog
+
+```tsx
+<Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline">Open Dialog</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Edit profile</DialogTitle>
+          <DialogDescription>
+            Make changes to your profile here. Click save when you are done.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="py-4">
+          <p className="text-sm text-muted-foreground">Profile form content goes here.</p>
+        </div>
+        <DialogFooter>
+          <Button variant="outline">Cancel</Button>
+          <Button>Save changes</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+```
+
+**Variants/Stories:** Default, CssCheck, OpenCloseInteraction
+
+---
+
+## Direction
+**Category:** Utilities/Direction
+
+```ts
+interface DirectionProps {
+  dir?: Direction
+  children: React.ReactNode
+}
+```
+
+```tsx
+<Direction dir="ltr">
+      <div className="flex flex-col gap-2">
+        <p className="text-sm text-muted-foreground">Left-to-right (default)</p>
+        <SelectDemo />
+      </div>
+    </Direction>
+```
+
+**Variants/Stories:** LTR, RTL
+
+---
+
+## Drawer
+**Category:** Components/Drawer
+
+```tsx
+<Drawer>
+      <DrawerTrigger asChild>
+        <Button variant="outline">Open Drawer</Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Edit profile</DrawerTitle>
+          <DrawerDescription>
+            Make changes to your profile here.
+          </DrawerDescription>
+        </DrawerHeader>
+        <div className="p-4">
+          <p className="text-sm text-muted-foreground">Drawer content goes here.</p>
+        </div>
+        <DrawerFooter>
+          <Button>Save changes</Button>
+          <DrawerClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+```
+
+---
+
+## DropdownMenu
+**Category:** Components/DropdownMenu
+
+```tsx
+<DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">Open Menu</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56">
+        <DropdownMenuItem>Profile</DropdownMenuItem>
+        <DropdownMenuItem>Billing</DropdownMenuItem>
+        <DropdownMenuItem>Settings</DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem variant="destructive">Log out</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+```
+
+**Variants/Stories:** Default, WithIcons, WithGroups
+
+---
+
+## EmptyState
+**Category:** Layout/EmptyState
+
+```tsx
+<EmptyState title="No messages" />
+```
+
+**Variants/Stories:** Default, WithDescription, WithAction, SmallSize
+
+---
+
+## Field
+**Category:** Forms/Field
+
+```ts
+interface FieldProps {
+  label?: string
+  htmlFor?: string
+  helperText?: string
+  error?: string
+  required?: boolean
+  children: React.ReactNode
+  className?: string
+}
+```
+
+```tsx
+<div className="w-72">
+      <Field label="Email" htmlFor="email">
+        <Input id="email" type="email" placeholder="you@example.com" />
+      </Field>
+    </div>
+```
+
+**Variants/Stories:** Default, WithHelperText, WithError, Required
+
+---
+
+## FieldGroup
+**Category:** Forms/FieldGroup
+
+```ts
+interface FieldGroupProps {
+  title?: string
+  description?: string
+  children: React.ReactNode
+  className?: string
+  columns?: 1 | 2 | 3
+}
+```
+
+```tsx
+<div className="w-80">
+      <FieldGroup title="Personal Information">
+        <Field label="First Name" htmlFor="first">
+          <Input id="first" placeholder="Joan" />
+        </Field>
+        <Field label="Last Name" htmlFor="last">
+          <Input id="last" placeholder="Smith" />
+        </Field>
+        <Field label="Email" htmlFor="email">
+          <Input id="email" type="email" placeholder="you@example.com" />
+        </Field>
+      </FieldGroup>
+    </div>
+```
+
+**Variants/Stories:** SingleColumn, TwoColumns, WithDescription
+
+---
+
+## FileAttachment
+**Category:** AI/FileAttachment
+
+```ts
+interface FileAttachmentProps {
+  filename: string
+  size?: string
+  type?: string
+  url?: string
+  onRemove?: () => void
+  className?: string
+}
+```
+
+```tsx
+<FileAttachment filename="document.txt" size="12 KB" type="text/plain" />
+```
+
+**Variants/Stories:** Default, PDFFile, ImageFile, WithRemove, WithDownload
+
+---
+
+## FileDropzone
+**Category:** Components/FileDropzone
+
+```ts
+interface FileDropzoneProps {
+  accept?: string
+  multiple?: boolean
+  maxSize?: number
+  onFilesAccepted?: (files: File[]) => void
+  onFilesRejected?: (files: File[], reason: string) => void
+  disabled?: boolean
+  className?: string
+  children?: React.ReactNode
+}
+```
+
+```tsx
+<FileDropzone />
+```
+
+**Variants/Stories:** Default, ImagesOnly, PDFOnly, MultipleFiles, WithMaxSize, Disabled, CustomContent
+
+---
+
+## FileUpload
+**Category:** Components/FileUpload
+
+```ts
+interface UploadFile {
+  id: string
+  file: File
+  progress: number
+  status: 'pending' | 'uploading' | 'done' | 'error'
+  error?: string
+}
+
+interface FileUploadProps {
+  onUpload?: (files: File[]) => void
+  files?: UploadFile[]
+  onRemove?: (fileId: string) => void
+  accept?: string
+  multiple?: boolean
+  maxSize?: number
+  disabled?: boolean
+  className?: string
+}
+```
+
+```tsx
+<FileUpload />
+```
+
+**Variants/Stories:** Default, WithUploadingFiles, WithMixedStatuses, MultipleFiles, ImagesOnly, WithMaxSize, Disabled
+
+---
+
+## Form
+**Category:** Forms/Form
+
+**Variants/Stories:** Default, ProfileForm
+
+---
+
+## Header
+**Category:** Navigation/Header
+
+```tsx
+<Header name="Jane Smith" email="jane@example.com" />
+```
+
+**Variants/Stories:** Default, WithoutNav, MinimalHeader
+
+---
+
+## HoverCard
+**Category:** Components/HoverCard
+
+```tsx
+<HoverCard>
+      <HoverCardTrigger asChild>
+        <span className="cursor-pointer underline decoration-dotted underline-offset-4">
+          @johndoe
+        </span>
+      </HoverCardTrigger>
+      <HoverCardContent>
+        <div className="flex flex-col gap-2">
+          <h4 className="text-sm font-semibold">John Doe</h4>
+          <p className="text-sm text-muted-foreground">
+            Software engineer and open source contributor. Building cool things.
+          </p>
+          <p className="text-xs text-muted-foreground">Joined December 2021</p>
+        </div>
+      </HoverCardContent>
+    </HoverCard>
+```
+
+---
+
+## Input
+**Category:** Components/Input
+
+```tsx
+<Input className="w-[300px]" />
+```
+
+**Variants/Stories:** Default, WithPlaceholder, Disabled, TypeEmail, TypePassword, TypeSearch, CssCheck, TypeInteraction, ClearInteraction
+
+---
+
+## InputGroup
+**Category:** Forms/InputGroup
+
+```ts
+interface InputGroupProps {
+  prefix?: React.ReactNode
+  suffix?: React.ReactNode
+  children: React.ReactNode
+  className?: string
+}
+```
+
+```tsx
+<div className="w-64">
+      <InputGroup prefix="$">
+        <Input placeholder="0.00" />
+      </InputGroup>
+    </div>
+```
+
+**Variants/Stories:** WithPrefix, WithSuffix, WithBothSides, WithIconPrefix
+
+---
+
+## InputOTP
+**Category:** Components/InputOTP
+
+---
+
+## Item
+**Category:** Primitives/Item
+
+```ts
+interface ItemProps {
+  icon?: React.ReactNode
+  label: string
+  description?: string
+  trailing?: React.ReactNode
+  onClick?: () => void
+  active?: boolean
+  disabled?: boolean
+  className?: string
+}
+```
+
+```tsx
+<Item label="Profile" />
+```
+
+**Variants/Stories:** Default, WithDescription, WithTrailing, Clickable, Active, Disabled, List
+
+---
+
+## Kbd
+**Category:** Primitives/Kbd
+
+```ts
+interface KbdProps {
+  children: React.ReactNode
+  className?: string
+}
+```
+
+```tsx
+<Kbd>⌘K</Kbd>
+```
+
+**Variants/Stories:** Single, Combination, InlineWithText
+
+---
+
+## Label
+**Category:** Components/Label
+
+```tsx
+<Label>Email address</Label>
+```
+
+**Variants/Stories:** Default, WithHtmlFor
+
+---
+
+## LayoutRow
+**Category:** Layout/LayoutRow
+
+```tsx
+<div className="p-6">
+      <LayoutRow gap={4}>
+        <Box label="Box 1" />
+        <Box label="Box 2" />
+        <Box label="Box 3" />
+      </LayoutRow>
+    </div>
+```
+
+**Variants/Stories:** Default, Centered, SpaceBetween, Wrapped
+
+---
+
+## MarkdownMessage
+**Category:** AI/MarkdownMessage
+
+```ts
+interface MarkdownMessageProps {
+  content: string
+  className?: string
+}
+```
+
+```tsx
+<MarkdownMessage content="This is a simple paragraph of text rendered from markdown." />
+```
+
+**Variants/Stories:** Simple, WithCode, WithList, WithTable, Full
+
+---
+
+## Menubar
+**Category:** Components/Menubar
+
+```tsx
+<Menubar>
+      <MenubarMenu>
+        <MenubarTrigger>File</MenubarTrigger>
+        <MenubarContent>
+          <MenubarItem>
+            New Tab <MenubarShortcut>⌘T</MenubarShortcut>
+          </MenubarItem>
+          <MenubarItem>
+            New Window <MenubarShortcut>⌘N</MenubarShortcut>
+          </MenubarItem>
+          <MenubarSeparator />
+          <MenubarItem>Print</MenubarItem>
+        </MenubarContent>
+      </MenubarMenu>
+      <MenubarMenu>
+        <MenubarTrigger>Edit</MenubarTrigger>
+        <MenubarContent>
+          <MenubarItem>
+            Undo <MenubarShortcut>⌘Z</MenubarShortcut>
+          </MenubarItem>
+          <MenubarItem>
+            Redo <MenubarShortcut>⇧⌘Z</MenubarShortcut>
+          </MenubarItem>
+          <MenubarSeparator />
+          <MenubarItem>Cut</MenubarItem>
+          <MenubarItem>Copy</MenubarItem>
+          <MenubarItem>Paste</MenubarItem>
+        </MenubarContent>
+      </MenubarMenu>
+      <MenubarMenu>
+        <MenubarTrigger>View</MenubarTrigger>
+        <MenubarContent>
+          <MenubarItem>Zoom In</MenubarItem>
+          <MenubarItem>Zoom Out</MenubarItem>
+          <MenubarSeparator />
+          <MenubarItem>Full Screen</MenubarItem>
+        </MenubarContent>
+      </MenubarMenu>
+    </Menubar>
+```
+
+---
+
+## MessageActions
+**Category:** AI/MessageActions
+
+```ts
+interface MessageActionsProps {
+  onCopy?: () => void
+  onRegenerate?: () => void
+  onThumbsUp?: () => void
+  onThumbsDown?: () => void
+  className?: string
+}
+```
+
+```tsx
+<MessageActions />
+```
+
+**Variants/Stories:** AllActions, CopyOnly, WithFeedback
+
+---
+
+## MessageFeedback
+**Category:** AI/MessageFeedback
+
+```ts
+interface MessageFeedbackProps {
+  onSubmit: (rating: 'positive' | 'negative', comment?: string) => void
+  className?: string
+}
+```
+
+```tsx
+<MessageFeedback />
+```
+
+**Variants/Stories:** Default, FeedbackSelected
+
+---
+
+## ModelSelector
+**Category:** AI/ModelSelector
+
+```ts
+interface AIModel {
+  id: string
+  name: string
+  provider: string
+  contextWindow?: number
+  description?: string
+}
+
+interface ModelSelectorProps {
+  models: AIModel[]
+  value?: string
+  onChange?: (modelId: string) => void
+  disabled?: boolean
+  className?: string
+}
+```
+
+```tsx
+<ModelSelector value="claude-sonnet-4" />
+```
+
+**Variants/Stories:** Default, SingleModel, Disabled
+
+---
+
+## NativeSelect
+**Category:** Forms/NativeSelect
+
+```ts
+interface NativeSelectProps {
+  placeholder?: string
+  error?: boolean
+}
+```
+
+```tsx
+<div className="w-48">
+      <NativeSelect defaultValue="apple">{options}</NativeSelect>
+    </div>
+```
+
+**Variants/Stories:** Default, WithPlaceholder, WithError, Disabled
+
+---
+
+## NavigationMenu
+**Category:** Components/NavigationMenu
+
+```tsx
+<NavigationMenu>
+      <NavigationMenuList>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <div style={{ padding: '1rem', minWidth: '200px' }}>
+              <NavigationMenuLink href="#">Analytics</NavigationMenuLink>
+              <NavigationMenuLink href="#">Dashboard</NavigationMenuLink>
+              <NavigationMenuLink href="#">Reports</NavigationMenuLink>
+            </div>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>Company</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <div style={{ padding: '1rem', minWidth: '200px' }}>
+              <NavigationMenuLink href="#">About</NavigationMenuLink>
+              <NavigationMenuLink href="#">Careers</NavigationMenuLink>
+            </div>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink href="#">Blog</NavigationMenuLink>
+        </NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
+```
+
+---
+
+## PageHeader
+**Category:** Layout/PageHeader
+
+```tsx
+<PageHeader title="Dashboard" />
+```
+
+**Variants/Stories:** TitleOnly, WithDescription, WithActions, WithBreadcrumb, Full
+
+---
+
+## Pagination
+**Category:** Components/Pagination
+
+```tsx
+<Pagination>
+      <PaginationContent>
+        <PaginationItem>
+          <PaginationPrevious href="#" />
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink href="#">1</PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink href="#" isActive>2</PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink href="#">3</PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink href="#">4</PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink href="#">5</PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationNext href="#" />
+        </PaginationItem>
+      </PaginationContent>
+    </Pagination>
+```
+
+**Variants/Stories:** Default, FirstPage, LastPage
+
+---
+
+## Popover
+**Category:** Components/Popover
+
+```tsx
+<Popover>
+      <PopoverTrigger asChild>
+        <button
+          style={{
+            border: '1px solid #ccc',
+            borderRadius: 6,
+            padding: '6px 12px',
+            cursor: 'pointer',
+          }}
+        >
+          Open Popover
+        </button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <PopoverHeader>
+          <PopoverTitle>Popover Title</PopoverTitle>
+          <PopoverDescription>This is the popover description with some content.</PopoverDescription>
+        </PopoverHeader>
+      </PopoverContent>
+    </Popover>
+```
+
+---
+
+## Progress
+**Category:** Components/Progress
+
+```tsx
+<Progress value={50} className="w-[300px]" />
+```
+
+**Variants/Stories:** Default, Zero, Full, Loading
+
+---
+
+## PromptCard
+**Category:** AI/PromptCard
+
+```ts
+interface PromptCardProps {
+  title: string
+  content: string
+  category?: string
+  onUse?: () => void
+  onCopy?: () => void
+  onDelete?: () => void
+  className?: string
+}
+```
+
+```tsx
+<PromptCard title="Summarise article" content="Please summarise the following article in 3 bullet points, focusing on the key takeaways and actionable insights." />
+```
+
+**Variants/Stories:** Default, WithCategory, WithAllActions
+
+---
+
+## PromptInput
+**Category:** AI/PromptInput
+
+```ts
+interface PromptInputProps {
+  value?: string
+  onChange?: (v: string) => void
+  onSubmit?: (v: string) => void
+  placeholder?: string
+  maxTokens?: number
+  currentTokens?: number
+  disabled?: boolean
+  className?: string
+}
+```
+
+```tsx
+<PromptInput placeholder="Write a short story about…" />
+```
+
+**Variants/Stories:** Default, WithTokenCount, NearLimit, Disabled
+
+---
+
+## PromptLibrary
+**Category:** AI/PromptLibrary
+
+```ts
+interface PromptCardData {
+  id: string
+  title: string
+  content: string
+  category?: string
+}
+
+interface PromptLibraryProps {
+  prompts: PromptCardData[]
+  onUse?: (id: string) => void
+  onCopy?: (id: string) => void
+  onDelete?: (id: string) => void
+  className?: string
+}
+```
+
+```tsx
+<PromptLibrary />
+```
+
+**Variants/Stories:** Default, Empty, WithFilter
+
+---
+
+## RadioGroup
+**Category:** Components/RadioGroup
+
+```tsx
+<RadioGroup>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <RadioGroupItem value="option-1" id="option-1" />
+        <Label htmlFor="option-1">Option 1</Label>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <RadioGroupItem value="option-2" id="option-2" />
+        <Label htmlFor="option-2">Option 2</Label>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <RadioGroupItem value="option-3" id="option-3" />
+        <Label htmlFor="option-3">Option 3</Label>
+      </div>
+    </RadioGroup>
+```
+
+**Variants/Stories:** Default, WithDefaultValue, Disabled
+
+---
+
+## Resizable
+**Category:** Components/Resizable
+
+```tsx
+<ResizablePanelGroup orientation="horizontal" style={{ height: '200px', border: '1px solid #ccc' }}>
+      <ResizablePanel defaultSize={50}>
+        <div style={{ padding: '1rem', height: '100%', background: '#f5f5f5' }}>
+          Left Panel
+        </div>
+      </ResizablePanel>
+      <ResizableHandle withHandle />
+      <ResizablePanel defaultSize={50}>
+        <div style={{ padding: '1rem', height: '100%', background: '#e5e5e5' }}>
+          Right Panel
+        </div>
+      </ResizablePanel>
+    </ResizablePanelGroup>
+```
+
+**Variants/Stories:** TwoPanels, ThreePanels, Vertical
+
+---
+
+## ScrollArea
+**Category:** Components/ScrollArea
+
+```tsx
+<ScrollArea className="h-[200px] w-[300px] rounded-md border p-4">
+      {tags.map((tag) => (
+        <div key={tag} style={{ padding: '4px 0', fontSize: 14 }}>
+          {tag}
+        </div>
+      ))}
+    </ScrollArea>
+```
+
+**Variants/Stories:** Default, Horizontal
+
+---
+
+## SearchInput
+**Category:** Forms/SearchInput
+
+```ts
+interface SearchInputProps {
+  value?: string
+  onChange?: (value: string) => void
+  onClear?: () => void
+  placeholder?: string
+  debounce?: number
+  loading?: boolean
+  className?: string
+}
+```
+
+```tsx
+<div className="w-72">
+      <SearchInput {...args} />
+    </div>
+```
+
+**Variants/Stories:** Default, Controlled, Loading, WithClear, WithDebounce
+
+---
+
+## Section
+**Category:** Layout/Section
+
+```tsx
+<Section title="General" description="Basic settings for your account." />
+```
+
+**Variants/Stories:** Default, WithAction, WithDivider, WithContent
+
+---
+
+## Select
+**Category:** Components/Select
+
+```tsx
+<Select>
+      <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder="Select a fruit" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="apple">Apple</SelectItem>
+        <SelectItem value="banana">Banana</SelectItem>
+        <SelectItem value="cherry">Cherry</SelectItem>
+        <SelectItem value="mango">Mango</SelectItem>
+        <SelectItem value="orange">Orange</SelectItem>
+      </SelectContent>
+    </Select>
+```
+
+**Variants/Stories:** Default, WithPlaceholder, Disabled, CssCheck, OpenAndSelectInteraction
+
+---
+
+## Separator
+**Category:** Primitives/Separator
+
+```tsx
+<div className="w-64">
+      <p className="text-sm text-foreground">Above the separator</p>
+      <Separator className="my-4" />
+      <p className="text-sm text-foreground">Below the separator</p>
+    </div>
+```
+
+**Variants/Stories:** Horizontal, Vertical, WithLabel
+
+---
+
+## Sheet
+**Category:** Components/Sheet
+
+**Variants/Stories:** Right, Left, Top, Bottom
+
+---
+
+## Sidebar
+**Category:** Components/Sidebar
+
+```ts
+interface SidebarProps {
+  variant?: 'default' | 'outline' // default: 'default'
+  size?: 'default' | 'sm' | 'lg' // default: 'default'
+  // ...extends React.HTMLAttributes<HTMLElement>
+}
+```
+
+```tsx
+<SidebarProvider>
+      <Sidebar>
+        <SidebarHeader>
+          <div style={{ padding: '0.5rem', fontWeight: 600, fontSize: 14 }}>My App</div>
+        </SidebarHeader>
+        <SidebarContent>
+          <SidebarGroup>
+            <SidebarGroupLabel>Navigation</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {navItems.map((item) => (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton asChild>
+                      <a href={item.href}>
+                        <item.icon />
+                        <span>{item.title}</span>
+                      </a>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        </SidebarContent>
+      </Sidebar>
+      <SidebarInset>
+        <header style={{ display: 'flex', alignItems: 'center', padding: '0.75rem 1rem', borderBottom: '1px solid #eee' }}>
+          <SidebarTrigger />
+          <span style={{ marginLeft: '0.5rem', fontWeight: 500 }}>Dashboard</span>
+        </header>
+        <main style={{ padding: '1.5rem' }}>
+          <p>Main content area</p>
+        </main>
+      </SidebarInset>
+    </SidebarProvider>
+```
+
+---
+
+## Skeleton
+**Category:** Components/Skeleton
+
+```tsx
+<Skeleton className="h-4 w-[250px]" />
+```
+
+**Variants/Stories:** Default, CardSkeleton, ProfileSkeleton
+
+---
+
+## Slider
+**Category:** Components/Slider
+
+```tsx
+<Slider min={0} max={100} className="w-[300px]" />
+```
+
+**Variants/Stories:** Default, Range, Small
+
+---
+
+## Sonner
+**Category:** Components/Sonner
+
+```tsx
+<div>
+      <Toaster />
+      <button
+        style={{
+          border: '1px solid #ccc',
+          borderRadius: 6,
+          padding: '6px 12px',
+          cursor: 'pointer',
+        }}
+        onClick={() => toast('Event has been created', { description: 'Monday, January 3rd at 6:00pm' })}
+      >
+        Show Toast
+      </button>
+    </div>
+```
+
+---
+
+## Spinner
+**Category:** Primitives/Spinner
+
+```ts
+interface SpinnerProps {
+  size?: keyof typeof sizeMap
+  className?: string
+}
+```
+
+```tsx
+<Spinner size="md" />
+```
+
+**Variants/Stories:** Default, AllSizes, InlineWithText
+
+---
+
+## SplitLayout
+**Category:** Layout/SplitLayout
+
+```tsx
+<SplitLayout label="Display Name" />
+```
+
+**Variants/Stories:** Default, WithDescription, NestedInSection
+
+---
+
+## StatCard
+**Category:** DataDisplay/StatCard
+
+```tsx
+<StatCard label="Total Revenue" value="$12,400" />
+```
+
+**Variants/Stories:** Default, WithTrend, NegativeTrend, WithIcon, Loading
+
+---
+
+## StatusBadge
+**Category:** Primitives/StatusBadge
+
+```ts
+interface StatusBadgeProps {
+  status: Status
+  label?: string
+  showDot?: boolean
+  className?: string
+}
+```
+
+```tsx
+<div className="flex flex-col gap-3">
+      <StatusBadge status="online" />
+      <StatusBadge status="offline" />
+      <StatusBadge status="busy" />
+      <StatusBadge status="away" />
+      <StatusBadge status="pending" />
+    </div>
+```
+
+**Variants/Stories:** AllStatuses, WithLabel, WithoutDot
+
+---
+
+## Stepper
+**Category:** Navigation/Stepper
+
+```ts
+interface StepperStep {
+  id: string
+  title: string
+  description?: string
+  optional?: boolean
+}
+
+interface StepperProps {
+  steps: StepperStep[]
+  currentStep: number
+  onStepClick?: (index: number) => void
+  orientation?: 'horizontal' | 'vertical'
+  className?: string
+}
+
+interface UseStepperReturn {
+  currentStep: number
+  next: () => void
+  prev: () => void
+  goTo: (index: number) => void
+  isFirst: boolean
+  isLast: boolean
+  isComplete: boolean
+}
+```
+
+```tsx
+<Stepper currentStep={0} />
+```
+
+**Variants/Stories:** Default, Step2Active, AllComplete, Vertical, Interactive
+
+---
+
+## StreamingText
+**Category:** AI/StreamingText
+
+```ts
+interface StreamingTextProps {
+  text: string
+  streaming?: boolean
+  className?: string
+}
+```
+
+```tsx
+<StreamingText text="This is a static message with no streaming cursor." streaming={false} />
+```
+
+**Variants/Stories:** Static, Streaming, Empty
+
+---
+
+## Switch
+**Category:** Components/Switch
+
+```tsx
+<Switch />
+```
+
+**Variants/Stories:** Default, Checked, Disabled, WithLabel, CssCheck, ToggleInteraction
+
+---
+
+## Table
+**Category:** Components/Table
+
+```tsx
+<Table>
+      <TableCaption>A list of recent invoices.</TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Invoice</TableHead>
+          <TableHead>Status</TableHead>
+          <TableHead>Method</TableHead>
+          <TableHead className="text-right">Amount</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {invoices.map((invoice) => (
+          <TableRow key={invoice.id}>
+            <TableCell>{invoice.id}</TableCell>
+            <TableCell>{invoice.status}</TableCell>
+            <TableCell>{invoice.method}</TableCell>
+            <TableCell className="text-right">{invoice.amount}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+```
+
+**Variants/Stories:** Default, WithFooter
+
+---
+
+## Tabs
+**Category:** Components/Tabs
+
+```ts
+interface TabsProps {
+  variant?: 'default' | 'line' // default: 'default'
+  // ...extends React.HTMLAttributes<HTMLElement>
+}
+```
+
+```tsx
+<Tabs defaultValue="account" className="w-[400px]">
+      <TabsList>
+        <TabsTrigger value="account">Account</TabsTrigger>
+        <TabsTrigger value="password">Password</TabsTrigger>
+        <TabsTrigger value="settings">Settings</TabsTrigger>
+      </TabsList>
+      <TabsContent value="account">
+        <p style={{ padding: '1rem 0', fontSize: 14 }}>
+          Make changes to your account here. Click save when you are done.
+        </p>
+      </TabsContent>
+      <TabsContent value="password">
+        <p style={{ padding: '1rem 0', fontSize: 14 }}>
+          Change your password here. After saving, you will be logged out.
+        </p>
+      </TabsContent>
+      <TabsContent value="settings">
+        <p style={{ padding: '1rem 0', fontSize: 14 }}>
+          Update your settings and preferences.
+        </p>
+      </TabsContent>
+    </Tabs>
+```
+
+**Variants/Stories:** Default, DefaultValue, CssCheck, SwitchTabInteraction
+
+---
+
+## Textarea
+**Category:** Components/Textarea
+
+```tsx
+<Textarea className="w-[320px]" />
+```
+
+**Variants/Stories:** Default, WithPlaceholder, Disabled, WithRows
+
+---
+
+## ThinkingBlock
+**Category:** AI/ThinkingBlock
+
+```ts
+interface ThinkingBlockProps {
+  children: React.ReactNode
+  title?: string
+  defaultOpen?: boolean
+  className?: string
+}
+```
+
+```tsx
+<ThinkingBlock defaultOpen={false}>The user is asking about the capital of France. The answer is Paris.</ThinkingBlock>
+```
+
+**Variants/Stories:** Default, DefaultOpen, WithLongContent
+
+---
+
+## Timeline
+**Category:** DataDisplay/Timeline
+
+```tsx
+<Timeline />
+```
+
+**Variants/Stories:** Default, WithStatuses, WithIcons
+
+---
+
+## Toggle
+**Category:** Components/Toggle
+
+```ts
+interface ToggleProps {
+  variant?: 'default' | 'outline' // default: 'default'
+  size?: 'default' | 'sm' | 'lg' // default: 'default'
+  // ...extends React.HTMLAttributes<HTMLElement>
+}
+```
+
+```tsx
+<Toggle>Toggle</Toggle>
+```
+
+**Variants/Stories:** Default, Pressed, Outline, WithIcon, Sizes
+
+---
+
+## ToggleGroup
+**Category:** Components/ToggleGroup
+
+```tsx
+<ToggleGroup type="single" defaultValue="center">
+      <ToggleGroupItem value="left" aria-label="Align left">
+        <AlignLeftIcon />
+      </ToggleGroupItem>
+      <ToggleGroupItem value="center" aria-label="Align center">
+        <AlignCenterIcon />
+      </ToggleGroupItem>
+      <ToggleGroupItem value="right" aria-label="Align right">
+        <AlignRightIcon />
+      </ToggleGroupItem>
+    </ToggleGroup>
+```
+
+**Variants/Stories:** Default, Multiple, SingleVariant, OutlineVariant
+
+---
+
+## TokenCounter
+**Category:** AI/TokenCounter
+
+```ts
+interface TokenCounterProps {
+  current: number
+  max: number
+  className?: string
+}
+```
+
+```tsx
+<TokenCounter current={1200} max={8000} />
+```
+
+**Variants/Stories:** Normal, Warning, Critical
+
+---
+
+## Tooltip
+**Category:** Components/Tooltip
+
+```tsx
+<Tooltip>
+      <TooltipTrigger asChild>
+        <button
+          style={{
+            border: '1px solid #ccc',
+            borderRadius: 6,
+            padding: '6px 12px',
+            cursor: 'pointer',
+          }}
+        >
+          Hover me
+        </button>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>This is a tooltip</p>
+      </TooltipContent>
+    </Tooltip>
+```
+
+**Variants/Stories:** Default, DestructiveContent, LeftSide
+
+---
+
+## TopNavigation
+**Category:** Navigation/TopNavigation
+
+```tsx
+<TopNavigation id="dashboard" label="Dashboard" active id="projects" label="Projects" id="team" label="Team" id="settings" label="Settings" />
+```
+
+**Variants/Stories:** Default, WithIcons, WithBadges, Disabled
+
+---
+
+## TreeView
+**Category:** DataDisplay/TreeView
+
+```ts
+interface TreeNode {
+  id: string
+  label: string
+  icon?: React.ReactNode
+  children?: TreeNode[]
+  disabled?: boolean
+  badge?: string | number
+}
+
+interface TreeViewProps {
+  nodes: TreeNode[]
+  defaultExpanded?: string[]
+  selected?: string
+  onSelect?: (nodeId: string) => void
+  className?: string
+}
+```
+
+```tsx
+<TreeView />
+```
+
+**Variants/Stories:** Default, FileTree, SingleLevel, WithBadges, Controlled
+
+---
+
+## TypingIndicator
+**Category:** AI/TypingIndicator
+
+```ts
+interface TypingIndicatorProps {
+  className?: string
+}
+```
+
+```tsx
+<TypingIndicator />
+```
+
+---
+
+## Typography
+**Category:** Typography/Typography
+
+```ts
+interface TypographyProps {
+  variant?: TypographyVariant
+  as?: React.ElementType
+  className?: string
+  children?: React.ReactNode
+}
+```
+
+```tsx
+<div className="flex flex-col gap-4 max-w-xl">
+      <Typography variant="h1">Heading 1</Typography>
+      <Typography variant="h2">Heading 2</Typography>
+      <Typography variant="h3">Heading 3</Typography>
+      <Typography variant="h4">Heading 4</Typography>
+      <Typography variant="p">
+        Paragraph — The quick brown fox jumps over the lazy dog.
+      </Typography>
+      <Typography variant="lead">
+        Lead — A larger introductory paragraph.
+      </Typography>
+      <Typography variant="large">Large text</Typography>
+      <Typography variant="small">Small text</Typography>
+      <Typography variant="muted">Muted text</Typography>
+      <Typography variant="blockquote">
+        Blockquote — "Design is not just what it looks like and feels like. Design is how it works."
+      </Typography>
+      <Typography variant="code">const greeting = "hello world"</Typography>
+      <Typography variant="list" as="ul">
+        <li>First item</li>
+        <li>Second item</li>
+        <li>Third item</li>
+      </Typography>
+    </div>
+```
+
+**Variants/Stories:** AllVariants, Heading, Body

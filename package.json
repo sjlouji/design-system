@@ -31,7 +31,8 @@
     "test:watch": "vitest --project=unit",
     "test:coverage": "vitest run --project=unit --coverage",
     "prepublishOnly": "npm run lint && npm run test && npm run build",
-    "prepare": "husky"
+    "prepare": "husky",
+    "generate:llm-context": "node scripts/generate-llm-context.mjs"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
