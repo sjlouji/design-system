@@ -1,8 +1,12 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { render } from '@/lib/test-utils'
 import { InputOTP, InputOTPGroup, InputOTPSlot } from './InputOTP'
 
+// input-otp schedules a window-access timeout after mount; fake timers
+// prevent it from firing after jsdom tears down the environment.
 describe('InputOTP', () => {
+  beforeEach(() => vi.useFakeTimers())
+  afterEach(() => vi.useRealTimers())
   it('renders the correct number of slots', () => {
     render(
       <InputOTP maxLength={6}>
