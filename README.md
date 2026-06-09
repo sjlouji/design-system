@@ -8,6 +8,9 @@ A React component library built on Radix UI primitives, Tailwind CSS v4, and sha
 
 **Stack:** React 19 · TypeScript 6 · Tailwind CSS v4 · Radix UI · Vite · Storybook 10 · Vitest
 
+**Storybook:** `https://<branch>--6a278cda6ea36483150a66f5.chromatic.com`
+e.g. [https://main--6a278cda6ea36483150a66f5.chromatic.com](https://main--6a278cda6ea36483150a66f5.chromatic.com) for `main`
+
 ---
 
 ## Getting started locally
