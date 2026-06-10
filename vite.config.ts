@@ -8,11 +8,12 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import { playwright } from '@vitest/browser-playwright';
+import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
-  plugins: [tailwindcss(), react()],
+  plugins: [tailwindcss(), react(), cssInjectedByJsPlugin()],
   resolve: {
     alias: {
       '@': path.resolve(dirname, './src'),
@@ -23,7 +24,6 @@ export default defineConfig({
       entry: path.resolve(dirname, 'src/index.ts'),
       formats: ['es'],
       fileName: () => 'index.mjs',
-      cssFileName: 'index',
     },
     rollupOptions: {
       external: (id) => !id.startsWith('.') && !id.startsWith('\0') && !id.startsWith('@/') && !path.isAbsolute(id),
