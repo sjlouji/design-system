@@ -21,16 +21,13 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(dirname, 'src/index.ts'),
-      formats: ['es', 'cjs'],
-      fileName: (format) => `index.${format === 'es' ? 'mjs' : 'cjs'}`,
+      formats: ['es'],
+      fileName: () => 'index.mjs',
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'react/jsx-runtime'],
+      external: (id) => !id.startsWith('.') && !id.startsWith('\0') && !id.startsWith('@/') && !path.isAbsolute(id),
       output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-        },
+        format: 'es',
       },
     },
   },

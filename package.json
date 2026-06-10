@@ -6,12 +6,10 @@
     "type": "git",
     "url": "https://github.com/sjlouji/design-system"
   },
-  "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.mjs"
     },
     "./styles": "./dist/index.css"
   },
