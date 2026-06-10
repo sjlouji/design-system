@@ -1,3 +1,5 @@
+import './index.css'
+
 // ─── Utilities ────────────────────────────────────────────────────────────────
 export { cn } from './lib/utils'
 

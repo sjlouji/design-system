@@ -23,6 +23,7 @@ export default defineConfig({
       entry: path.resolve(dirname, 'src/index.ts'),
       formats: ['es'],
       fileName: () => 'index.mjs',
+      cssFileName: 'index',
     },
     rollupOptions: {
       external: (id) => !id.startsWith('.') && !id.startsWith('\0') && !id.startsWith('@/') && !path.isAbsolute(id),
