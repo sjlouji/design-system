@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/joanlouji/Documents/repositories/design-system diff HEAD --stat)",
+      "Bash(git -C /Users/joanlouji/Documents/repositories/design-system show --stat HEAD)"
+    ]
+  }
+}
