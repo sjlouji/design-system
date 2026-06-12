@@ -64,6 +64,7 @@ export * from './components/Tooltip'
 
 // ─── Form ─────────────────────────────────────────────────────────────────────
 export * from './components/Form'
+export * from './components/PropertyFilter'
 export * from './components/Field'
 export * from './components/FieldGroup'
 export * from './components/InputGroup'
