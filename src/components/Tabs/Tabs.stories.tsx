@@ -1,8 +1,32 @@
 import * as React from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { Settings, User, Bell, CreditCard, ShieldCheck, Code2, Database, Globe } from 'lucide-react'
+import {
+  Settings,
+  User,
+  Bell,
+  CreditCard,
+  ShieldCheck,
+  Code2,
+  Database,
+  Globe,
+  BarChart2,
+  FileText,
+  Layout,
+  Lock,
+  Palette,
+  Activity,
+  Package,
+  HelpCircle,
+  Home,
+  Inbox,
+  Send,
+  Star,
+  Trash2,
+} from 'lucide-react'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from './Tabs'
+import type { ExpandableTabsEntry } from './ExpandableTabs'
 import { Badge } from '@/components/Badge'
+import { Button } from '@/components/Button'
 
 const meta = {
   title: 'Components/Tabs',
@@ -10,30 +34,57 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   argTypes: {
+    type: {
+      control: 'select',
+      options: ['default', 'expandable'],
+      description:
+        '`"default"` renders standard pill/line tabs using Radix UI (compose with `TabsList`, `TabsTrigger`, `TabsContent`). `"expandable"` renders icon-only tabs that expand to show a label when active — pass a `tabs` array instead of children.',
+    },
     defaultValue: {
       control: 'text',
-      description: 'The value of the tab that should be active by default (uncontrolled). Omit when using `value` for controlled mode.',
+      description: '(`type="default"`) The value of the tab that should be active by default (uncontrolled). Omit when using `value` for controlled mode.',
     },
     value: {
       control: 'text',
-      description: 'Controlled active tab value. Use with `onValueChange` to manage state externally.',
+      description: '(`type="default"`) Controlled active tab value. Use with `onValueChange` to manage state externally.',
     },
     onValueChange: {
       action: 'valueChanged',
-      description: 'Callback fired when the active tab changes. Receives the new tab value string as its argument.',
+      description: '(`type="default"`) Callback fired when the active tab changes. Receives the new tab value string.',
     },
     orientation: {
       control: 'select',
       options: ['horizontal', 'vertical'],
-      description: 'Direction of the tab list and active indicator. `horizontal` stacks tabs in a row with a bottom line indicator; `vertical` stacks them in a column with a right-side indicator.',
+      description: '(`type="default"`) Direction of the tab list. `horizontal` stacks tabs in a row; `vertical` stacks them in a column.',
+    },
+    tabs: {
+      control: false,
+      description:
+        '(`type="expandable"`) Array of tab entries. Each entry is `{ title: string; icon: LucideIcon }` or `{ type: "separator" }` for a visual divider.',
+    },
+    activeIndex: {
+      control: 'number',
+      description: '(`type="expandable"`) Controlled active tab index. Pass `null` to deselect all.',
+    },
+    defaultActiveIndex: {
+      control: 'number',
+      description: '(`type="expandable"`) Initial active index for uncontrolled usage.',
+    },
+    onChange: {
+      action: 'onChange',
+      description: '(`type="expandable"`) Fired when a tab is selected or deselected. Receives the new index or `null`.',
+    },
+    activeColor: {
+      control: 'text',
+      description: '(`type="expandable"`) Tailwind text-colour class for the active tab (e.g. `"text-primary"`). Defaults to `"text-foreground"`.',
     },
     className: {
       control: 'text',
-      description: 'Additional CSS classes on the root `Tabs` element.',
+      description: 'Additional CSS classes on the root element.',
     },
     children: {
       control: false,
-      description: 'Compose with TabsList, TabsTrigger, and TabsContent. TabsList accepts a `variant` prop (`default` | `line`) that controls pill vs. underline styling.',
+      description: '(`type="default"`) Compose with `TabsList`, `TabsTrigger`, and `TabsContent`. `TabsList` accepts a `variant` prop (`"default"` | `"line"`) that controls pill vs. underline styling.',
     },
   },
 } satisfies Meta<typeof Tabs>
@@ -345,4 +396,377 @@ export const DefaultToSecondTab: Story = {
       <TabsContent value="settings">Settings content</TabsContent>
     </Tabs>
   ),
+}
+
+export const SettingsPage: Story = {
+  render: () => (
+    <div className="w-[640px] rounded-lg border bg-card p-6 shadow-sm">
+      <div className="mb-6">
+        <h2 className="text-lg font-semibold">Settings</h2>
+        <p className="text-sm text-muted-foreground">Manage your account and workspace preferences.</p>
+      </div>
+      <Tabs defaultValue="profile" orientation="vertical" className="gap-6">
+        <TabsList className="w-44 shrink-0">
+          <TabsTrigger value="profile" className="justify-start gap-2">
+            <User className="size-4" />
+            Profile
+          </TabsTrigger>
+          <TabsTrigger value="appearance" className="justify-start gap-2">
+            <Palette className="size-4" />
+            Appearance
+          </TabsTrigger>
+          <TabsTrigger value="notifications" className="justify-start gap-2">
+            <Bell className="size-4" />
+            Notifications
+          </TabsTrigger>
+          <TabsTrigger value="billing" className="justify-start gap-2">
+            <CreditCard className="size-4" />
+            Billing
+          </TabsTrigger>
+          <TabsTrigger value="security" className="justify-start gap-2">
+            <Lock className="size-4" />
+            Security
+          </TabsTrigger>
+        </TabsList>
+        <div className="flex-1 min-w-0">
+          <TabsContent value="profile" className="mt-0">
+            <div className="space-y-3">
+              <h3 className="font-medium">Profile</h3>
+              <p className="text-sm text-muted-foreground">Update your name, avatar, and public profile information.</p>
+              <div className="flex gap-2 pt-2">
+                <Button size="sm">Save changes</Button>
+                <Button size="sm" variant="outline">Cancel</Button>
+              </div>
+            </div>
+          </TabsContent>
+          <TabsContent value="appearance" className="mt-0">
+            <div className="space-y-3">
+              <h3 className="font-medium">Appearance</h3>
+              <p className="text-sm text-muted-foreground">Choose your theme, font size, and display density preferences.</p>
+            </div>
+          </TabsContent>
+          <TabsContent value="notifications" className="mt-0">
+            <div className="space-y-3">
+              <h3 className="font-medium">Notifications</h3>
+              <p className="text-sm text-muted-foreground">Configure which events trigger email and push notifications.</p>
+            </div>
+          </TabsContent>
+          <TabsContent value="billing" className="mt-0">
+            <div className="space-y-3">
+              <h3 className="font-medium">Billing</h3>
+              <p className="text-sm text-muted-foreground">Manage your subscription, payment method, and invoices.</p>
+            </div>
+          </TabsContent>
+          <TabsContent value="security" className="mt-0">
+            <div className="space-y-3">
+              <h3 className="font-medium">Security</h3>
+              <p className="text-sm text-muted-foreground">Change your password, enable 2FA, and manage active sessions.</p>
+            </div>
+          </TabsContent>
+        </div>
+      </Tabs>
+    </div>
+  ),
+  parameters: {
+    layout: 'padded',
+    docs: {
+      description: {
+        story: 'Full settings page layout with vertical tabs used as a sidebar navigation inside a card.',
+      },
+    },
+  },
+}
+
+export const ProjectDashboard: Story = {
+  render: () => (
+    <Tabs defaultValue="overview" className="w-[640px]">
+      <div className="flex items-center justify-between border-b pb-0">
+        <TabsList variant="line">
+          <TabsTrigger value="overview">
+            <Layout className="size-4" />
+            Overview
+          </TabsTrigger>
+          <TabsTrigger value="activity">
+            <Activity className="size-4" />
+            Activity
+          </TabsTrigger>
+          <TabsTrigger value="analytics">
+            <BarChart2 className="size-4" />
+            Analytics
+          </TabsTrigger>
+          <TabsTrigger value="packages">
+            <Package className="size-4" />
+            Packages
+          </TabsTrigger>
+          <TabsTrigger value="docs">
+            <FileText className="size-4" />
+            Docs
+          </TabsTrigger>
+        </TabsList>
+        <Button size="sm" variant="outline" className="mb-2">New release</Button>
+      </div>
+      <TabsContent value="overview">
+        <div className="py-4 space-y-2">
+          <h3 className="text-sm font-medium">Project Overview</h3>
+          <p className="text-sm text-muted-foreground">Repository stats, recent commits, and contributors.</p>
+        </div>
+      </TabsContent>
+      <TabsContent value="activity">
+        <div className="py-4 space-y-2">
+          <h3 className="text-sm font-medium">Recent Activity</h3>
+          <p className="text-sm text-muted-foreground">Push events, pull requests, and issues across all branches.</p>
+        </div>
+      </TabsContent>
+      <TabsContent value="analytics">
+        <div className="py-4 space-y-2">
+          <h3 className="text-sm font-medium">Analytics</h3>
+          <p className="text-sm text-muted-foreground">Traffic, clones, and contributor graphs over time.</p>
+        </div>
+      </TabsContent>
+      <TabsContent value="packages">
+        <div className="py-4 space-y-2">
+          <h3 className="text-sm font-medium">Packages</h3>
+          <p className="text-sm text-muted-foreground">Published packages and container images linked to this repository.</p>
+        </div>
+      </TabsContent>
+      <TabsContent value="docs">
+        <div className="py-4 space-y-2">
+          <h3 className="text-sm font-medium">Documentation</h3>
+          <p className="text-sm text-muted-foreground">Auto-generated API docs and README content.</p>
+        </div>
+      </TabsContent>
+    </Tabs>
+  ),
+  parameters: {
+    layout: 'padded',
+    docs: {
+      description: {
+        story: 'Repository-style dashboard header using the `line` variant with an action button aligned to the right of the tab list.',
+      },
+    },
+  },
+}
+
+export const VerticalWithLineVariant: Story = {
+  render: () => (
+    <Tabs defaultValue="general" orientation="vertical" className="w-[560px]">
+      <TabsList variant="line">
+        <TabsTrigger value="general">General</TabsTrigger>
+        <TabsTrigger value="integrations">Integrations</TabsTrigger>
+        <TabsTrigger value="api">API</TabsTrigger>
+        <TabsTrigger value="webhooks">Webhooks</TabsTrigger>
+        <TabsTrigger value="support" disabled>Support</TabsTrigger>
+      </TabsList>
+      <div className="flex-1 pl-6">
+        <TabsContent value="general" className="mt-0">
+          <h3 className="text-sm font-medium mb-2">General Settings</h3>
+          <p className="text-sm text-muted-foreground">Workspace name, timezone, and regional preferences.</p>
+        </TabsContent>
+        <TabsContent value="integrations" className="mt-0">
+          <h3 className="text-sm font-medium mb-2">Integrations</h3>
+          <p className="text-sm text-muted-foreground">Connect Slack, GitHub, and other services.</p>
+        </TabsContent>
+        <TabsContent value="api" className="mt-0">
+          <h3 className="text-sm font-medium mb-2">API Access</h3>
+          <p className="text-sm text-muted-foreground">Generate and revoke API tokens for programmatic access.</p>
+        </TabsContent>
+        <TabsContent value="webhooks" className="mt-0">
+          <h3 className="text-sm font-medium mb-2">Webhooks</h3>
+          <p className="text-sm text-muted-foreground">Configure outgoing webhooks to external endpoints.</p>
+        </TabsContent>
+      </div>
+    </Tabs>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Vertical layout using the `line` variant — the active indicator appears on the right edge of each trigger.',
+      },
+    },
+  },
+}
+
+export const HelpCenter: Story = {
+  render: () => (
+    <Tabs defaultValue="faq" className="w-[560px]">
+      <TabsList>
+        <TabsTrigger value="faq">
+          <HelpCircle className="size-4" />
+          FAQ
+        </TabsTrigger>
+        <TabsTrigger value="guides">
+          <FileText className="size-4" />
+          Guides
+        </TabsTrigger>
+        <TabsTrigger value="api">
+          <Code2 className="size-4" />
+          API Docs
+        </TabsTrigger>
+        <TabsTrigger value="status">
+          <Activity className="size-4" />
+          Status
+          <Badge variant="outline" className="ml-1 h-4 px-1 text-xs text-green-600 border-green-200">All good</Badge>
+        </TabsTrigger>
+      </TabsList>
+      <TabsContent value="faq">
+        <div className="py-4 space-y-2">
+          <p className="text-sm font-medium">How do I reset my password?</p>
+          <p className="text-sm text-muted-foreground">Go to Settings → Security and click "Change password".</p>
+        </div>
+      </TabsContent>
+      <TabsContent value="guides">
+        <p className="py-4 text-sm text-muted-foreground">Step-by-step guides for common workflows.</p>
+      </TabsContent>
+      <TabsContent value="api">
+        <p className="py-4 text-sm text-muted-foreground">Full API reference with code examples in multiple languages.</p>
+      </TabsContent>
+      <TabsContent value="status">
+        <p className="py-4 text-sm text-muted-foreground">All systems operational. Last checked 2 minutes ago.</p>
+      </TabsContent>
+    </Tabs>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Help center tabs combining icons, text, and a status badge inside a single trigger.',
+      },
+    },
+  },
+}
+
+// ──── type="expandable" ──────────────────────────────────────────────────────
+
+export const Expandable: Story = {
+  args: {
+    type: 'expandable',
+    tabs: [
+      { title: 'Home', icon: Home },
+      { title: 'Profile', icon: User },
+      { title: 'Settings', icon: Settings },
+    ] satisfies ExpandableTabsEntry[],
+    defaultActiveIndex: 0,
+    activeColor: 'text-foreground',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Pass `type="expandable"` and a `tabs` array to render icon-only tabs that animate open to reveal their label when active. No `TabsList`/`TabsTrigger` children needed.',
+      },
+    },
+  },
+}
+
+export const ExpandableWithSeparator: Story = {
+  render: () => (
+    <Tabs
+      type="expandable"
+      tabs={[
+        { title: 'Inbox', icon: Inbox },
+        { title: 'Sent', icon: Send },
+        { title: 'Drafts', icon: FileText },
+        { type: 'separator' },
+        { title: 'Starred', icon: Star },
+        { title: 'Trash', icon: Trash2 },
+      ] satisfies ExpandableTabsEntry[]}
+      defaultActiveIndex={0}
+    />
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Use `{ type: "separator" }` entries in the `tabs` array to visually group tabs with a thin divider.',
+      },
+    },
+  },
+}
+
+export const ExpandableCustomColor: Story = {
+  render: () => (
+    <Tabs
+      type="expandable"
+      tabs={[
+        { title: 'Overview', icon: Layout },
+        { title: 'Analytics', icon: BarChart2 },
+        { title: 'Code', icon: Code2 },
+        { title: 'Settings', icon: Settings },
+      ] satisfies ExpandableTabsEntry[]}
+      defaultActiveIndex={0}
+      activeColor="text-primary"
+    />
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Use `activeColor` to apply any Tailwind text-colour class to the active tab.',
+      },
+    },
+  },
+}
+
+export const ExpandableControlled: Story = {
+  render: function ExpandableControlledDemo() {
+    const [active, setActive] = React.useState<number | null>(0)
+    const tabs = [
+      { title: 'Home', icon: Home },
+      { title: 'Profile', icon: User },
+      { title: 'Settings', icon: Settings },
+    ] satisfies ExpandableTabsEntry[]
+
+    return (
+      <div className="flex flex-col items-center gap-4">
+        <Tabs type="expandable" tabs={tabs} activeIndex={active} onChange={setActive} />
+        <p className="text-sm text-muted-foreground">
+          Active: <strong>{active !== null ? (tabs[active] as { title: string }).title : 'none'}</strong>
+        </p>
+      </div>
+    )
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Fully controlled mode — drive the active tab externally via `activeIndex` + `onChange`.',
+      },
+    },
+  },
+}
+
+export const SideBySide: Story = {
+  render: () => (
+    <div className="flex flex-col gap-8 items-start">
+      <div className="flex flex-col gap-2">
+        <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">type="default"</p>
+        <Tabs defaultValue="overview" className="w-[400px]">
+          <TabsList>
+            <TabsTrigger value="overview"><Layout className="size-4" />Overview</TabsTrigger>
+            <TabsTrigger value="analytics"><BarChart2 className="size-4" />Analytics</TabsTrigger>
+            <TabsTrigger value="settings"><Settings className="size-4" />Settings</TabsTrigger>
+          </TabsList>
+          <TabsContent value="overview"><p className="py-3 text-sm text-muted-foreground">Overview content.</p></TabsContent>
+          <TabsContent value="analytics"><p className="py-3 text-sm text-muted-foreground">Analytics content.</p></TabsContent>
+          <TabsContent value="settings"><p className="py-3 text-sm text-muted-foreground">Settings content.</p></TabsContent>
+        </Tabs>
+      </div>
+      <div className="flex flex-col gap-2">
+        <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">type="expandable"</p>
+        <Tabs
+          type="expandable"
+          tabs={[
+            { title: 'Overview', icon: Layout },
+            { title: 'Analytics', icon: BarChart2 },
+            { title: 'Settings', icon: Settings },
+          ] satisfies ExpandableTabsEntry[]}
+          defaultActiveIndex={0}
+        />
+      </div>
+    </div>
+  ),
+  parameters: {
+    layout: 'padded',
+    docs: {
+      description: {
+        story: 'Both tab styles rendered side-by-side for comparison. Same `<Tabs>` component — different `type` prop.',
+      },
+    },
+  },
 }

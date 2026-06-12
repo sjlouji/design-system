@@ -6,12 +6,25 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { Tabs as TabsPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
+import { ExpandableTabs } from "./ExpandableTabs"
+import type { ExpandableTabsProps } from "./ExpandableTabs"
 
-function Tabs({
-  className,
-  orientation = "horizontal",
-  ...props
-}: React.ComponentProps<typeof TabsPrimitive.Root>) {
+type DefaultTabsProps = React.ComponentProps<typeof TabsPrimitive.Root> & {
+  type?: "default"
+}
+
+type ExpandableTabsVariantProps = ExpandableTabsProps & {
+  type: "expandable"
+}
+
+export type TabsProps = DefaultTabsProps | ExpandableTabsVariantProps
+
+function Tabs({ type, ...restProps }: TabsProps) {
+  if (type === "expandable") {
+    return <ExpandableTabs {...(restProps as ExpandableTabsProps)} />
+  }
+
+  const { className, orientation = "horizontal", ...rest } = restProps as DefaultTabsProps
   return (
     <TabsPrimitive.Root
       data-slot="tabs"
@@ -21,7 +34,7 @@ function Tabs({
         "group/tabs flex gap-2 data-[orientation=horizontal]:flex-col",
         className
       )}
-      {...props}
+      {...rest}
     />
   )
 }
