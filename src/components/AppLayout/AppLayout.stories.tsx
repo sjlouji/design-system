@@ -19,6 +19,9 @@ const meta = {
     toolsWidth: { control: 'number', description: 'Right tools panel width in px (default 280)' },
     splitPanelSize: { control: 'number', description: 'Split panel height in px when open (default 300)' },
   },
+  args: {
+    content: null,
+  },
 } satisfies Meta<typeof AppLayout>
 
 export default meta
@@ -145,6 +148,7 @@ export const WithSplitPanel: Story = {
 }
 
 export const FullKitchen: Story = {
+  args: {},
   render: () => {
     const [navOpen, setNavOpen] = React.useState(true)
     const [toolsOpen, setToolsOpen] = React.useState(false)
