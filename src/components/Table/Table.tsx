@@ -63,12 +63,19 @@ function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
   )
 }
 
-function TableHead({ className, ...props }: React.ComponentProps<"th">) {
+function TableHead({
+  className,
+  sticky,
+  ...props
+}: React.ComponentProps<"th"> & { sticky?: 'left' | 'right' }) {
   return (
     <th
       data-slot="table-head"
       className={cn(
         "h-10 px-2 text-left align-middle font-medium whitespace-nowrap text-foreground [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+        sticky && 'sticky z-10 bg-background',
+        sticky === 'left' && 'left-0',
+        sticky === 'right' && 'right-0',
         className
       )}
       {...props}
@@ -76,12 +83,19 @@ function TableHead({ className, ...props }: React.ComponentProps<"th">) {
   )
 }
 
-function TableCell({ className, ...props }: React.ComponentProps<"td">) {
+function TableCell({
+  className,
+  sticky,
+  ...props
+}: React.ComponentProps<"td"> & { sticky?: 'left' | 'right' }) {
   return (
     <td
       data-slot="table-cell"
       className={cn(
         "p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+        sticky && 'sticky z-10 bg-background',
+        sticky === 'left' && 'left-0',
+        sticky === 'right' && 'right-0',
         className
       )}
       {...props}
