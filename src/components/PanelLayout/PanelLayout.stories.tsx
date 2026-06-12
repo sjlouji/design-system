@@ -100,7 +100,7 @@ const formPanel = (
 // ─── Meta ────────────────────────────────────────────────────────────────────
 
 const meta = {
-  title: 'Components/PanelLayout',
+  title: 'Layout/PanelLayout',
   component: PanelLayout,
   parameters: {
     layout: 'fullscreen',

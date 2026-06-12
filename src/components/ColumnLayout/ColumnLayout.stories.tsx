@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { ColumnLayout } from './ColumnLayout'
 
 const meta = {
-  title: 'Components/ColumnLayout',
+  title: 'Layout/ColumnLayout',
   component: ColumnLayout,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },

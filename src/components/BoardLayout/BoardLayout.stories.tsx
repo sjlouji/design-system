@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { BoardLayout, type BoardColumn } from './BoardLayout'
 
 const meta = {
-  title: 'DataDisplay/BoardLayout',
+  title: 'Layout/BoardLayout',
   component: BoardLayout,
   tags: ['autodocs'],
   parameters: { layout: 'fullscreen' },

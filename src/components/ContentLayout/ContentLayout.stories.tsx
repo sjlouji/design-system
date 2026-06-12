@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { ContentLayout } from './ContentLayout'
 
 const meta = {
-  title: 'Components/ContentLayout',
+  title: 'Layout/ContentLayout',
   component: ContentLayout,
   tags: ['autodocs'],
   parameters: { layout: 'fullscreen' },
