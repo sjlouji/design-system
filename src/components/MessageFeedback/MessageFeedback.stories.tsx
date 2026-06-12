@@ -23,7 +23,7 @@ export const Default: Story = {}
 
 export const WithOnSubmitCallback: Story = {
   args: {
-    onSubmit: (rating, comment) => console.log('Feedback:', rating, comment),
+    onSubmit: (rating?: 'positive' | 'negative', comment?: string) => console.log('Feedback:', rating, comment),
   },
 }
 

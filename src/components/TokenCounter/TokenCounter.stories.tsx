@@ -118,6 +118,7 @@ export const MillionTokenContext: Story = {
 }
 
 export const AllStatesExpanded: Story = {
+  args: {} as Story['args'],
   render: () => (
     <div className="flex flex-col gap-6 w-72">
       {[
@@ -137,6 +138,7 @@ export const AllStatesExpanded: Story = {
 }
 
 export const AllStatesCompact: Story = {
+  args: {} as Story['args'],
   render: () => (
     <div className="flex flex-col gap-3">
       {[
@@ -156,6 +158,7 @@ export const AllStatesCompact: Story = {
 }
 
 export const InPromptFooter: Story = {
+  args: {} as Story['args'],
   render: () => (
     <div className="flex items-center justify-between gap-4 px-4 py-2 border border-border rounded-lg bg-background w-80">
       <TokenCounter current={3200} max={8192} compact />

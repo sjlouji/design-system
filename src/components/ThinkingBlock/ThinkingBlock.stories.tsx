@@ -112,6 +112,7 @@ export const ThinkingWithShortContent: Story = {
 }
 
 export const InChatContext: Story = {
+  args: {} as Story['args'],
   render: () => (
     <div className="flex flex-col gap-3 max-w-xl">
       <div className="flex gap-3 px-4 py-3">
@@ -134,6 +135,7 @@ I'll use generics to make it reusable for any comparable type.`}
 }
 
 export const ToggleInteraction: Story = {
+  args: {} as Story['args'],
   render: () => (
     <div className="flex flex-col gap-3 max-w-xl">
       <p className="text-xs text-muted-foreground">Click the header to toggle the content.</p>

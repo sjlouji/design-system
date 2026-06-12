@@ -1,4 +1,3 @@
-import * as React from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { ImageIcon, PlayCircleIcon, MapPinIcon } from 'lucide-react'
 import { AspectRatio } from './AspectRatio'

@@ -176,6 +176,7 @@ export const WithContextWindows: Story = {
 }
 
 export const Controlled: Story = {
+  args: {} as Story['args'],
   render: () => {
     const [selected, setSelected] = React.useState('claude-sonnet-4')
     return (
@@ -194,6 +195,7 @@ export const Controlled: Story = {
 }
 
 export const AllTierDots: Story = {
+  args: {} as Story['args'],
   render: () => (
     <div className="flex flex-col gap-3">
       {(['fast', 'balanced', 'powerful'] as const).map((tier) => (

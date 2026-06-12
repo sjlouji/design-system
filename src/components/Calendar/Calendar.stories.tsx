@@ -103,8 +103,8 @@ export const DropdownCaption: Story = {
   args: {
     mode: 'single',
     captionLayout: 'dropdown',
-    fromYear: 2020,
-    toYear: 2030,
+    startMonth: new Date(2020, 0),
+    endMonth: new Date(2030, 11),
     defaultMonth: new Date(2025, 5, 1),
   },
 }
@@ -113,8 +113,8 @@ export const DropdownMonths: Story = {
   args: {
     mode: 'single',
     captionLayout: 'dropdown-months',
-    fromYear: 2023,
-    toYear: 2027,
+    startMonth: new Date(2023, 0),
+    endMonth: new Date(2027, 11),
     defaultMonth: new Date(2025, 5, 1),
   },
 }
@@ -194,7 +194,7 @@ export const ControlledSingle: Story = {
 
 export const ControlledRange: Story = {
   render: function ControlledRange() {
-    const [range, setRange] = React.useState<{ from?: Date; to?: Date } | undefined>({
+    const [range, setRange] = React.useState<{ from: Date; to?: Date } | undefined>({
       from: new Date(2025, 5, 10),
       to: new Date(2025, 5, 20),
     })

@@ -98,6 +98,7 @@ export const ReadOnly: Story = {
 }
 
 export const Controlled: Story = {
+  args: {} as Story['args'],
   render: () => {
     const [items, setItems] = React.useState<Conversation[]>(conversations)
     const [activeId, setActiveId] = React.useState<string>('1')
@@ -154,6 +155,7 @@ export const ManyConversations: Story = {
 }
 
 export const InSidebar: Story = {
+  args: {} as Story['args'],
   render: () => (
     <div className="w-60 h-[500px] border border-border rounded-xl bg-background overflow-hidden flex flex-col py-3">
       <ConversationList

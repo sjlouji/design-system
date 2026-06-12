@@ -36,6 +36,7 @@ const meta = {
       description: 'Additional CSS classes on the root wrapper',
     },
   },
+  args: { title: '' },
 } satisfies Meta<typeof EmptyState>
 
 export default meta

@@ -111,6 +111,7 @@ export const ShortContent: Story = {
 }
 
 export const Grid: Story = {
+  args: {} as Story['args'],
   render: () => (
     <div className="grid grid-cols-2 gap-3 w-[600px]">
       {[

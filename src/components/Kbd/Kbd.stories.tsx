@@ -18,6 +18,7 @@ const meta = {
       description: 'Additional CSS classes for custom styling',
     },
   },
+  args: { children: '⌘K' },
 } satisfies Meta<typeof Kbd>
 
 export default meta

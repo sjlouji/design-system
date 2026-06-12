@@ -1,4 +1,3 @@
-import * as React from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { expect, userEvent, within } from 'storybook/test'
 import {
@@ -119,6 +118,7 @@ export const Multiple: Story = {
 
 export const DefaultExpanded: Story = {
   name: 'Default expanded',
+  args: {} as Story['args'],
   render: () => (
     <Accordion type="single" collapsible defaultValue="item-2" className="w-[400px]">
       <AccordionItem value="item-1">
@@ -150,6 +150,7 @@ export const DefaultExpanded: Story = {
 
 export const AllExpanded: Story = {
   name: 'All items expanded (multiple)',
+  args: {} as Story['args'],
   render: () => (
     <Accordion
       type="multiple"
@@ -184,6 +185,7 @@ export const AllExpanded: Story = {
 
 export const DisabledItem: Story = {
   name: 'With disabled item',
+  args: {} as Story['args'],
   render: () => (
     <Accordion type="single" collapsible className="w-[400px]">
       <AccordionItem value="item-1">
@@ -214,6 +216,7 @@ export const DisabledItem: Story = {
 
 export const WithIcons: Story = {
   name: 'With icons in triggers',
+  args: {} as Story['args'],
   render: () => (
     <Accordion type="single" collapsible className="w-[420px]">
       <AccordionItem value="account">
@@ -271,6 +274,7 @@ export const WithIcons: Story = {
 
 export const LongContent: Story = {
   name: 'Long content',
+  args: {} as Story['args'],
   render: () => (
     <Accordion type="single" collapsible className="w-[420px]">
       <AccordionItem value="item-1">
@@ -318,6 +322,7 @@ export const LongContent: Story = {
 
 export const NestedContent: Story = {
   name: 'Structured nested content',
+  args: {} as Story['args'],
   render: () => (
     <Accordion type="single" collapsible className="w-[420px]">
       <AccordionItem value="api-keys">
@@ -367,6 +372,7 @@ export const NestedContent: Story = {
 
 export const NonCollapsible: Story = {
   name: 'Single — non-collapsible',
+  args: {} as Story['args'],
   render: () => (
     <Accordion type="single" defaultValue="item-1" className="w-[400px]">
       <AccordionItem value="item-1">
@@ -400,6 +406,7 @@ export const NonCollapsible: Story = {
 export const FAQPattern: Story = {
   name: 'FAQ pattern',
   parameters: { layout: 'padded' },
+  args: {} as Story['args'],
   render: () => (
     <div className="max-w-2xl mx-auto">
       <h2 className="text-xl font-semibold mb-4">Frequently asked questions</h2>

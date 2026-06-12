@@ -1,4 +1,3 @@
-import * as React from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { ChatMessage } from './ChatMessage'
 import { MessageActions } from '@/components/MessageActions'
@@ -258,6 +257,7 @@ Thank you!`,
 }
 
 export const FullConversation: Story = {
+  args: {} as Story['args'],
   render: () => (
     <div className="flex flex-col gap-1 max-w-2xl mx-auto py-4">
       <ChatMessage role="system" content="New conversation" />
@@ -317,6 +317,7 @@ export const FullConversation: Story = {
 }
 
 export const AllRoles: Story = {
+  args: {} as Story['args'],
   render: () => (
     <div className="flex flex-col gap-1 max-w-2xl mx-auto py-4">
       <ChatMessage role="system" content="Session started" />

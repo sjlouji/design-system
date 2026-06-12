@@ -21,6 +21,7 @@ const meta = {
       description: 'Additional CSS classes on the button',
     },
   },
+  args: { value: '' },
 } satisfies Meta<typeof CopyButton>
 
 export default meta

@@ -1,6 +1,5 @@
-import * as React from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { CalendarIcon, LinkIcon, MapPinIcon, TwitterIcon } from 'lucide-react'
+import { CalendarIcon, LinkIcon, MapPinIcon, XIcon } from 'lucide-react'
 import { HoverCard, HoverCardTrigger, HoverCardContent } from './HoverCard'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/Avatar'
 import { Button } from '@/components/Button'
@@ -216,7 +215,7 @@ export const WithLinksInside: Story = {
               href="#"
               className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
             >
-              <TwitterIcon className="size-3" />
+              <XIcon className="size-3" />
               @designsystemdev
             </a>
             <a

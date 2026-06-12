@@ -112,6 +112,7 @@ export const SizeLg: Story = {
 
 export const AllSizes: Story = {
   name: 'All sizes compared',
+  args: {} as Story['args'],
   render: () => (
     <div className="flex flex-col gap-6">
       <div className="flex items-center gap-4">
@@ -186,6 +187,7 @@ export const MixedSrcAndFallback: Story = {
 
 export const OverflowAllSizes: Story = {
   name: 'Overflow across all sizes',
+  args: {} as Story['args'],
   render: () => (
     <div className="flex flex-col gap-6">
       <div className="flex items-center gap-4">
