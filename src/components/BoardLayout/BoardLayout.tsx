@@ -53,16 +53,12 @@ const priorityStyles: Record<NonNullable<BoardCard['priority']>, string> = {
 
 interface BoardCardProps {
   card: BoardCard
-  isDragging?: boolean
 }
 
-export function BoardCardComponent({ card, isDragging }: BoardCardProps) {
+export function BoardCardComponent({ card }: BoardCardProps) {
   return (
     <div
-      className={cn(
-        'bg-card border border-border rounded-lg p-3 cursor-grab active:cursor-grabbing shadow-xs hover:shadow-sm transition-shadow',
-        isDragging && 'opacity-50',
-      )}
+      className="bg-card border border-border rounded-lg p-3 cursor-grab active:cursor-grabbing shadow-xs hover:shadow-sm transition-shadow"
     >
       <p className="text-sm font-medium leading-snug">{card.title}</p>
       {card.description && (
@@ -121,8 +117,13 @@ function DraggableCard({ card }: DraggableCardProps) {
   })
 
   return (
-    <div ref={setNodeRef} {...attributes} {...listeners}>
-      <BoardCardComponent card={card} isDragging={isDragging} />
+    <div
+      ref={setNodeRef}
+      className={cn(isDragging && 'opacity-0')}
+      {...attributes}
+      {...listeners}
+    >
+      <BoardCardComponent card={card} />
     </div>
   )
 }
