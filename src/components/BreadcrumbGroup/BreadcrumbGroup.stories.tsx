@@ -27,7 +27,6 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  name: 'Default',
   args: {
     items: [
       { label: 'Home', href: '/' },
@@ -38,7 +37,6 @@ export const Default: Story = {
 }
 
 export const TwoLevels: Story = {
-  name: 'Two Levels',
   args: {
     items: [
       { label: 'Dashboard', href: '/dashboard' },
@@ -48,14 +46,12 @@ export const TwoLevels: Story = {
 }
 
 export const SingleItem: Story = {
-  name: 'Single Item',
   args: {
     items: [{ label: 'Dashboard', current: true }],
   },
 }
 
 export const FourLevels: Story = {
-  name: 'Four Levels',
   args: {
     items: [
       { label: 'Home', href: '/' },
@@ -117,7 +113,6 @@ export const NoHrefs: Story = {
 }
 
 export const FileSystemPath: Story = {
-  name: 'File System Path',
   args: {
     items: [
       { label: 'Users', href: '/users' },
@@ -140,7 +135,6 @@ export const AdminBreadcrumb: Story = {
 }
 
 export const DocumentationPath: Story = {
-  name: 'Documentation Path',
   args: {
     items: [
       { label: 'Docs', href: '/docs' },

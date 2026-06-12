@@ -118,7 +118,6 @@ export const DisabledWithSelection: Story = {
 }
 
 export const SingleItemDisabled: Story = {
-  name: 'Single Item Disabled',
   render: () => (
     <RadioGroup defaultValue="monthly">
       <div className="flex items-center gap-2">

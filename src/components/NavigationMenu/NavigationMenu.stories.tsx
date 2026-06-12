@@ -58,7 +58,6 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  name: 'Default',
   render: () => (
     <NavigationMenu>
       <NavigationMenuList>
@@ -189,7 +188,6 @@ export const SimpleLinks: Story = {
 }
 
 export const WithIcons: Story = {
-  name: 'With Icons',
   render: () => (
     <NavigationMenu>
       <NavigationMenuList>

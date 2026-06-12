@@ -145,9 +145,11 @@ export const UseToastsHook: Story = {
 const simulateUpload = () =>
   new Promise<{ name: string }>((resolve, reject) =>
     setTimeout(() => {
-      Math.random() > 0.4
-        ? resolve({ name: 'report-q4.pdf' })
-        : reject(new Error('Upload failed'))
+      if (Math.random() > 0.4) {
+        resolve({ name: 'report-q4.pdf' })
+      } else {
+        reject(new Error('Upload failed'))
+      }
     }, 2000)
   )
 

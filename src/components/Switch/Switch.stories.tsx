@@ -99,7 +99,6 @@ export const WithLabelDisabled: Story = {
 }
 
 export const SizeComparison: Story = {
-  name: 'Size Comparison',
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-3">

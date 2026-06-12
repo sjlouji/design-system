@@ -60,7 +60,6 @@ export const Basic: Story = {
 }
 
 export const WithForm: Story = {
-  name: 'With Form',
   render: () => (
     <Popover>
       <PopoverTrigger asChild>
@@ -101,7 +100,6 @@ export const WithForm: Story = {
 }
 
 export const AlignStart: Story = {
-  name: 'Align Start',
   render: () => (
     <Popover>
       <PopoverTrigger asChild>
@@ -135,7 +133,6 @@ export const AlignCenter: Story = {
 }
 
 export const AlignEnd: Story = {
-  name: 'Align End',
   render: () => (
     <Popover>
       <PopoverTrigger asChild>
@@ -152,7 +149,6 @@ export const AlignEnd: Story = {
 }
 
 export const SideTop: Story = {
-  name: 'Side Top',
   render: () => (
     <Popover>
       <PopoverTrigger asChild>
@@ -169,7 +165,6 @@ export const SideTop: Story = {
 }
 
 export const SideRight: Story = {
-  name: 'Side Right',
   render: () => (
     <Popover>
       <PopoverTrigger asChild>
@@ -186,7 +181,6 @@ export const SideRight: Story = {
 }
 
 export const SideLeft: Story = {
-  name: 'Side Left',
   render: () => (
     <Popover>
       <PopoverTrigger asChild>
@@ -293,7 +287,6 @@ export const FilterPanel: Story = {
 }
 
 export const DatePickerPattern: Story = {
-  name: 'Date Picker Pattern',
   render: () => {
     const [date, setDate] = React.useState('')
     return (
@@ -326,7 +319,6 @@ export const DatePickerPattern: Story = {
 }
 
 export const ControlsPanel: Story = {
-  name: 'Controls Panel',
   render: () => (
     <Popover>
       <PopoverTrigger asChild>

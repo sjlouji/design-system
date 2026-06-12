@@ -184,7 +184,6 @@ export const Animated: Story = {
 }
 
 export const FileUploadList: Story = {
-  name: 'File Upload List',
   render: () => {
     const files = [
       { name: 'report-2024.pdf', progress: 100 },

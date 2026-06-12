@@ -29,7 +29,6 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  name: 'Default',
   render: () => (
     <Breadcrumb>
       <BreadcrumbList>
@@ -50,7 +49,6 @@ export const Default: Story = {
 }
 
 export const TwoLevels: Story = {
-  name: 'Two Levels',
   render: () => (
     <Breadcrumb>
       <BreadcrumbList>
@@ -134,7 +132,6 @@ export const WithEllipsis: Story = {
 }
 
 export const WithHomeIcon: Story = {
-  name: 'With Home Icon',
   render: () => (
     <Breadcrumb>
       <BreadcrumbList>
@@ -235,7 +232,6 @@ export const CustomSeparatorChevron: Story = {
 }
 
 export const TextSeparator: Story = {
-  name: 'Text Separator',
   render: () => (
     <Breadcrumb>
       <BreadcrumbList>

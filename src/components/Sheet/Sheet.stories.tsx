@@ -79,7 +79,6 @@ export const Right: Story = {
 }
 
 export const Left: Story = {
-  name: 'Left',
   render: () => (
     <Sheet>
       <SheetTrigger asChild>
@@ -104,7 +103,6 @@ export const Left: Story = {
 }
 
 export const Top: Story = {
-  name: 'Top',
   render: () => (
     <Sheet>
       <SheetTrigger asChild>
@@ -130,7 +128,6 @@ export const Top: Story = {
 }
 
 export const Bottom: Story = {
-  name: 'Bottom',
   render: () => (
     <Sheet>
       <SheetTrigger asChild>
@@ -156,7 +153,6 @@ export const Bottom: Story = {
 }
 
 export const WithForm: Story = {
-  name: 'With Form',
   render: () => (
     <Sheet>
       <SheetTrigger asChild>
@@ -204,7 +200,6 @@ export const WithForm: Story = {
 }
 
 export const WithLongScrollableList: Story = {
-  name: 'With Long Scrollable List',
   render: () => (
     <Sheet>
       <SheetTrigger asChild>
@@ -245,7 +240,6 @@ export const WithLongScrollableList: Story = {
 }
 
 export const NavMenuPattern: Story = {
-  name: 'Nav Menu Pattern',
   render: () => (
     <Sheet>
       <SheetTrigger asChild>
@@ -300,7 +294,6 @@ export const NavMenuPattern: Story = {
 }
 
 export const NoCloseButton: Story = {
-  name: 'No Close Button',
   render: () => (
     <Sheet>
       <SheetTrigger asChild>

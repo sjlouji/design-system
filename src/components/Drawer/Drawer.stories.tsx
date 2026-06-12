@@ -172,7 +172,6 @@ export const Right: Story = {
 }
 
 export const WithForm: Story = {
-  name: 'With Form',
   render: () => (
     <Drawer direction="bottom">
       <DrawerTrigger asChild>

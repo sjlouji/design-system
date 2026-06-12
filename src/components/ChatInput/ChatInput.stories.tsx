@@ -80,7 +80,6 @@ export const Disabled: Story = {
 }
 
 export const WithMaxLength: Story = {
-  name: 'With Max Length',
   args: {
     placeholder: 'Type your message… (200 char limit)',
     maxLength: 200,
@@ -107,7 +106,6 @@ export const OverMaxLength: Story = {
 }
 
 export const WithAttachSlot: Story = {
-  name: 'With Attach Slot',
   args: {
     placeholder: 'Message…',
     onSubmit: (value) => console.log('Sent:', value),
@@ -120,7 +118,6 @@ export const WithAttachSlot: Story = {
 }
 
 export const WithActionsSlot: Story = {
-  name: 'With Actions Slot',
   args: {
     placeholder: 'Message…',
     onSubmit: (value) => console.log('Sent:', value),
@@ -223,7 +220,6 @@ export const LoadingToggle: Story = {
 }
 
 export const WithAllFeatures: Story = {
-  name: 'With All Features',
   args: {
     placeholder: 'Message Claude…',
     maxLength: 4000,

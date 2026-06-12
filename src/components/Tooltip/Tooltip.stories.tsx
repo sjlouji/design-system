@@ -83,7 +83,6 @@ export const ShowArrow: Story = {
 }
 
 export const NoArrow: Story = {
-  name: 'No Arrow',
   render: () => (
     <Tooltip>
       <TooltipTrigger asChild>
@@ -97,7 +96,6 @@ export const NoArrow: Story = {
 }
 
 export const SideTop: Story = {
-  name: 'Side Top',
   render: () => (
     <Tooltip>
       <TooltipTrigger asChild>
@@ -111,7 +109,6 @@ export const SideTop: Story = {
 }
 
 export const SideRight: Story = {
-  name: 'Side Right',
   render: () => (
     <Tooltip>
       <TooltipTrigger asChild>
@@ -139,7 +136,6 @@ export const SideBottom: Story = {
 }
 
 export const SideLeft: Story = {
-  name: 'Side Left',
   render: () => (
     <Tooltip>
       <TooltipTrigger asChild>
@@ -153,7 +149,6 @@ export const SideLeft: Story = {
 }
 
 export const AlignStart: Story = {
-  name: 'Align Start',
   render: () => (
     <Tooltip>
       <TooltipTrigger asChild>
@@ -167,7 +162,6 @@ export const AlignStart: Story = {
 }
 
 export const AlignEnd: Story = {
-  name: 'Align End',
   render: () => (
     <Tooltip>
       <TooltipTrigger asChild>

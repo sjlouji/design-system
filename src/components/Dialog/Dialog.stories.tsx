@@ -68,7 +68,6 @@ export const Default: Story = {
 }
 
 export const NoCloseButton: Story = {
-  name: 'No Close Button',
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
@@ -91,7 +90,6 @@ export const NoCloseButton: Story = {
 }
 
 export const WithForm: Story = {
-  name: 'With Form',
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
@@ -136,7 +134,6 @@ export const WithForm: Story = {
 }
 
 export const DestructiveConfirm: Story = {
-  name: 'Destructive Confirm',
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
@@ -162,7 +159,6 @@ export const DestructiveConfirm: Story = {
 }
 
 export const LongScrollableContent: Story = {
-  name: 'Long Scrollable Content',
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
@@ -196,7 +192,6 @@ export const LongScrollableContent: Story = {
 }
 
 export const SmallDialog: Story = {
-  name: 'Small Dialog',
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
@@ -216,7 +211,6 @@ export const SmallDialog: Story = {
 }
 
 export const LargeDialog: Story = {
-  name: 'Large Dialog',
   render: () => (
     <Dialog>
       <DialogTrigger asChild>

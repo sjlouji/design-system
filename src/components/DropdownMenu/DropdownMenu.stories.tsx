@@ -3,7 +3,6 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import {
   BellIcon,
   CheckIcon,
-  ChevronRightIcon,
   CloudIcon,
   CreditCardIcon,
   KeyboardIcon,
@@ -63,7 +62,6 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
-  name: 'Basic',
   render: () => (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -81,7 +79,6 @@ export const Basic: Story = {
 }
 
 export const WithIcons: Story = {
-  name: 'With Icons',
   render: () => (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -115,7 +112,6 @@ export const WithIcons: Story = {
 }
 
 export const WithShortcuts: Story = {
-  name: 'With Shortcuts',
   render: () => (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -258,7 +254,6 @@ export const WithRadioGroup: Story = {
 }
 
 export const WithSubmenu: Story = {
-  name: 'With Submenu',
   render: () => (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -304,7 +299,6 @@ export const WithSubmenu: Story = {
 }
 
 export const DestructiveItem: Story = {
-  name: 'Destructive Item',
   render: () => (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -330,7 +324,6 @@ export const DestructiveItem: Story = {
 }
 
 export const DisabledItems: Story = {
-  name: 'Disabled Items',
   render: () => (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -360,7 +353,6 @@ export const DisabledItems: Story = {
 }
 
 export const InsetLabel: Story = {
-  name: 'Inset Label',
   render: () => (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

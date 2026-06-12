@@ -54,7 +54,6 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  name: 'Default',
   render: () => (
     <Menubar>
       <MenubarMenu>
@@ -158,7 +157,6 @@ export const Default: Story = {
 }
 
 export const WithCheckboxItems: Story = {
-  name: 'With Checkbox Items',
   render: () => {
     const [wordWrap, setWordWrap] = React.useState(true)
     const [lineNumbers, setLineNumbers] = React.useState(true)
@@ -195,7 +193,6 @@ export const WithCheckboxItems: Story = {
 }
 
 export const WithRadioItems: Story = {
-  name: 'With Radio Items',
   render: () => {
     const [theme, setTheme] = React.useState('system')
     const [fontSize, setFontSize] = React.useState('medium')
@@ -229,7 +226,6 @@ export const WithRadioItems: Story = {
 }
 
 export const WithSubMenus: Story = {
-  name: 'With Sub Menus',
   render: () => (
     <Menubar>
       <MenubarMenu>
@@ -311,7 +307,6 @@ export const WithDestructiveItem: Story = {
 }
 
 export const WithDisabledItems: Story = {
-  name: 'With Disabled Items',
   render: () => (
     <Menubar>
       <MenubarMenu>
@@ -347,7 +342,6 @@ export const WithDisabledItems: Story = {
 }
 
 export const WithGroups: Story = {
-  name: 'With Groups',
   render: () => (
     <Menubar>
       <MenubarMenu>

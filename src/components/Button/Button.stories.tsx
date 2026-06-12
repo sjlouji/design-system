@@ -9,7 +9,6 @@ import {
   DownloadIcon,
   SparklesIcon,
   SearchIcon,
-  HeartIcon,
   SettingsIcon,
 } from 'lucide-react'
 import { Button } from './Button'

@@ -90,7 +90,6 @@ export const WithAvatarAndBio: Story = {
 }
 
 export const AlignStart: Story = {
-  name: 'Align Start',
   render: () => (
     <HoverCard>
       <HoverCardTrigger asChild>
@@ -118,7 +117,6 @@ export const AlignCenter: Story = {
 }
 
 export const AlignEnd: Story = {
-  name: 'Align End',
   render: () => (
     <HoverCard>
       <HoverCardTrigger asChild>
@@ -132,7 +130,6 @@ export const AlignEnd: Story = {
 }
 
 export const SideTop: Story = {
-  name: 'Side Top',
   render: () => (
     <HoverCard>
       <HoverCardTrigger asChild>
@@ -146,7 +143,6 @@ export const SideTop: Story = {
 }
 
 export const SideRight: Story = {
-  name: 'Side Right',
   render: () => (
     <HoverCard>
       <HoverCardTrigger asChild>
@@ -174,7 +170,6 @@ export const SideBottom: Story = {
 }
 
 export const SideLeft: Story = {
-  name: 'Side Left',
   render: () => (
     <HoverCard>
       <HoverCardTrigger asChild>
@@ -188,7 +183,6 @@ export const SideLeft: Story = {
 }
 
 export const WithLinksInside: Story = {
-  name: 'With Links Inside',
   render: () => (
     <HoverCard>
       <HoverCardTrigger asChild>

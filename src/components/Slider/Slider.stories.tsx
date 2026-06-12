@@ -172,7 +172,6 @@ export const Controlled: Story = {
 }
 
 export const ControlledRange: Story = {
-  name: 'Controlled Range',
   render: () => {
     const [range, setRange] = React.useState([20, 80])
     return (

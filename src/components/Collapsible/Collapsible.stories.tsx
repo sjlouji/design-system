@@ -180,7 +180,6 @@ export const WithIconRotation: Story = {
 // ---------------------------------------------------------------------------
 
 export const Disabled: Story = {
-  name: 'Disabled',
   render: () => (
     <Collapsible disabled className="w-[350px] space-y-2">
       <div className="flex items-center justify-between">
