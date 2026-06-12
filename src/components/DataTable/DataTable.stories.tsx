@@ -47,33 +47,45 @@ const meta: Meta<DataTableProps<User>> = {
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
   argTypes: {
+    data: {
+      control: false,
+      description: 'Array of row data objects. The generic type `TData` is inferred from this array and must match the column definitions.',
+    },
+    columns: {
+      control: false,
+      description: 'TanStack Table column definitions (`ColumnDef<TData>[]`). Use `createColumns` (re-exported `createColumnHelper`) to build type-safe column definitions. Columns with `enableSorting: true` render a sortable header button.',
+    },
     searchable: {
       control: 'boolean',
-      description: 'Show global search input',
+      description: 'When true, renders a global search input above the table that filters across all columns. Pair with `searchPlaceholder` to customise the input hint.',
     },
     searchPlaceholder: {
       control: 'text',
-      description: 'Placeholder for the search input',
+      description: 'Placeholder text for the global search input. Only visible when `searchable` is true. Defaults to "Search…".',
     },
     selectable: {
       control: 'boolean',
-      description: 'Enable row checkbox selection',
+      description: 'When true, prepends a checkbox column so rows can be individually or collectively selected. Header checkbox toggles all rows on the current page.',
     },
     pagination: {
       control: 'boolean',
-      description: 'Show pagination controls',
+      description: 'When true, renders pagination controls below the table — a page-size selector (5/10/20/50) and Previous/Next buttons. Defaults to true.',
     },
     pageSize: {
       control: { type: 'number', min: 1, max: 50 },
-      description: 'Initial number of rows per page',
+      description: 'Initial number of rows displayed per page. Defaults to 10. The user can change this at runtime via the rows-per-page selector when `pagination` is true.',
     },
     loading: {
       control: 'boolean',
-      description: 'Show skeleton loading state',
+      description: 'When true, replaces table rows with skeleton placeholders (5 rows × column count). Hides pagination. Use while data is being fetched.',
     },
     emptyMessage: {
       control: 'text',
-      description: 'Message shown when data is empty',
+      description: 'Text shown in the table body when `data` is empty and `loading` is false. Defaults to "No results.".',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes applied to the outermost wrapper `div`.',
     },
   },
 }
@@ -82,6 +94,19 @@ export default meta
 type Story = StoryObj<DataTableProps<User>>
 
 // ---- Stories ----
+
+export const Default: Story = {
+  args: {
+    data: smallData,
+    columns: baseColumns,
+    searchable: false,
+    selectable: false,
+    pagination: true,
+    pageSize: 10,
+    loading: false,
+    emptyMessage: 'No results.',
+  },
+}
 
 export const Basic: Story = {
   args: {

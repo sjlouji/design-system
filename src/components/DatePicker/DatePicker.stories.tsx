@@ -10,31 +10,31 @@ const meta: Meta<typeof DatePicker> = {
   argTypes: {
     value: {
       control: false,
-      description: 'Controlled selected date',
+      description: 'Controlled selected `Date`. When set, the trigger button displays the formatted date ("PPP" format, e.g. "June 15th, 2025"). Pair with `onChange` for fully controlled usage.',
     },
     onChange: {
-      action: 'changed',
-      description: 'Callback fired when a date is selected',
+      action: 'onChange',
+      description: 'Fired when the user selects a date from the calendar popover. Receives the selected `Date` object, or `undefined` if the selection is cleared.',
     },
     placeholder: {
       control: 'text',
-      description: 'Text shown on the trigger button when no date is selected',
+      description: 'Text shown on the trigger button when no date is selected. Renders in muted foreground colour. Defaults to "Pick a date".',
     },
     disabled: {
       control: 'boolean',
-      description: 'Disables the trigger button',
+      description: 'When true, disables the trigger button — the calendar popover cannot be opened and the button is visually dimmed.',
     },
     fromDate: {
       control: false,
-      description: 'Earliest selectable date',
+      description: 'Earliest selectable `Date`. Dates before this value are disabled in the calendar. Use for "future dates only" or "start of valid range" constraints.',
     },
     toDate: {
       control: false,
-      description: 'Latest selectable date',
+      description: 'Latest selectable `Date`. Dates after this value are disabled in the calendar. Use for "past dates only" or "end of valid range" constraints.',
     },
     className: {
       control: 'text',
-      description: 'Additional CSS classes applied to the trigger button',
+      description: 'Additional CSS classes applied to the trigger button. The default width is `w-[240px]` — pass `w-full` to make it fill its container.',
     },
   },
 }
@@ -45,6 +45,7 @@ type Story = StoryObj<typeof DatePicker>
 export const Default: Story = {
   args: {
     placeholder: 'Pick a date',
+    disabled: false,
   },
 }
 

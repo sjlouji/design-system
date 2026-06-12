@@ -16,7 +16,17 @@ export interface AutoSuggestProps {
   placeholder?: string
   loading?: boolean
   emptyMessage?: string
+  /**
+   * Set to false to display options as-is without client-side filtering.
+   * Automatically disabled when `onSearch` is provided.
+   */
   filterOptions?: boolean
+  /**
+   * When provided, disables client-side filtering and fires with the current
+   * input value (debounced 300 ms) as the user types. The caller is responsible
+   * for updating `options` with the matching results.
+   */
+  onSearch?: (query: string) => void
   className?: string
 }
 
@@ -29,27 +39,38 @@ function AutoSuggest({
   loading = false,
   emptyMessage = 'No results found.',
   filterOptions = true,
+  onSearch,
   className,
 }: AutoSuggestProps) {
   const [inputValue, setInputValue] = React.useState(value ?? '')
   const [isOpen, setIsOpen] = React.useState(false)
   const [highlightedIndex, setHighlightedIndex] = React.useState(-1)
   const containerRef = React.useRef<HTMLDivElement>(null)
+  const searchTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null)
 
   React.useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     if (value !== undefined) setInputValue(value)
   }, [value])
 
+  React.useEffect(() => {
+    return () => {
+      if (searchTimeoutRef.current !== null) clearTimeout(searchTimeoutRef.current)
+    }
+  }, [])
+
+  // When onSearch is provided, client-side filtering is disabled — the API handles it.
+  const effectiveFilterOptions = filterOptions && !onSearch
+
   const filteredOptions = React.useMemo(() => {
-    if (!filterOptions) return options
+    if (!effectiveFilterOptions) return options
     const q = inputValue.toLowerCase()
     return options.filter(
       (o) =>
         o.label.toLowerCase().includes(q) ||
         o.value.toLowerCase().includes(q)
     )
-  }, [options, inputValue, filterOptions])
+  }, [options, inputValue, effectiveFilterOptions])
 
   const showDropdown = isOpen && (loading || filteredOptions.length > 0 || inputValue.length > 0)
 
@@ -69,6 +90,11 @@ function AutoSuggest({
     onChange?.(v)
     setIsOpen(true)
     setHighlightedIndex(-1)
+
+    if (onSearch) {
+      if (searchTimeoutRef.current !== null) clearTimeout(searchTimeoutRef.current)
+      searchTimeoutRef.current = setTimeout(() => onSearch(v), 300)
+    }
   }
 
   function handleFocus() {

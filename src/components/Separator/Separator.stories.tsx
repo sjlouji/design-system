@@ -8,15 +8,44 @@ const meta = {
   parameters: { layout: 'centered' },
   argTypes: {
     orientation: {
-      control: 'radio',
+      control: 'select',
       options: ['horizontal', 'vertical'],
+      description:
+        'Layout axis of the separator. "horizontal" renders a full-width 1px horizontal line; "vertical" renders a full-height 1px vertical line. Affects both visual appearance and the aria-orientation attribute.',
     },
-    decorative: { control: 'boolean' },
+    decorative: {
+      control: 'boolean',
+      description:
+        'When true (default), the element has role="none" and is hidden from screen readers — use for purely visual dividers. When false, it has role="separator" and is announced by assistive technology — use when the separator conveys meaningful structure.',
+    },
+    className: {
+      control: 'text',
+      description:
+        'Additional CSS classes. Override color with bg-* utilities or thickness with h-* / w-* utilities (e.g. "h-0.5" for a 2px horizontal line).',
+    },
   },
 } satisfies Meta<typeof Separator>
 
 export default meta
 type Story = StoryObj<typeof meta>
+
+// ---------------------------------------------------------------------------
+// Default
+// ---------------------------------------------------------------------------
+
+export const Default: Story = {
+  args: {
+    orientation: 'horizontal',
+    decorative: true,
+  },
+  render: (args) => (
+    <div className="w-64">
+      <p className="text-sm text-foreground">Above the separator</p>
+      <Separator {...args} className="my-4" />
+      <p className="text-sm text-foreground">Below the separator</p>
+    </div>
+  ),
+}
 
 // ---------------------------------------------------------------------------
 // Orientations

@@ -15,6 +15,12 @@ const meta = {
   component: Pagination,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
+  argTypes: {
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes applied to the root `<nav>` element. By default the pagination is centered and full-width.',
+    },
+  },
 } satisfies Meta<typeof Pagination>
 
 export default meta

@@ -9,17 +9,25 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   argTypes: {
+    models: {
+      control: false,
+      description: 'Array of AIModel objects to display in the dropdown. Each model has: id (string), name (string), provider (string), optional contextWindow (number), optional description (string), and optional tier ("fast" | "balanced" | "powerful"). Tier controls the colour dot shown next to the model name.',
+    },
     value: {
       control: 'text',
-      description: 'Currently selected model ID (controlled)',
+      description: 'Currently selected model ID (controlled). Should match one of the ids in the models array. When undefined, the trigger shows the placeholder "Select a model…".',
+    },
+    onChange: {
+      action: 'onChange',
+      description: 'Fired when the user picks a different model. Receives the new model id string.',
     },
     disabled: {
       control: 'boolean',
-      description: 'Disables the select trigger',
+      description: 'When true, the select trigger is non-interactive and visually dimmed. Use during loading or when model selection is locked.',
     },
     className: {
       control: 'text',
-      description: 'Additional CSS classes on the trigger',
+      description: 'Additional CSS classes applied to the SelectTrigger element.',
     },
   },
 } satisfies Meta<typeof ModelSelector>

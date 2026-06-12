@@ -5,6 +5,7 @@ export { cn } from './lib/utils'
 
 // ─── Primitives ───────────────────────────────────────────────────────────────
 export * from './components/Spinner'
+export * from './components/AnimatedShinyText'
 export * from './components/Typography'
 export * from './components/Kbd'
 export * from './components/Separator'
@@ -55,6 +56,7 @@ export * from './components/Sonner'
 export * from './components/Switch'
 export * from './components/Table'
 export * from './components/Tabs'
+export * from './components/ExpandableTabs'
 export * from './components/Textarea'
 export * from './components/Toggle'
 export * from './components/ToggleGroup'
@@ -72,6 +74,7 @@ export * from './components/Combobox'
 export * from './components/DatePicker'
 
 // ─── Layout ───────────────────────────────────────────────────────────────────
+export * from './components/AnnouncementBanner'
 export * from './components/PageHeader'
 export * from './components/Section'
 export * from './components/SplitLayout'

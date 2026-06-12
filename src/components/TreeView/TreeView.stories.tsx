@@ -8,6 +8,32 @@ const meta = {
   component: TreeView,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
+  argTypes: {
+    nodes: {
+      control: false,
+      description:
+        'Array of `TreeNode` objects that form the root level of the tree. Each node supports `id` (unique key), `label` (display text), `icon` (ReactNode rendered at 16 px), `children` (nested `TreeNode[]` — presence of children makes the row expandable/collapsible), `disabled` (makes the row non-interactive and visually dimmed), and `badge` (string or number shown as a secondary badge on the right).',
+    },
+    defaultExpanded: {
+      control: false,
+      description:
+        'Array of node `id` strings that should be expanded on initial render. Only applies at mount — after that, expand/collapse state is managed internally. Pass an empty array (default) to start fully collapsed.',
+    },
+    selected: {
+      control: 'text',
+      description:
+        'The `id` of the currently selected node. Pass `undefined` for no selection. When controlled, update this value inside `onSelect` to keep the highlight in sync.',
+    },
+    onSelect: {
+      action: 'nodeSelected',
+      description:
+        'Fired when a non-disabled node row is clicked or activated via keyboard. Receives the node `id` string as its only argument. Also fires for branch nodes (nodes with children) in addition to toggling their expand state.',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes applied to the root `<ul role="tree">` element.',
+    },
+  },
 } satisfies Meta<typeof TreeView>
 
 export default meta
@@ -62,6 +88,8 @@ export const Default: Story = {
   args: {
     nodes: defaultNodes,
     defaultExpanded: ['src', 'components'],
+    selected: undefined,
+    className: undefined,
   },
 }
 

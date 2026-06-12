@@ -22,17 +22,24 @@ const meta = {
   argTypes: {
     open: {
       control: 'boolean',
-      description: 'Controlled open state',
+      description:
+        'Controlled open state. When provided, the component becomes controlled and `onOpenChange` must be used to update it. Omit to use uncontrolled mode with `defaultOpen`.',
     },
     defaultOpen: {
       control: 'boolean',
-      description: 'Initial open state (uncontrolled)',
+      description:
+        'Initial open state in uncontrolled mode. Has no effect when `open` is also provided. Defaults to false (collapsed).',
     },
     disabled: {
       control: 'boolean',
-      description: 'Prevents the content from being toggled',
+      description:
+        'When true, the `CollapsibleTrigger` clicks are ignored and the content cannot be toggled. Does not visually dim the component — apply disabled styles to the trigger separately if needed.',
     },
-    onOpenChange: { action: 'onOpenChange' },
+    onOpenChange: {
+      action: 'onOpenChange',
+      description:
+        'Fired when the open state changes. Receives the new boolean open value. Required when using the component in controlled mode (i.e. when `open` is provided).',
+    },
   },
 } satisfies Meta<typeof Collapsible>
 

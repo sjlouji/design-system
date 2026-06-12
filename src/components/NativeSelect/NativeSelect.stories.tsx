@@ -6,6 +6,28 @@ const meta = {
   component: NativeSelect,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
+  argTypes: {
+    placeholder: {
+      control: 'text',
+      description: 'Text shown as a disabled first option prompting the user to make a selection. When provided, renders an <option value="" disabled> at the top of the list.',
+    },
+    error: {
+      control: 'boolean',
+      description: 'When true, applies destructive border and ring colours to signal a validation error.',
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'When true, the select is non-interactive and rendered with reduced opacity.',
+    },
+    children: {
+      control: false,
+      description: '<option> (and optional <optgroup>) elements that make up the dropdown list.',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes applied to the underlying <select> element.',
+    },
+  },
 } satisfies Meta<typeof NativeSelect>
 
 export default meta
@@ -20,9 +42,17 @@ const options = (
 )
 
 export const Default: Story = {
-  render: () => (
+  args: {
+    defaultValue: 'apple',
+    placeholder: undefined,
+    error: false,
+    disabled: false,
+    children: options,
+    className: '',
+  },
+  render: (args) => (
     <div className="w-48">
-      <NativeSelect defaultValue="apple">{options}</NativeSelect>
+      <NativeSelect {...args} />
     </div>
   ),
 }

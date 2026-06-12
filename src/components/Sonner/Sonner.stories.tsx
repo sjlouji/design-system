@@ -27,15 +27,54 @@ const meta = {
   component: Toaster,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
+  argTypes: {
+    expand: {
+      control: 'boolean',
+      description: 'When `true`, all toasts are permanently expanded and stacked in full view. When `false` (default), toasts stack and collapse — hover to expand.',
+    },
+    visibleToasts: {
+      control: { type: 'number' },
+      description: 'Maximum number of toasts visible at once before older ones are hidden. Defaults to `3`.',
+    },
+    gap: {
+      control: { type: 'number' },
+      description: 'Gap in pixels between stacked toasts. Defaults to `8`.',
+    },
+    closeButton: {
+      control: 'boolean',
+      description: 'When `true` (default), renders an ✕ close button on each toast. Set to `false` to rely solely on auto-dismiss.',
+    },
+    position: {
+      control: 'select',
+      options: ['top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right'],
+      description: 'Corner/edge of the viewport where toasts appear. Defaults to `bottom-right`.',
+    },
+    theme: {
+      control: 'select',
+      options: ['light', 'dark', 'system'],
+      description: '`light` — always light. `dark` — always dark. `system` (default) — follows the OS/next-themes preference.',
+    },
+    duration: {
+      control: { type: 'number' },
+      description: 'Default auto-dismiss duration in milliseconds for all toasts. Pass `Infinity` to prevent auto-dismiss. Defaults to `4000`.',
+    },
+  },
 } satisfies Meta<typeof Toaster>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  render: () => (
+  args: {
+    expand: false,
+    visibleToasts: 3,
+    gap: 8,
+    closeButton: true,
+    position: 'bottom-right',
+  },
+  render: (args) => (
     <div>
-      <Toaster />
+      <Toaster {...args} />
       <button style={btn} onClick={() => toast('Event has been created', { description: 'Monday, January 3rd at 6:00pm' })}>
         Show Toast
       </button>

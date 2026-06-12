@@ -6,6 +6,33 @@ const meta = {
   component: Branding,
   tags: ['autodocs'],
   parameters: { layout: 'fullscreen' },
+  argTypes: {
+    name: {
+      control: 'text',
+      description: 'Brand or product name. Always required. Drives the default logo initial when no custom logo is provided.',
+    },
+    tagline: {
+      control: 'text',
+      description: 'Optional secondary line rendered below the name in a smaller, muted style.',
+    },
+    size: {
+      control: 'select',
+      options: ['sm', 'md', 'lg'],
+      description: 'Overall scale. "sm" — 20 px logo, text-sm. "md" — 28 px logo, text-base semibold (default). "lg" — 36 px logo, text-xl bold.',
+    },
+    href: {
+      control: 'text',
+      description: 'When provided, wraps the entire branding block in an <a> element. Useful for linking back to a home page.',
+    },
+    logo: {
+      control: false,
+      description: 'Custom logo element rendered left of the name. When omitted, a coloured square showing the first letter of name is used as a fallback.',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes applied to the outer wrapper element.',
+    },
+  },
 } satisfies Meta<typeof Branding>
 
 export default meta
@@ -14,6 +41,9 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     name: 'Acme',
+    size: 'md',
+    tagline: undefined,
+    href: undefined,
   },
 }
 

@@ -9,23 +9,26 @@ const meta: Meta<typeof CodeBlock> = {
   argTypes: {
     code: {
       control: 'text',
-      description: 'The code string to display',
+      description: 'The raw code string to display. Whitespace and newlines are preserved.',
     },
     language: {
       control: 'text',
-      description: 'Language badge label shown in the header',
+      description:
+        'Language label shown as a badge in the header (e.g. "typescript", "python", "bash"). Purely decorative — no syntax highlighting is applied. Requires either `language` or `filename` to be set for the header to appear.',
     },
     filename: {
       control: 'text',
-      description: 'Filename shown in the header (also triggers header display)',
+      description:
+        'Filename displayed on the left side of the header bar (e.g. "greet.ts"). When provided, the header is shown and a copy button appears in the top-right. Can be combined with `language` for the badge.',
     },
     showLineNumbers: {
       control: 'boolean',
-      description: 'When true, renders line numbers in the gutter',
+      description:
+        'When true, each line is wrapped in a `<span>` with a right-aligned muted line number in the gutter. Defaults to false.',
     },
     className: {
       control: 'text',
-      description: 'Additional CSS classes on the root wrapper',
+      description: 'Additional CSS classes on the root wrapper `div`.',
     },
   },
 }
@@ -150,6 +153,9 @@ const shortSnippet = `npm install @myorg/design-system`
 export const Default: Story = {
   args: {
     code: tsCode,
+    language: 'typescript',
+    filename: 'greet.ts',
+    showLineNumbers: false,
   },
 }
 

@@ -13,27 +13,27 @@ const meta = {
     size: {
       control: 'select',
       options: ['default', 'sm'],
-      description: 'Visual size of the switch',
+      description: '`default` — standard switch (32×18 px). `sm` — compact switch (24×14 px), suited for dense settings panels or inline use next to small text.',
     },
     checked: {
       control: 'boolean',
-      description: 'Controlled checked state',
+      description: 'Controlled checked state. Must be paired with `onCheckedChange` to keep the switch in sync with external state.',
     },
     defaultChecked: {
       control: 'boolean',
-      description: 'Default checked state (uncontrolled)',
+      description: 'Initial checked state for uncontrolled usage. The switch manages its own state after mount.',
     },
     disabled: {
       control: 'boolean',
-      description: 'Disables the switch',
+      description: 'When `true`, the switch is non-interactive and rendered at reduced opacity. The cursor changes to `not-allowed`.',
     },
     required: {
       control: 'boolean',
-      description: 'Marks the switch as required',
+      description: 'When `true`, marks the underlying input as required for form validation.',
     },
     onCheckedChange: {
       action: 'checkedChange',
-      description: 'Callback fired when checked state changes',
+      description: 'Fires when the user toggles the switch. Receives the new boolean checked value (`true` = on, `false` = off).',
     },
   },
 } satisfies Meta<typeof Switch>
@@ -42,7 +42,11 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: { size: 'default' },
+  args: {
+    size: 'default',
+    defaultChecked: false,
+    disabled: false,
+  },
 }
 
 export const Checked: Story = {

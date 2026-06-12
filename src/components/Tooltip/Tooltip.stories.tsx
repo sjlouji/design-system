@@ -30,23 +30,27 @@ const meta = {
   argTypes: {
     open: {
       control: 'boolean',
-      description: 'Controlled open state',
+      description: 'Controlled open state. Pair with `onOpenChange` to manage visibility externally.',
     },
     defaultOpen: {
       control: 'boolean',
-      description: 'Default open state (uncontrolled)',
+      description: 'Initial open state for uncontrolled usage.',
     },
     delayDuration: {
-      control: { type: 'number', min: 0, max: 2000, step: 100 },
-      description: 'Delay in ms before tooltip opens',
+      control: { type: 'range', min: 0, max: 2000, step: 100 },
+      description: 'Milliseconds to wait after hover before the tooltip opens. The `TooltipProvider` default is `0`; override per-tooltip by passing this prop on `Tooltip` directly.',
     },
     disableHoverableContent: {
       control: 'boolean',
-      description: 'When true, hovering over content will not keep tooltip open',
+      description: 'When `true`, moving the cursor from the trigger into the tooltip content will immediately close it. Useful for simple label tooltips.',
     },
     onOpenChange: {
       action: 'onOpenChange',
-      description: 'Callback when open state changes',
+      description: 'Fires when the open state changes. Receives the new boolean `open` value.',
+    },
+    children: {
+      control: false,
+      description: 'Compose with `TooltipTrigger` and `TooltipContent`. `TooltipContent` accepts `side` (`top` | `right` | `bottom` | `left`), `align` (`start` | `center` | `end`), `sideOffset` (number), and `showArrow` (boolean, default `true`).',
     },
   },
 } satisfies Meta<typeof Tooltip>
@@ -55,6 +59,11 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
+  args: {
+    defaultOpen: false,
+    delayDuration: 0,
+    disableHoverableContent: false,
+  },
   render: () => (
     <Tooltip>
       <TooltipTrigger asChild>

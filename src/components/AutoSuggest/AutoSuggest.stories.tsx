@@ -13,6 +13,51 @@ const meta = {
       </div>
     ),
   ],
+  argTypes: {
+    options: {
+      control: false,
+      description:
+        'Array of suggestion items. Each item has a required string value and label, plus an optional description shown as secondary text.',
+    },
+    value: {
+      control: 'text',
+      description:
+        'Controlled input value. When provided, the component syncs the text field to this string. Omit for uncontrolled usage.',
+    },
+    onChange: {
+      action: 'onChange',
+      description:
+        'Fired on every keystroke in the text input. Receives the current raw string value.',
+    },
+    onSelect: {
+      action: 'onSelect',
+      description:
+        'Fired when the user picks a suggestion from the dropdown. Receives the full AutoSuggestOption object ({ value, label, description? }).',
+    },
+    placeholder: {
+      control: 'text',
+      description: 'Placeholder text shown inside the input when it is empty.',
+    },
+    loading: {
+      control: 'boolean',
+      description:
+        'When true, replaces the suggestion list with a centered spinner. Use while fetching async options.',
+    },
+    emptyMessage: {
+      control: 'text',
+      description:
+        'Message shown when the dropdown is open but no options match the current input. Defaults to "No results found."',
+    },
+    filterOptions: {
+      control: 'boolean',
+      description:
+        'When true (default), options are filtered client-side to match the input text. Set to false to disable filtering and show all options on focus — useful when filtering happens server-side.',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes applied to the outer wrapper div.',
+    },
+  },
 } satisfies Meta<typeof AutoSuggest>
 
 export default meta
@@ -31,6 +76,9 @@ export const Default: Story = {
   args: {
     options: frameworkOptions,
     placeholder: 'Search frameworks…',
+    loading: false,
+    emptyMessage: 'No results found.',
+    filterOptions: true,
   },
 }
 

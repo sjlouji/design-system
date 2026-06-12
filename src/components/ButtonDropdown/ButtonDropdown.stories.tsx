@@ -7,6 +7,42 @@ const meta = {
   component: ButtonDropdown,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
+  argTypes: {
+    label: {
+      control: 'text',
+      description: 'Text label for the primary (left) button segment.',
+    },
+    onClick: {
+      action: 'onClick',
+      description: 'Click handler for the primary button segment. The dropdown trigger has its own handler via the actions array.',
+    },
+    actions: {
+      control: false,
+      description: 'Array of dropdown menu items. Each item: label (string), onClick (optional callback), icon (optional ReactNode shown left of label), disabled (boolean), destructive (boolean — renders item in red destructive style).',
+    },
+    variant: {
+      control: 'select',
+      options: ['default', 'outline', 'secondary'],
+      description: 'Visual style applied to both the primary button and the chevron trigger. "default" — filled primary. "outline" — bordered transparent. "secondary" — muted fill.',
+    },
+    size: {
+      control: 'select',
+      options: ['sm', 'default', 'lg'],
+      description: 'Height and padding applied to both button segments. "sm" h-8, "default" h-9, "lg" h-10.',
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'When true, disables both the primary button and the dropdown trigger.',
+    },
+    loading: {
+      control: 'boolean',
+      description: 'When true, shows a spinner in the primary button and disables both segments. Intended for async submit actions.',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes applied to the outer wrapper div.',
+    },
+  },
 } satisfies Meta<typeof ButtonDropdown>
 
 export default meta
@@ -21,6 +57,10 @@ const baseActions = [
 export const Default: Story = {
   args: {
     label: 'Save',
+    variant: 'default',
+    size: 'default',
+    disabled: false,
+    loading: false,
     actions: baseActions,
   },
 }

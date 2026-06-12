@@ -14,13 +14,52 @@ const meta = {
       </div>
     ),
   ],
+  argTypes: {
+    accept: {
+      control: 'text',
+      description: 'Comma-separated list of accepted file types. Supports MIME types ("image/png"), wildcard MIME groups ("image/*"), and file extensions (".pdf"). Files that do not match are passed to `onFilesRejected`. Omit to accept any file.',
+    },
+    multiple: {
+      control: 'boolean',
+      description: 'When true, multiple files can be dropped or selected at once. When false (default), only the first file of each drop event is processed.',
+    },
+    maxSize: {
+      control: 'number',
+      description: 'Maximum allowed file size in bytes. Files exceeding this are passed to `onFilesRejected` with a "File size exceeds …" reason. Omit for no size limit.',
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'When true, disables all interaction — pointer events are blocked, keyboard focus is removed, and the zone is dimmed with 50% opacity.',
+    },
+    onFilesAccepted: {
+      action: 'onFilesAccepted',
+      description: 'Called with the array of `File` objects that passed all validation rules (type and size). Fires immediately after a drop or file-picker selection.',
+    },
+    onFilesRejected: {
+      action: 'onFilesRejected',
+      description: 'Called with the array of rejected `File` objects and a human-readable reason string when any files fail type or size validation.',
+    },
+    children: {
+      control: false,
+      description: 'Optional custom content rendered inside the drop zone. When omitted, a default cloud-upload icon with instructional text is shown. Use to provide branded or context-specific copy.',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes applied to the drop zone container.',
+    },
+  },
 } satisfies Meta<typeof FileDropzone>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: {},
+  args: {
+    accept: undefined,
+    multiple: false,
+    maxSize: undefined,
+    disabled: false,
+  },
 }
 
 export const ImagesOnly: Story = {

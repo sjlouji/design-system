@@ -7,6 +7,22 @@ const meta = {
   component: TopNavigation,
   tags: ['autodocs'],
   parameters: { layout: 'fullscreen' },
+  argTypes: {
+    items: {
+      control: false,
+      description:
+        'Array of `NavItem` objects that define the navigation links. Each item supports `id` (unique key), `label` (display text), `href` (renders an `<a>` when provided, otherwise a `<button>`), `icon` (ReactNode rendered at 16 px), `badge` (string or number shown as a secondary badge), `active` (highlights the item and sets `aria-current="page"`), and `disabled` (makes the item non-interactive).',
+    },
+    onItemClick: {
+      action: 'itemClicked',
+      description:
+        'Fired when a non-disabled item is clicked. Receives the full `NavItem` object as its only argument. Not fired for disabled items.',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes applied to the wrapping `<nav>` element.',
+    },
+  },
 } satisfies Meta<typeof TopNavigation>
 
 export default meta

@@ -20,20 +20,28 @@ const meta = {
   argTypes: {
     title: {
       control: 'text',
-      description: 'Primary heading text',
+      description: 'Primary heading text. Always required — describes what is absent.',
     },
     description: {
       control: 'text',
-      description: 'Secondary body text below the title',
+      description: 'Optional secondary body text rendered below the title. Use to explain why the state is empty or suggest a next action.',
     },
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg'],
-      description: 'Controls icon size, title size, and vertical padding',
+      description: 'Overall scale of the component. "sm" — compact icon (20px), small title, py-8 padding; best for card interiors. "md" — standard icon (28px), base title, py-12 (default). "lg" — large icon (36px), lg title, py-20; best for full-page empty states.',
+    },
+    icon: {
+      control: false,
+      description: 'Optional React element rendered above the title in a branded gradient container. Pass any lucide-react icon, e.g. `<InboxIcon />`.',
+    },
+    action: {
+      control: false,
+      description: 'Optional React element rendered below the title/description block. Typically a `<Button>` or a row of buttons that lets the user resolve the empty state.',
     },
     className: {
       control: 'text',
-      description: 'Additional CSS classes on the root wrapper',
+      description: 'Additional CSS classes applied to the root flex container.',
     },
   },
   args: { title: '' },
@@ -46,6 +54,8 @@ export const Default: Story = {
   args: {
     icon: <InboxIcon />,
     title: 'No messages',
+    description: 'When you receive messages, they will appear here.',
+    size: 'md',
   },
 }
 

@@ -18,14 +18,34 @@ const meta = {
     size: {
       control: 'select',
       options: ['sm', 'default', 'lg'],
-      description: 'Controls the rendered size of the avatar circle',
+      description:
+        'Controls the rendered size of the avatar circle. "sm" — 24 px. "default" — 32 px. "lg" — 40 px.',
       table: { defaultValue: { summary: 'default' } },
+    },
+    children: {
+      control: false,
+      description:
+        'Content of the avatar. Compose with <AvatarImage> for the photo, <AvatarFallback> for the initials shown on load/error, and optionally <AvatarBadge> for a status indicator.',
     },
   },
 } satisfies Meta<typeof Avatar>
 
 export default meta
 type Story = StoryObj<typeof meta>
+
+// --- Default (controllable) ---
+
+export const Default: Story = {
+  args: {
+    size: 'default',
+  },
+  render: (args) => (
+    <Avatar {...args}>
+      <AvatarImage src="https://i.pravatar.cc/80?img=1" alt="Jane Doe" />
+      <AvatarFallback>JD</AvatarFallback>
+    </Avatar>
+  ),
+}
 
 // --- With image ---
 

@@ -9,19 +9,23 @@ const meta = {
   argTypes: {
     title: {
       control: 'text',
-      description: 'Label shown in the collapsible trigger (default: "Thinking…")',
+      description: 'Label shown in the collapsible trigger button. Defaults to "Thinking…". Set to a duration string like "Thought for 3 seconds" once the model finishes reasoning.',
     },
     thinking: {
       control: 'boolean',
-      description: 'When true, animates the brain icon and title with a shimmer effect',
+      description: 'When `true`, applies a shimmer animation to the title text and a pulse animation to the brain icon — use while the model is actively reasoning.',
     },
     defaultOpen: {
       control: 'boolean',
-      description: 'Whether the content is expanded on mount',
+      description: 'Whether the reasoning content is expanded on initial mount. Defaults to `false` so completed thoughts are collapsed.',
+    },
+    children: {
+      control: false,
+      description: 'The reasoning text content rendered inside the collapsible area. Accepts any React node.',
     },
     className: {
       control: 'text',
-      description: 'Additional CSS classes on the root element',
+      description: 'Additional CSS classes on the root collapsible element.',
     },
   },
 } satisfies Meta<typeof ThinkingBlock>
@@ -31,8 +35,10 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    children: 'The user is asking about the capital of France. The answer is Paris.',
+    title: 'Thinking…',
+    thinking: false,
     defaultOpen: false,
+    children: 'The user is asking about the capital of France. The answer is Paris.',
   },
 }
 

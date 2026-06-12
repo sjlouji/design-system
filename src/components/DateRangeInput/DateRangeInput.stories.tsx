@@ -17,28 +17,28 @@ const meta = {
   argTypes: {
     value: {
       control: false,
-      description: 'Controlled date range value with optional from/to dates',
+      description: 'Controlled date range `{ from?: Date, to?: Date }`. When only `from` is set the display shows "startDate → ...". When both are set it shows the full formatted range. Pair with `onChange` for fully controlled usage.',
     },
     onChange: {
-      action: 'changed',
-      description: 'Callback fired when the range changes',
+      action: 'onChange',
+      description: 'Fired on every calendar selection change. Receives a `{ from?: Date, to?: Date }` object, or `undefined` if the range is cleared. The popover auto-closes once both `from` and `to` are selected.',
     },
     placeholder: {
       control: 'text',
-      description: 'Placeholder text when no range is selected',
+      description: 'Text shown on the trigger button when no range is selected. Defaults to "Start date → End date".',
     },
     format: {
       control: 'select',
       options: ['dd/MM/yyyy', 'MM/dd/yyyy', 'yyyy-MM-dd', 'MMM d, yyyy'],
-      description: 'Date format string for displaying selected dates',
+      description: 'date-fns format string used to display the selected dates on the trigger button. "dd/MM/yyyy" — day-first (UK/AU). "MM/dd/yyyy" — month-first (US). "yyyy-MM-dd" — ISO 8601. "MMM d, yyyy" — abbreviated month (e.g. Jun 15, 2025). Defaults to "dd/MM/yyyy".',
     },
     disabled: {
       control: 'boolean',
-      description: 'Disables the range input trigger',
+      description: 'When true, disables the trigger button — the calendar popover cannot be opened and the button is visually dimmed.',
     },
     className: {
       control: 'text',
-      description: 'Additional CSS classes applied to the trigger',
+      description: 'Additional CSS classes applied to the trigger button element.',
     },
   },
 } satisfies Meta<typeof DateRangeInput>
@@ -47,7 +47,11 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: {},
+  args: {
+    placeholder: 'Start date → End date',
+    format: 'dd/MM/yyyy',
+    disabled: false,
+  },
 }
 
 export const WithFullRange: Story = {

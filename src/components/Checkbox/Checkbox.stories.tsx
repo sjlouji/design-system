@@ -13,23 +13,28 @@ const meta = {
     checked: {
       control: 'select',
       options: [true, false, 'indeterminate'],
-      description: 'Controlled checked state (true, false, or "indeterminate")',
+      description:
+        'Controlled checked state. `true` — checked with a checkmark. `false` — unchecked. `"indeterminate"` — partial selection state (dash icon), typically used for "select all" rows where only some children are selected.',
     },
     defaultChecked: {
       control: 'boolean',
-      description: 'Default checked state (uncontrolled)',
+      description:
+        'Initial checked state when used in uncontrolled mode. Has no effect when `checked` is also provided.',
     },
     disabled: {
       control: 'boolean',
-      description: 'Disables the checkbox',
+      description:
+        'When true, the checkbox is non-interactive, visually dimmed (50% opacity), and the cursor changes to `not-allowed`.',
     },
     required: {
       control: 'boolean',
-      description: 'Marks the checkbox as required',
+      description:
+        'Marks the checkbox as required in a form context. Does not affect visual appearance.',
     },
     onCheckedChange: {
       action: 'checkedChange',
-      description: 'Callback fired when checked state changes',
+      description:
+        'Fired when the checked state changes. Receives `true`, `false`, or `"indeterminate"`. Use this with `checked` for controlled usage.',
     },
   },
 } satisfies Meta<typeof Checkbox>
@@ -38,7 +43,11 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: { id: 'default' },
+  args: {
+    id: 'default',
+    disabled: false,
+    required: false,
+  },
 }
 
 export const Checked: Story = {

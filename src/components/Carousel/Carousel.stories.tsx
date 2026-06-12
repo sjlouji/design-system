@@ -20,8 +20,24 @@ const meta = {
     orientation: {
       control: 'select',
       options: ['horizontal', 'vertical'],
-      description: 'Scroll axis for the carousel',
+      description: 'Scroll axis. "horizontal" — items scroll left/right, arrow keys navigate left/right (default). "vertical" — items scroll up/down. The CarouselContent height must be set explicitly when using vertical.',
       table: { defaultValue: { summary: 'horizontal' } },
+    },
+    opts: {
+      control: false,
+      description: 'Embla Carousel options object passed directly to the underlying useEmblaCarousel hook. Common options: loop (boolean — wraps around at ends), align ("start" | "center" | "end" — snap alignment), slidesToScroll (number — how many slides to advance per click).',
+    },
+    plugins: {
+      control: false,
+      description: 'Array of Embla Carousel plugins (e.g. Autoplay, ClassNames). Passed directly to useEmblaCarousel.',
+    },
+    setApi: {
+      control: false,
+      description: 'Callback that receives the Embla CarouselApi instance once initialised. Use this to programmatically control the carousel or subscribe to scroll events (e.g. to build dot indicators).',
+    },
+    children: {
+      control: false,
+      description: 'Compose with CarouselContent > CarouselItem for slides, and optionally CarouselPrevious / CarouselNext for navigation buttons. All child components consume the shared carousel context.',
     },
   },
 } satisfies Meta<typeof Carousel>

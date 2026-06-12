@@ -48,6 +48,16 @@ const meta = {
   component: Menubar,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
+  argTypes: {
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes on the root menubar container (the horizontal bar itself).',
+    },
+    children: {
+      control: false,
+      description: 'One or more MenubarMenu elements, each containing a MenubarTrigger and MenubarContent.',
+    },
+  },
 } satisfies Meta<typeof Menubar>
 
 export default meta

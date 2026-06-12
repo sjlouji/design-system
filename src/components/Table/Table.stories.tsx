@@ -17,6 +17,16 @@ const meta = {
   component: Table,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
+  argTypes: {
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes applied to the inner <table> element. The outer container always has overflow-x-auto applied.',
+    },
+    children: {
+      control: false,
+      description: 'Table content — compose with TableHeader, TableBody, TableFooter, TableCaption, TableRow, TableHead, and TableCell sub-components.',
+    },
+  },
 } satisfies Meta<typeof Table>
 
 export default meta
@@ -49,6 +59,9 @@ const statusVariant = (status: string) => {
 }
 
 export const Default: Story = {
+  args: {
+    className: undefined,
+  },
   render: () => (
     <Table>
       <TableCaption>A list of recent invoices.</TableCaption>

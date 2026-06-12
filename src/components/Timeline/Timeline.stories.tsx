@@ -8,6 +8,16 @@ const meta = {
   component: Timeline,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
+  argTypes: {
+    items: {
+      control: false,
+      description: 'Array of `TimelineItem` objects. Each item has: `id` (string, required), `title` (string, required), `description` (string, optional), `timestamp` (string, optional), `icon` (ReactNode rendered inside the status dot, optional), and `status` (`default` | `success` | `error` | `warning` | `pending`, optional — controls dot color).',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes on the root container element.',
+    },
+  },
 } satisfies Meta<typeof Timeline>
 
 export default meta

@@ -7,15 +7,41 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   argTypes: {
+    onCopy: {
+      action: 'onCopy',
+      description: 'Called when the user clicks the Copy button. The component internally shows a checkmark for 1.5 s before resetting. Omit to hide the Copy button entirely.',
+    },
+    onRegenerate: {
+      action: 'onRegenerate',
+      description: 'Called when the user clicks the Regenerate button. Omit to hide the button.',
+    },
+    onThumbsUp: {
+      action: 'onThumbsUp',
+      description: 'Called when the user clicks the thumbs-up button. Activates the button visually (primary colour). Omit to hide it. A separator is only rendered when at least one thumbs button is present.',
+    },
+    onThumbsDown: {
+      action: 'onThumbsDown',
+      description: 'Called when the user clicks the thumbs-down button. Activates the button visually. Omit to hide it.',
+    },
     className: {
       control: 'text',
-      description: 'Additional CSS classes on the toolbar root',
+      description: 'Additional CSS classes on the toolbar root.',
     },
   },
 } satisfies Meta<typeof MessageActions>
 
 export default meta
 type Story = StoryObj<typeof meta>
+
+export const Default: Story = {
+  args: {
+    onCopy: () => console.log('copy'),
+    onRegenerate: () => console.log('regenerate'),
+    onThumbsUp: () => console.log('thumbs up'),
+    onThumbsDown: () => console.log('thumbs down'),
+    className: '',
+  },
+}
 
 export const AllActions: Story = {
   args: {

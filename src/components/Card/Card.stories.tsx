@@ -26,7 +26,14 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   argTypes: {
-    className: { control: 'text' },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes applied to the Card root element. The card has default padding, border, background, and shadow — use className to override dimensions, spacing, or add hover effects.',
+    },
+    children: {
+      control: false,
+      description: 'Compose with CardHeader, CardContent, and CardFooter. Use CardTitle and CardDescription inside CardHeader. Use CardAction inside CardHeader for a right-aligned action (e.g. a button or icon). Slots are vertically spaced with gap-6.',
+    },
   },
 } satisfies Meta<typeof Card>
 

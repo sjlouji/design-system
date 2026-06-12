@@ -14,6 +14,32 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'fullscreen' },
   args: { children: null },
+  argTypes: {
+    sidebar: {
+      control: false,
+      description:
+        'React node rendered in a fixed-width (260 px) left sidebar with `bg-sidebar` background and a right border. Omit to collapse the sidebar entirely and use the full width for the main column.',
+    },
+    header: {
+      control: false,
+      description:
+        'React node rendered in a sticky 56 px header bar at the top of the main column. Typically contains the conversation title and a model selector. Omit to remove the header.',
+    },
+    children: {
+      control: false,
+      description:
+        'Main content area — fills all remaining vertical space between the header and footer. Typically a `<ChatThread>` component with `className="h-full"` so it takes the full height and manages its own scroll.',
+    },
+    footer: {
+      control: false,
+      description:
+        'React node rendered in a sticky footer bar at the bottom of the main column. Typically a `<ChatInput>` component. Omit to remove the footer.',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes on the root `div` (which is full-screen `h-screen overflow-hidden`).',
+    },
+  },
 } satisfies Meta<typeof ChatShell>
 
 export default meta

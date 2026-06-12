@@ -12,28 +12,28 @@ const meta = {
   argTypes: {
     defaultValue: {
       control: 'text',
-      description: 'The default selected value (uncontrolled)',
+      description: 'The initially selected value for uncontrolled usage. Does not re-render on prop change — use `value` + `onValueChange` for controlled usage.',
     },
     value: {
       control: 'text',
-      description: 'The controlled selected value',
+      description: 'The controlled selected value. Must be kept in sync via `onValueChange`.',
     },
     disabled: {
       control: 'boolean',
-      description: 'Disables all radio items in the group',
+      description: 'When `true`, all `RadioGroupItem` children are disabled and non-interactive. Individual items can also be disabled via their own `disabled` prop.',
     },
     required: {
       control: 'boolean',
-      description: 'Marks the group as required',
+      description: 'Marks the radio group as required for form validation purposes. Propagated to the underlying `<input type="radio">` elements.',
     },
     orientation: {
       control: 'select',
       options: ['horizontal', 'vertical'],
-      description: 'Layout orientation of the group',
+      description: 'Semantic orientation hint used by assistive technologies. `"vertical"` (default) means arrow-up/down navigate items; `"horizontal"` means arrow-left/right navigate items.',
     },
     onValueChange: {
-      action: 'valueChange',
-      description: 'Callback when the selected value changes',
+      action: 'onValueChange',
+      description: 'Fires when the selected item changes. Receives the `value` string of the newly selected `RadioGroupItem`.',
     },
   },
 } satisfies Meta<typeof RadioGroup>

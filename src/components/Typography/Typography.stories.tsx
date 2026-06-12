@@ -10,25 +10,37 @@ const meta = {
     variant: {
       control: 'select',
       options: ['h1', 'h2', 'h3', 'h4', 'p', 'lead', 'large', 'small', 'muted', 'blockquote', 'code', 'list'],
-      description: 'The typographic variant — controls both element and visual style.',
+      description:
+        'Controls both the rendered HTML element and the visual text style. `h1`–`h4` render heading elements with decreasing size and weight. `p` is standard body copy. `lead` is a larger introductory paragraph in muted foreground. `large` is semibold body-plus. `small` is compact text with medium weight. `muted` renders helper/secondary copy in muted foreground. `blockquote` adds a left border and italic style. `code` renders inline monospace with a muted background chip. `list` renders a disc-style unordered list.',
     },
     as: {
       control: 'text',
-      description: 'Override the rendered HTML element regardless of the variant.',
+      description:
+        'Override the rendered HTML element without changing the visual style. For example, `variant="h2" as="h1"` renders h2 styling on an h1 element. Useful for correct document outline while maintaining a specific visual hierarchy.',
     },
     className: {
       control: 'text',
-      description: 'Additional CSS classes applied to the element.',
+      description: 'Additional CSS classes applied to the rendered element.',
     },
     children: {
-      control: 'text',
-      description: 'Text content or nested elements.',
+      control: false,
+      description:
+        'Text content or nested React nodes. For `variant="list"`, pass `<li>` elements as children.',
     },
   },
 } satisfies Meta<typeof Typography>
 
 export default meta
 type Story = StoryObj<typeof meta>
+
+export const Default: Story = {
+  args: {
+    variant: 'p',
+    children: 'The quick brown fox jumps over the lazy dog.',
+    as: undefined,
+    className: undefined,
+  },
+}
 
 // ─── Individual variants ───────────────────────────────────────────────────
 

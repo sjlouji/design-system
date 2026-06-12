@@ -19,9 +19,15 @@ const meta = {
     variant: {
       control: 'select',
       options: ['default', 'destructive'],
-      description: 'Visual style of the alert',
+      description:
+        'Visual style of the alert. "default" — card background with standard text colour. "destructive" — red text and icon to signal errors or dangerous states.',
     },
-    className: { control: 'text' },
+    children: {
+      control: false,
+      description:
+        'Content rendered inside the alert. Typically composed of <AlertTitle> and/or <AlertDescription> sub-components, optionally preceded by an icon element.',
+    },
+    className: { control: 'text', description: 'Additional CSS classes for the alert container.' },
   },
 } satisfies Meta<typeof Alert>
 
@@ -33,8 +39,12 @@ type Story = StoryObj<typeof meta>
 // ---------------------------------------------------------------------------
 
 export const Default: Story = {
-  render: () => (
-    <Alert className="w-[420px]">
+  args: {
+    variant: 'default',
+    className: 'w-[420px]',
+  },
+  render: (args) => (
+    <Alert {...args}>
       <AlertTitle>Heads up!</AlertTitle>
       <AlertDescription>
         You can add components to your app using the CLI.

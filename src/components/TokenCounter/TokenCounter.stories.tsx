@@ -9,25 +9,33 @@ const meta = {
   argTypes: {
     current: {
       control: { type: 'number', min: 0 },
-      description: 'Current token count',
+      description: 'Number of tokens currently used. The progress bar and text color update automatically: neutral below 75%, warning (`text-warning`) above 75%, destructive (`text-destructive`) above 90%.',
     },
     max: {
       control: { type: 'number', min: 1 },
-      description: 'Maximum token limit',
+      description: 'Maximum token capacity for the model context window.',
     },
     compact: {
       control: 'boolean',
-      description: 'Compact inline display — shows count/max + mini progress bar inline',
+      description: '`false` (default) — full layout with a labelled progress bar. `true` — single-line inline display showing `count/max` + a narrow bar, suitable for toolbars or footers.',
     },
     className: {
       control: 'text',
-      description: 'Additional CSS classes',
+      description: 'Additional CSS classes on the root element.',
     },
   },
 } satisfies Meta<typeof TokenCounter>
 
 export default meta
 type Story = StoryObj<typeof meta>
+
+export const Default: Story = {
+  args: {
+    current: 1024,
+    max: 8192,
+    compact: false,
+  },
+}
 
 export const LowUsage: Story = {
   args: {

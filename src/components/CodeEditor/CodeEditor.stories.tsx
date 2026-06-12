@@ -6,6 +6,69 @@ const meta = {
   component: CodeEditor,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
+  argTypes: {
+    value: {
+      control: 'text',
+      description:
+        'Controlled value of the editor. When provided, the component is controlled and `onChange` must be used to update it.',
+    },
+    onChange: {
+      action: 'onChange',
+      description:
+        'Fired on every edit with the full current editor content as a string. Required when using the component in controlled mode.',
+    },
+    language: {
+      control: 'select',
+      options: ['javascript', 'typescript', 'css', 'html', 'json', 'python', 'plain'],
+      description:
+        '"javascript" — JS syntax highlighting. "typescript" — TS syntax highlighting. "css" — CSS. "html" — HTML. "json" — JSON. "python" — Python. "plain" — no language extension, plain text.',
+    },
+    theme: {
+      control: 'select',
+      options: ['light', 'dark'],
+      description:
+        '"light" — default CodeMirror light theme. "dark" — One Dark theme. Defaults to "light".',
+    },
+    readOnly: {
+      control: 'boolean',
+      description:
+        'When true, the editor content cannot be edited. Cursor and selection still work. Defaults to false.',
+    },
+    lineNumbers: {
+      control: 'boolean',
+      description:
+        'When true, line numbers are shown in the gutter on the left. Defaults to true.',
+    },
+    placeholder: {
+      control: 'text',
+      description:
+        'Placeholder text shown when the editor is empty. Rendered by CodeMirror as a ghost overlay.',
+    },
+    height: {
+      control: 'text',
+      description:
+        'Fixed height of the editor as a CSS string (e.g. "300px", "50vh"). Defaults to "300px".',
+    },
+    minHeight: {
+      control: 'text',
+      description:
+        'Minimum height as a CSS string. Useful for auto-growing editors — combine with no `height` and set a `minHeight` instead.',
+    },
+    maxHeight: {
+      control: 'text',
+      description:
+        'Maximum height as a CSS string. Editor scrolls vertically when content exceeds this height.',
+    },
+    filename: {
+      control: 'text',
+      description:
+        'When provided, renders a header bar above the editor showing the filename, language badge, and a copy button.',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes on the root wrapper `div`.',
+    },
+  },
 } satisfies Meta<typeof CodeEditor>
 
 export default meta
@@ -44,6 +107,17 @@ const jsonCode = `{
     "build": "tsc -b && vite build"
   }
 }`
+
+export const Default: Story = {
+  args: {
+    value: jsCode,
+    language: 'javascript',
+    theme: 'light',
+    readOnly: false,
+    lineNumbers: true,
+    height: '200px',
+  },
+}
 
 export const JavaScript: Story = {
   args: {

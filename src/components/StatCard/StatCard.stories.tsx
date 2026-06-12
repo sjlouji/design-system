@@ -7,6 +7,32 @@ const meta = {
   component: StatCard,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
+  argTypes: {
+    label: {
+      control: 'text',
+      description: 'Short descriptive label shown above the primary value, rendered in muted foreground text.',
+    },
+    value: {
+      control: 'text',
+      description: 'The primary metric displayed in large bold text. Accepts a string (e.g. `"$12,400"`, `"98.6%"`) or a number.',
+    },
+    trend: {
+      control: false,
+      description: 'Optional trend indicator. Pass an object `{ value: number, label?: string }`. Positive values show a green upward arrow; negative values show a red downward arrow; zero shows neutral muted text. The `label` is appended after the number (e.g. `"vs last month"`).',
+    },
+    icon: {
+      control: false,
+      description: 'Optional icon rendered in the top-right corner of the card, displayed in muted foreground color. Accepts any React node — typically a Lucide icon at `size-5`.',
+    },
+    loading: {
+      control: 'boolean',
+      description: 'When `true`, replaces card content with skeleton placeholders. Use while data is being fetched.',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes on the card container. Useful for controlling width or adding custom spacing.',
+    },
+  },
 } satisfies Meta<typeof StatCard>
 
 export default meta
@@ -16,6 +42,7 @@ export const Default: Story = {
   args: {
     label: 'Total Revenue',
     value: '$12,400',
+    loading: false,
   },
 }
 

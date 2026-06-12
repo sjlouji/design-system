@@ -5,6 +5,7 @@ import {
   type ColumnDef,
   type SortingState,
   type RowSelectionState,
+  type PaginationState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -40,6 +41,23 @@ export interface DataTableProps<TData> {
   loading?: boolean
   emptyMessage?: string
   className?: string
+  /**
+   * Total number of rows across all pages. Required for server pagination to
+   * correctly compute page count and enable/disable the Next button.
+   */
+  totalRows?: number
+  /**
+   * When provided, switches to server-side pagination mode. The table will no
+   * longer paginate `data` client-side — `data` must already be the current
+   * page. Fired whenever the user changes page or page size.
+   */
+  onPaginationChange?: (page: number, pageSize: number) => void
+  /**
+   * When provided, switches to server-side search mode. Fired (debounced 300 ms)
+   * whenever the user types in the search input. The caller should refetch `data`
+   * and reset to page 0 on each call.
+   */
+  onSearchChange?: (query: string) => void
 }
 
 export function DataTable<TData>({
@@ -53,10 +71,41 @@ export function DataTable<TData>({
   loading = false,
   emptyMessage = 'No results.',
   className,
+  totalRows,
+  onPaginationChange,
+  onSearchChange,
 }: DataTableProps<TData>) {
+  const isServerPagination = !!onPaginationChange
+  const isServerSearch = !!onSearchChange
+
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [globalFilter, setGlobalFilter] = React.useState('')
   const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({})
+  const [serverPagination, setServerPagination] = React.useState<PaginationState>({
+    pageIndex: 0,
+    pageSize,
+  })
+  const searchTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  React.useEffect(() => {
+    return () => {
+      if (searchTimeoutRef.current !== null) clearTimeout(searchTimeoutRef.current)
+    }
+  }, [])
+
+  function handleSearchInput(value: string) {
+    setGlobalFilter(value)
+    if (isServerSearch) {
+      if (searchTimeoutRef.current !== null) clearTimeout(searchTimeoutRef.current)
+      searchTimeoutRef.current = setTimeout(() => {
+        onSearchChange!(value)
+        // Reset to first page on new search so the caller's refetch starts at 0
+        if (isServerPagination) {
+          setServerPagination((prev) => ({ ...prev, pageIndex: 0 }))
+        }
+      }, 300)
+    }
+  }
 
   const selectionColumn: ColumnDef<TData, any> = {
     id: '__select__',
@@ -96,10 +145,22 @@ export function DataTable<TData>({
       sorting,
       globalFilter,
       rowSelection,
+      ...(isServerPagination ? { pagination: serverPagination } : {}),
     },
     onSortingChange: setSorting,
     onGlobalFilterChange: setGlobalFilter,
     onRowSelectionChange: setRowSelection,
+    ...(isServerPagination && {
+      manualPagination: true,
+      pageCount: totalRows != null ? Math.ceil(totalRows / serverPagination.pageSize) : -1,
+      onPaginationChange: (updater) => {
+        const prev = serverPagination
+        const next = typeof updater === 'function' ? updater(prev) : updater
+        setServerPagination(next)
+        onPaginationChange!(next.pageIndex, next.pageSize)
+      },
+    }),
+    ...(isServerSearch && { manualFiltering: true }),
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -118,7 +179,7 @@ export function DataTable<TData>({
         <Input
           placeholder={searchPlaceholder}
           value={globalFilter}
-          onChange={(e) => setGlobalFilter(e.target.value)}
+          onChange={(e) => handleSearchInput(e.target.value)}
           className="max-w-sm"
         />
       )}
@@ -215,7 +276,8 @@ export function DataTable<TData>({
 
           <div className="flex items-center gap-2">
             <span className="text-sm text-muted-foreground">
-              Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
+              Page {table.getState().pagination.pageIndex + 1} of{' '}
+              {table.getPageCount() === -1 ? '…' : table.getPageCount()}
             </span>
             <Button
               variant="outline"

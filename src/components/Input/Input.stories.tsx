@@ -18,17 +18,37 @@ const meta = {
     shape: {
       control: 'select',
       options: ['default', 'boxy', 'rounded'],
+      description: 'Corner radius style. "default" — rounded-lg (standard). "boxy" — no rounding, flat corners for grouped/stacked layouts. "rounded" — pill shape, fully rounded ends.',
     },
     type: {
       control: 'select',
       options: ['text', 'email', 'password', 'number', 'search', 'tel', 'url', 'file'],
+      description: 'HTML input type. Controls the native keyboard on mobile and browser-level validation. "password" masks the value; "file" shows a file picker.',
     },
-    disabled: { control: 'boolean' },
-    readOnly: { control: 'boolean' },
-    placeholder: { control: 'text' },
-    onChange: { action: 'changed' },
-    onFocus: { action: 'focused' },
-    onBlur: { action: 'blurred' },
+    disabled: {
+      control: 'boolean',
+      description: 'When true, the input is non-interactive, dimmed (50% opacity), and shows a not-allowed cursor.',
+    },
+    readOnly: {
+      control: 'boolean',
+      description: 'When true, the value is visible and selectable but cannot be edited by the user.',
+    },
+    placeholder: {
+      control: 'text',
+      description: 'Hint text displayed when the input has no value. Rendered at reduced opacity via the muted-foreground colour token.',
+    },
+    onChange: {
+      action: 'changed',
+      description: 'Fired on every keystroke. Receives the native `React.ChangeEvent<HTMLInputElement>`.',
+    },
+    onFocus: {
+      action: 'focused',
+      description: 'Fired when the input receives focus. Receives the native `React.FocusEvent<HTMLInputElement>`.',
+    },
+    onBlur: {
+      action: 'blurred',
+      description: 'Fired when the input loses focus. Receives the native `React.FocusEvent<HTMLInputElement>`.',
+    },
   },
 } satisfies Meta<typeof Input>
 
@@ -40,7 +60,12 @@ type Story = StoryObj<typeof meta>
 // ---------------------------------------------------------------------------
 
 export const Default: Story = {
-  args: { placeholder: 'Enter text…' },
+  args: {
+    placeholder: 'Enter text…',
+    shape: 'default',
+    type: 'text',
+    disabled: false,
+  },
 }
 
 // ---------------------------------------------------------------------------

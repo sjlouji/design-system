@@ -17,40 +17,40 @@ const meta = {
   argTypes: {
     value: {
       control: false,
-      description: 'Controlled date value',
+      description: 'Controlled `Date` value. When provided the text input is populated with the formatted date. Pair with `onChange` for fully controlled usage.',
     },
     onChange: {
-      action: 'changed',
-      description: 'Callback fired when the date changes',
+      action: 'onChange',
+      description: 'Fired when the user selects a date from the calendar or types a valid date in the text input and blurs. Receives a `Date` object, or `undefined` when the field is cleared.',
     },
     placeholder: {
       control: 'text',
-      description: 'Placeholder text shown when no date is selected',
+      description: 'Placeholder text shown in the text input when no date is set. Should match the `format` pattern so users know the expected input (e.g. "DD/MM/YYYY"). Defaults to "DD/MM/YYYY".',
     },
     format: {
       control: 'select',
       options: ['dd/MM/yyyy', 'MM/dd/yyyy', 'yyyy-MM-dd', 'dd-MM-yyyy', 'MMM d, yyyy'],
-      description: 'Date format string (date-fns format tokens)',
+      description: 'date-fns format string used for both displaying and parsing the typed input. "dd/MM/yyyy" — day-first (UK/AU). "MM/dd/yyyy" — month-first (US). "yyyy-MM-dd" — ISO 8601. "dd-MM-yyyy" — hyphen-separated day-first. "MMM d, yyyy" — abbreviated month (e.g. Jun 15, 2025). Defaults to "dd/MM/yyyy".',
     },
     disabled: {
       control: 'boolean',
-      description: 'Disables the input and calendar button',
+      description: 'When true, disables both the text input and the calendar icon button — no interaction is possible and both are visually dimmed.',
     },
     error: {
       control: 'boolean',
-      description: 'Renders the input in an error state',
+      description: 'When true, applies a destructive (red) border to the text input. Combine with an external error message for full form validation feedback. The component also sets this internally when the user types an unparseable date string.',
     },
     min: {
       control: false,
-      description: 'Minimum selectable date (disables earlier dates in the calendar)',
+      description: 'Earliest selectable `Date`. Dates before this are disabled in the calendar popover. Does not constrain direct text input.',
     },
     max: {
       control: false,
-      description: 'Maximum selectable date (disables later dates in the calendar)',
+      description: 'Latest selectable `Date`. Dates after this are disabled in the calendar popover. Does not constrain direct text input.',
     },
     className: {
       control: 'text',
-      description: 'Additional CSS classes applied to the wrapper',
+      description: 'Additional CSS classes applied to the outer wrapper `div` (which contains both the text input and the calendar icon button).',
     },
   },
 } satisfies Meta<typeof DateInput>
@@ -59,7 +59,12 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: {},
+  args: {
+    placeholder: 'DD/MM/YYYY',
+    format: 'dd/MM/yyyy',
+    disabled: false,
+    error: false,
+  },
 }
 
 export const WithPreselectedDate: Story = {

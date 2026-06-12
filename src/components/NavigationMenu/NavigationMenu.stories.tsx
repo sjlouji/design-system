@@ -34,21 +34,28 @@ const meta = {
   argTypes: {
     viewport: {
       control: 'boolean',
-      description: 'Whether to render the viewport panel (animated dropdown container)',
-      defaultValue: true,
+      description: 'When true (default), dropdown content is rendered inside a shared NavigationMenuViewport panel with enter/exit animations. When false, content renders inline directly beneath its trigger — useful for compact or mobile-style navs.',
     },
     orientation: {
       control: 'select',
       options: ['horizontal', 'vertical'],
-      description: 'Orientation of the menu items',
+      description: 'Layout direction of the menu list. "horizontal" — items sit side-by-side (default). "vertical" — items stack top-to-bottom.',
     },
     delayDuration: {
       control: 'number',
-      description: 'Duration in ms before the menu opens on hover',
+      description: 'Milliseconds to wait before opening a dropdown when the trigger is hovered. Default is 200 ms. Set to 0 for instant open.',
     },
     skipDelayDuration: {
       control: 'number',
-      description: 'How much time a user has to move to another trigger without delay',
+      description: 'Milliseconds a user has to move their cursor from one trigger to another without the open-delay being re-applied. Default is 300 ms.',
+    },
+    children: {
+      control: false,
+      description: 'A NavigationMenuList containing NavigationMenuItem elements. When viewport is true, a NavigationMenuViewport is automatically appended.',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes on the root NavigationMenu element.',
     },
   },
 } satisfies Meta<typeof NavigationMenu>

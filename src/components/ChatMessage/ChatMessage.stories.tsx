@@ -12,33 +12,58 @@ const meta = {
     role: {
       control: 'select',
       options: ['user', 'assistant', 'system'],
-      description: 'The sender role — controls layout direction and bubble style',
+      description:
+        '"user" — right-aligned bubble with primary background. "assistant" — left-aligned plain markdown content with an AI avatar. "system" — centred horizontal rule with small caps label text, ignores all other props except `content`.',
     },
     content: {
       control: 'text',
-      description: 'Message text content (markdown is rendered for assistant)',
+      description:
+        'Message text. For `role="assistant"`, rendered via `MarkdownMessage` (supports headings, code blocks, lists, bold, italic). For `role="user"`, displayed as plain pre-wrapped text. For `role="system"`, shown as a centred label.',
+    },
+    avatar: {
+      control: false,
+      description:
+        'Optional avatar config `{ src?: string; fallback: string }`. When omitted for `role="assistant"`, a gradient AI badge is shown automatically. When omitted for `role="user"`, no avatar is shown.',
     },
     name: {
       control: 'text',
-      description: 'Display name shown above the message bubble',
+      description:
+        'Display name rendered above the message. For `role="assistant"`, styled with a gradient text effect. For `role="user"`, rendered in muted foreground.',
     },
     timestamp: {
       control: 'text',
-      description: 'Timestamp string rendered beside the name',
+      description:
+        'Timestamp string displayed beside the name in muted small text. Pass any formatted string (e.g. "2:34 PM", "just now").',
     },
     streaming: {
       control: 'boolean',
-      description: 'When true, shows TypingIndicator instead of content',
+      description:
+        'When true, renders a `TypingIndicator` in place of `content`. Use this while the assistant response is being streamed.',
+    },
+    actions: {
+      control: false,
+      description:
+        'React node rendered below the message bubble on group hover (opacity transitions in). Typically `<MessageActions>` or `<MessageFeedback>` components.',
     },
     className: {
       control: 'text',
-      description: 'Additional CSS classes applied to the root element',
+      description: 'Additional CSS classes applied to the root element.',
     },
   },
 } satisfies Meta<typeof ChatMessage>
 
 export default meta
 type Story = StoryObj<typeof meta>
+
+export const Default: Story = {
+  args: {
+    role: 'assistant',
+    content: 'Hello! How can I help you today?',
+    name: 'Claude',
+    timestamp: '2:34 PM',
+    streaming: false,
+  },
+}
 
 export const UserMessage: Story = {
   args: {

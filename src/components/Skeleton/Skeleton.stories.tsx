@@ -7,7 +7,16 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   argTypes: {
-    className: { control: 'text' },
+    className: {
+      control: 'text',
+      description:
+        'CSS classes that control the skeleton shape and size. Set dimensions (h-*, w-*, size-*) and border-radius (rounded-md, rounded-full, rounded-lg) via className — there are no explicit size props. The pulse animation and muted background are applied automatically.',
+    },
+    children: {
+      control: false,
+      description:
+        'Optional children rendered inside the skeleton element. Typically left empty — the skeleton represents absent content.',
+    },
   },
 } satisfies Meta<typeof Skeleton>
 

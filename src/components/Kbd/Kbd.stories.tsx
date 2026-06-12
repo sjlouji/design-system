@@ -11,11 +11,11 @@ const meta = {
   argTypes: {
     children: {
       control: 'text',
-      description: 'Key label or content rendered inside the keyboard key',
+      description: 'Content rendered inside the `<kbd>` element. Accepts a string (e.g. "Enter", "⌘", "Ctrl") or a React element such as a small icon. Use multiple `<Kbd>` components side-by-side with "+" separators to represent key combinations.',
     },
     className: {
       control: 'text',
-      description: 'Additional CSS classes for custom styling',
+      description: 'Additional CSS classes applied to the `<kbd>` element. Useful for overriding colours (e.g. destructive red, primary blue) for context-specific shortcut hints.',
     },
   },
   args: { children: '⌘K' },

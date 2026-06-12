@@ -8,6 +8,20 @@ const meta = {
   component: Label,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
+  argTypes: {
+    children: {
+      control: 'text',
+      description: 'Label text content. Can also contain React nodes such as a required-indicator span.',
+    },
+    htmlFor: {
+      control: 'text',
+      description: 'ID of the form control this label is associated with. Clicking the label moves focus to that control.',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes applied to the label element. Use to override font size, colour, or weight.',
+    },
+  },
 } satisfies Meta<typeof Label>
 
 export default meta
@@ -20,6 +34,8 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     children: 'Email address',
+    htmlFor: '',
+    className: '',
   },
 }
 

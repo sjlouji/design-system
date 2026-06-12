@@ -12,39 +12,43 @@ const meta = {
   argTypes: {
     placeholder: {
       control: 'text',
-      description: 'Placeholder text shown when the field is empty',
+      description: 'Placeholder text shown when the field is empty. Rendered at reduced opacity.',
     },
     disabled: {
       control: 'boolean',
-      description: 'Disables the textarea',
+      description: 'Disables interaction. Applies reduced opacity and a not-allowed cursor.',
     },
     readOnly: {
       control: 'boolean',
-      description: 'Makes the textarea read-only',
+      description: 'Prevents editing without disabling. The field still receives focus and can be selected/copied.',
     },
     required: {
       control: 'boolean',
-      description: 'Marks the field as required',
+      description: 'Marks the field as required for native form validation.',
     },
     rows: {
       control: { type: 'number', min: 1 },
-      description: 'Number of visible text rows',
+      description: 'Number of visible text rows. The textarea auto-grows beyond this via `field-sizing-content` unless overridden.',
     },
     maxLength: {
       control: { type: 'number' },
-      description: 'Maximum character count',
+      description: 'Maximum character count enforced by the browser. Pair with a character counter in the UI for user feedback.',
     },
     'aria-invalid': {
       control: 'boolean',
-      description: 'Marks the textarea as invalid for error styling',
+      description: 'Triggers error styling (destructive border and ring). Set to `true` when form validation fails.',
     },
     onChange: {
       action: 'change',
-      description: 'Callback fired on value change',
+      description: 'Fires on every keystroke. Receives a `React.ChangeEvent<HTMLTextAreaElement>`.',
     },
     onBlur: {
       action: 'blur',
-      description: 'Callback fired when focus leaves the textarea',
+      description: 'Fires when focus leaves the textarea. Receives a `React.FocusEvent<HTMLTextAreaElement>`.',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes merged onto the textarea element.',
     },
   },
 } satisfies Meta<typeof Textarea>
@@ -53,7 +57,13 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: { className: 'w-[320px]' },
+  args: {
+    placeholder: 'Write your message here…',
+    disabled: false,
+    readOnly: false,
+    required: false,
+    className: 'w-[320px]',
+  },
 }
 
 export const WithPlaceholder: Story = {

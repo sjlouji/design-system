@@ -6,6 +6,35 @@ const meta = {
   component: ScrollArea,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
+  argTypes: {
+    className: {
+      control: 'text',
+      description:
+        'Additional CSS classes on the root element. Use this to set the visible dimensions (e.g. "h-[200px] w-[300px]") — content overflowing those bounds becomes scrollable.',
+    },
+    children: {
+      control: false,
+      description:
+        'Content rendered inside the scroll viewport. Any overflowing content will be scrollable. Pair with a <ScrollBar> child to show a horizontal scrollbar.',
+    },
+    type: {
+      control: 'select',
+      options: ['auto', 'always', 'scroll', 'hover'],
+      description:
+        'Controls scrollbar visibility. "auto" — shown when content overflows; "always" — always visible; "scroll" — shown while scrolling; "hover" — shown on pointer hover.',
+    },
+    scrollHideDelay: {
+      control: 'number',
+      description:
+        'Milliseconds before the scrollbar hides after the pointer leaves (only relevant when type is "scroll" or "hover"). Default is 600.',
+    },
+    dir: {
+      control: 'select',
+      options: ['ltr', 'rtl'],
+      description:
+        'Reading direction. "ltr" places the vertical scrollbar on the right; "rtl" places it on the left.',
+    },
+  },
 } satisfies Meta<typeof ScrollArea>
 
 export default meta

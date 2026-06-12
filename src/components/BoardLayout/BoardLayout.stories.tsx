@@ -6,6 +6,27 @@ const meta = {
   component: BoardLayout,
   tags: ['autodocs'],
   parameters: { layout: 'fullscreen' },
+  argTypes: {
+    columns: {
+      control: false,
+      description:
+        'Array of board columns. Each column has an id, title, cards array, and an optional color string (any CSS colour) rendered as a dot in the column header.',
+    },
+    onCardMove: {
+      action: 'onCardMove',
+      description:
+        'Fired after a card is dragged to a different column. Receives (cardId, fromColumnId, toColumnId, newIndex). Does not fire for same-column reorders.',
+    },
+    onColumnsChange: {
+      action: 'onColumnsChange',
+      description:
+        'Fired after any drag-and-drop operation completes, with the full updated columns array reflecting the new card positions.',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes applied to the scrollable columns container.',
+    },
+  },
 } satisfies Meta<typeof BoardLayout>
 
 export default meta

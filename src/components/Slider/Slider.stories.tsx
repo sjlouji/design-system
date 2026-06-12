@@ -11,40 +11,40 @@ const meta = {
   argTypes: {
     min: {
       control: { type: 'number' },
-      description: 'Minimum value',
+      description: 'Minimum selectable value. Defaults to `0`.',
     },
     max: {
       control: { type: 'number' },
-      description: 'Maximum value',
+      description: 'Maximum selectable value. Defaults to `100`.',
     },
     step: {
       control: { type: 'number' },
-      description: 'Step increment between values',
+      description: 'Increment between each selectable value. Defaults to `1`. Use larger values (e.g. `10`) for coarse steps.',
     },
     defaultValue: {
-      control: 'object',
-      description: 'Default value as an array of numbers (uncontrolled)',
+      control: false,
+      description: 'Initial value(s) as an array of numbers — one entry per thumb. Use for uncontrolled usage. Pass two numbers (e.g. `[25, 75]`) to render a range slider.',
     },
     value: {
-      control: 'object',
-      description: 'Controlled value as an array of numbers',
+      control: false,
+      description: 'Controlled value(s) as an array of numbers — one entry per thumb. Must be paired with `onValueChange` to stay in sync.',
     },
     disabled: {
       control: 'boolean',
-      description: 'Disables interaction with the slider',
+      description: 'When `true`, prevents all interaction and renders the track and thumb(s) at reduced opacity.',
     },
     orientation: {
       control: 'select',
       options: ['horizontal', 'vertical'],
-      description: 'Layout orientation',
+      description: '`horizontal` — standard left-to-right slider (default). `vertical` — top-to-bottom slider; requires an explicit height on the wrapper.',
     },
     onValueChange: {
       action: 'valueChange',
-      description: 'Callback when value changes during drag',
+      description: 'Fires continuously while the user drags a thumb. Receives the current value array, e.g. `[42]` or `[20, 80]`.',
     },
     onValueCommit: {
       action: 'valueCommit',
-      description: 'Callback when value is committed (on release)',
+      description: 'Fires once when the user releases the thumb (pointer-up or key-up). Useful for triggering expensive operations only after the drag is finished.',
     },
   },
 } satisfies Meta<typeof Slider>
@@ -56,7 +56,10 @@ export const Default: Story = {
   args: {
     min: 0,
     max: 100,
+    step: 1,
     defaultValue: [50],
+    disabled: false,
+    orientation: 'horizontal',
     className: 'w-[300px]',
   },
 }

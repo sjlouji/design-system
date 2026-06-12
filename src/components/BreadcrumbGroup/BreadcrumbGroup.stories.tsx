@@ -9,16 +9,15 @@ const meta = {
   argTypes: {
     items: {
       control: 'object',
-      description: 'Array of breadcrumb items with label, optional href, and optional current flag',
+      description: 'Ordered array of breadcrumb items. Each item has: label (string, required), href (string, optional — falls back to "#" when omitted), current (boolean, optional — marks the active page; the last item is automatically treated as current even without the flag).',
     },
     maxItems: {
       control: { type: 'number', min: 1 },
-      description:
-        'When set and item count exceeds this value, the middle items collapse to an ellipsis',
+      description: 'Maximum items to display before collapsing. When items.length exceeds this value, the component shows the first item, an ellipsis, and the last item only. Omit to always show all items.',
     },
     className: {
       control: 'text',
-      description: 'Additional CSS classes applied to the breadcrumb root',
+      description: 'Additional CSS classes applied to the root <nav> element.',
     },
   },
 } satisfies Meta<typeof BreadcrumbGroup>

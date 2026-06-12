@@ -6,10 +6,27 @@ const meta = {
   component: MarkdownMessage,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
+  argTypes: {
+    content: {
+      control: 'text',
+      description: 'Markdown string to render. Supports headings (h1–h3), paragraphs, bold, italic, inline code, fenced code blocks with language highlighting, unordered and ordered lists, blockquotes, links, horizontal rules, and tables.',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes applied to the root wrapper div. The default wrapper uses "space-y-3 text-sm leading-relaxed".',
+    },
+  },
 } satisfies Meta<typeof MarkdownMessage>
 
 export default meta
 type Story = StoryObj<typeof meta>
+
+export const Default: Story = {
+  args: {
+    content: 'This is a simple paragraph of text rendered from markdown.',
+    className: '',
+  },
+}
 
 export const Simple: Story = {
   args: {

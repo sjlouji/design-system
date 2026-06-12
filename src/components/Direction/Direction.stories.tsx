@@ -7,6 +7,17 @@ const meta: Meta<typeof Direction> = {
   component: Direction,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
+  argTypes: {
+    dir: {
+      control: 'select',
+      options: ['ltr', 'rtl'],
+      description: 'Text direction applied to all descendant Radix UI components. "ltr" — left-to-right (default, suits Latin scripts). "rtl" — right-to-left (suits Arabic, Hebrew, etc.).',
+    },
+    children: {
+      control: false,
+      description: 'Content to wrap. All Radix UI primitives inside will inherit the chosen direction.',
+    },
+  },
 }
 
 export default meta
@@ -25,6 +36,20 @@ function SelectDemo() {
       </SelectContent>
     </Select>
   )
+}
+
+export const Default: Story = {
+  args: {
+    dir: 'ltr',
+  },
+  render: (args) => (
+    <Direction {...args}>
+      <div className="flex flex-col gap-2">
+        <p className="text-sm text-muted-foreground">Direction: {args.dir ?? 'ltr'}</p>
+        <SelectDemo />
+      </div>
+    </Direction>
+  ),
 }
 
 export const LTR: Story = {

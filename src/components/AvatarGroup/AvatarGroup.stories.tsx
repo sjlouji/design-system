@@ -10,15 +10,24 @@ const meta = {
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg'],
-      description: 'Size of each avatar in the group',
+      description:
+        'Size of each avatar circle in the group. "sm" — 24 px. "md" — 32 px. "lg" — 40 px. Defaults to "md".',
+      table: { defaultValue: { summary: 'md' } },
     },
     max: {
       control: { type: 'number', min: 1, max: 20 },
-      description: 'Maximum number of avatars to show before displaying overflow count',
+      description:
+        'Maximum number of avatars to render before the overflow pill appears. Any avatars beyond this count are replaced with a "+N" bubble. Defaults to 4.',
+      table: { defaultValue: { summary: '4' } },
     },
     avatars: {
       control: false,
-      description: 'Array of avatar items ({ src?, fallback, alt? })',
+      description:
+        'Array of avatar data objects. Each entry has a required fallback string (shown as initials), and optional src URL and alt text.',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes applied to the outer flex wrapper.',
     },
   },
 } satisfies Meta<typeof AvatarGroup>

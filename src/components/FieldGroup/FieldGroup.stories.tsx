@@ -9,6 +9,29 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   args: { children: null },
+  argTypes: {
+    title: {
+      control: 'text',
+      description: 'Optional section heading rendered as a bold `<h3>` above the field grid. Omit to render no heading.',
+    },
+    description: {
+      control: 'text',
+      description: 'Optional muted subtext rendered below the title. Use to explain what the group of fields is for.',
+    },
+    columns: {
+      control: 'select',
+      options: [1, 2, 3],
+      description: 'Number of columns in the field grid. 1 — single stacked column (default). 2 — two-column grid, good for address or contact forms. 3 — three-column grid, good for compact data entry.',
+    },
+    children: {
+      control: false,
+      description: 'One or more `<Field>` (or other) elements placed in the grid. Each child occupies one grid cell.',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes applied to the root flex column container.',
+    },
+  },
 } satisfies Meta<typeof FieldGroup>
 
 export default meta

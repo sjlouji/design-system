@@ -29,25 +29,60 @@ const meta = {
   argTypes: {
     open: {
       control: 'boolean',
-      description: 'Controlled open state',
+      description:
+        'Controlled open state. When provided, the Sheet is fully controlled — you must also provide onOpenChange to keep it in sync.',
     },
     defaultOpen: {
       control: 'boolean',
-      description: 'Default open state (uncontrolled)',
+      description:
+        'Initial open state for uncontrolled usage. The Sheet manages its own open/closed state after mount.',
     },
     modal: {
       control: 'boolean',
-      description: 'When true, interaction with outside elements is disabled',
+      description:
+        'When true (default), interaction with elements outside the sheet is blocked and the page is inert while the sheet is open. Set to false for non-modal drawers that sit alongside interactive content.',
     },
     onOpenChange: {
       action: 'onOpenChange',
-      description: 'Callback when open state changes',
+      description:
+        'Fires whenever the open state changes. Receives a boolean — true when opening, false when closing. Required when using the controlled open prop.',
     },
   },
 } satisfies Meta<typeof Sheet>
 
 export default meta
 type Story = StoryObj<typeof meta>
+
+export const Default: Story = {
+  args: {
+    defaultOpen: false,
+    modal: true,
+  },
+  render: (args) => (
+    <Sheet {...args}>
+      <SheetTrigger asChild>
+        <Button variant="outline">Open sheet</Button>
+      </SheetTrigger>
+      <SheetContent side="right">
+        <SheetHeader>
+          <SheetTitle>Sheet title</SheetTitle>
+          <SheetDescription>
+            This sheet slides in from the right side of the screen.
+          </SheetDescription>
+        </SheetHeader>
+        <div className="flex-1 px-4 py-2">
+          <p className="text-sm text-muted-foreground">Sheet content goes here.</p>
+        </div>
+        <SheetFooter>
+          <SheetClose asChild>
+            <Button variant="outline">Close</Button>
+          </SheetClose>
+          <Button>Save changes</Button>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
+  ),
+}
 
 export const Right: Story = {
   name: 'Right (default)',

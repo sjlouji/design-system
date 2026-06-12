@@ -10,10 +10,14 @@ const meta = {
   parameters: { layout: 'centered' },
   argTypes: {
     size: {
-      control: 'radio',
+      control: 'select',
       options: ['xs', 'sm', 'md', 'lg'],
+      description: 'Controls the rendered SVG dimensions. `xs` — 12 px, typically for icon-size buttons. `sm` — 16 px, for use inside standard buttons or inline with small text. `md` — 20 px (default), general-purpose. `lg` — 24 px, for prominent loading states such as full-page or overlay spinners.',
     },
-    className: { control: 'text' },
+    className: {
+      control: 'text',
+      description: 'Additional Tailwind classes applied to the SVG. Use `text-*` utilities to change the stroke color (e.g. `text-primary`, `text-destructive`). Use `[animation-duration:Xs]` to adjust spin speed.',
+    },
   },
 } satisfies Meta<typeof Spinner>
 
@@ -25,7 +29,10 @@ type Story = StoryObj<typeof meta>
 // ---------------------------------------------------------------------------
 
 export const Default: Story = {
-  args: { size: 'md' },
+  args: {
+    size: 'md',
+    className: undefined,
+  },
 }
 
 export const SizeXS: Story = {

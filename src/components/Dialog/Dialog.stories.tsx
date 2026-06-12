@@ -22,19 +22,19 @@ const meta = {
   argTypes: {
     open: {
       control: 'boolean',
-      description: 'Controlled open state',
+      description: 'Controlled open state. When provided, the dialog becomes a controlled component — pair with `onOpenChange` to manage open/close yourself.',
     },
     defaultOpen: {
       control: 'boolean',
-      description: 'Default open state (uncontrolled)',
+      description: 'Initial open state for uncontrolled usage. The dialog manages its own state after mount.',
     },
     modal: {
       control: 'boolean',
-      description: 'When true, interaction with outside elements is disabled',
+      description: 'When true (default), focus is trapped inside the dialog and interaction with outside elements is blocked. Set to false for non-modal overlay panels.',
     },
     onOpenChange: {
       action: 'onOpenChange',
-      description: 'Callback when open state changes',
+      description: 'Fired when the open state changes. Receives the new boolean open value. Required when using the controlled `open` prop.',
     },
   },
 } satisfies Meta<typeof Dialog>
@@ -43,8 +43,12 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  render: () => (
-    <Dialog>
+  args: {
+    modal: true,
+    defaultOpen: false,
+  },
+  render: (args) => (
+    <Dialog {...args}>
       <DialogTrigger asChild>
         <Button variant="outline">Open Dialog</Button>
       </DialogTrigger>

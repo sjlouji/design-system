@@ -41,25 +41,56 @@ const meta = {
   argTypes: {
     open: {
       control: 'boolean',
-      description: 'Controlled open state',
+      description: 'Controlled open state. When provided, pair with `onOpenChange` to drive the menu open/close externally.',
     },
     defaultOpen: {
       control: 'boolean',
-      description: 'Default open state (uncontrolled)',
+      description: 'Initial open state for uncontrolled usage. The menu manages its own state after mount.',
     },
     modal: {
       control: 'boolean',
-      description: 'Whether the dropdown is modal',
+      description: 'When true (default), pointer events outside the menu are disabled while it is open and focus is trapped. Set to false to allow interaction with the page while the menu is open.',
     },
     onOpenChange: {
       action: 'onOpenChange',
-      description: 'Callback when open state changes',
+      description: 'Fired when the menu open state changes. Receives the new boolean open value.',
     },
   },
 } satisfies Meta<typeof DropdownMenu>
 
 export default meta
 type Story = StoryObj<typeof meta>
+
+export const Default: Story = {
+  args: {
+    modal: true,
+    defaultOpen: false,
+  },
+  render: (args) => (
+    <DropdownMenu {...args}>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">Open menu</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-48">
+        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <UserIcon />
+          Profile
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <SettingsIcon />
+          Settings
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem variant="destructive">
+          <LogOutIcon />
+          Log out
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  ),
+}
 
 export const Basic: Story = {
   render: () => (

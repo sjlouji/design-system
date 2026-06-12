@@ -8,12 +8,59 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   args: { type: 'single' as const },
+  argTypes: {
+    type: {
+      control: 'select',
+      options: ['single', 'multiple'],
+      description: '`single` — only one item can be active at a time (radio-like). `multiple` — any number of items can be active simultaneously (checkbox-like).',
+    },
+    variant: {
+      control: 'select',
+      options: ['default', 'outline'],
+      description: '`default` — transparent background with accent fill on active items. `outline` — bordered group with shared edge borders between adjacent items when `spacing` is `0`.',
+    },
+    size: {
+      control: 'select',
+      options: ['default', 'sm', 'lg'],
+      description: 'Controls the height and horizontal padding of all items in the group. `default` — 36px. `sm` — 32px. `lg` — 40px.',
+    },
+    spacing: {
+      control: { type: 'number', min: 0 },
+      description: 'Gap between items in Tailwind spacing units. `0` (default) collapses borders between items for a joined button-group appearance. Any positive value separates items.',
+    },
+    value: {
+      control: false,
+      description: 'Controlled active value(s). A string for `type="single"`, or a string array for `type="multiple"`.',
+    },
+    onValueChange: {
+      action: 'valueChange',
+      description: 'Fires when the active selection changes. Receives the new value — a string for `single`, a string array for `multiple`.',
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Disables all items in the group.',
+    },
+    children: {
+      control: false,
+      description: 'Compose with `ToggleGroupItem` components. Each item inherits `variant` and `size` from the group context.',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes on the root group element.',
+    },
+  },
 } satisfies Meta<typeof ToggleGroup>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
+  args: {
+    type: 'single',
+    variant: 'default',
+    size: 'default',
+    spacing: 0,
+  },
   render: () => (
     <ToggleGroup type="single" defaultValue="center">
       <ToggleGroupItem value="left" aria-label="Align left">

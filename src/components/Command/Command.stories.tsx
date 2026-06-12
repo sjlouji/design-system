@@ -15,6 +15,16 @@ const meta = {
   component: Command,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
+  argTypes: {
+    children: {
+      control: false,
+      description: 'Content of the command palette — typically `CommandInput`, `CommandList`, `CommandEmpty`, `CommandGroup`, and `CommandItem` sub-components.',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes applied to the root Command container.',
+    },
+  },
 } satisfies Meta<typeof Command>
 
 export default meta

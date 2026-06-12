@@ -7,6 +7,28 @@ const meta = {
   component: PromptLibrary,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
+  argTypes: {
+    prompts: {
+      control: false,
+      description: 'Array of `PromptCardData` objects (`{ id, title, content, category? }`) to display. The library derives category filter buttons from the unique `category` values in this list.',
+    },
+    onUse: {
+      action: 'onUse',
+      description: 'Fires when the "Use" button on a card is clicked. Receives the `id` string of the selected prompt. Providing this prop makes the Use button visible on every card.',
+    },
+    onCopy: {
+      action: 'onCopy',
+      description: 'Fires when the "Copy" button on a card is clicked. Receives the `id` string of the selected prompt.',
+    },
+    onDelete: {
+      action: 'onDelete',
+      description: 'Fires when the "Delete" button on a card is clicked. Receives the `id` string of the selected prompt.',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes applied to the root wrapper element.',
+    },
+  },
 } satisfies Meta<typeof PromptLibrary>
 
 export default meta

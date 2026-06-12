@@ -22,6 +22,14 @@ const meta = {
   component: Breadcrumb,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
+  argTypes: {
+    // Breadcrumb is a composable primitive — the interesting props live on sub-components.
+    // The stories below demonstrate each sub-component's usage.
+    children: {
+      control: false,
+      description: 'Compose with BreadcrumbList > BreadcrumbItem > BreadcrumbLink / BreadcrumbPage. Use BreadcrumbSeparator between items and BreadcrumbEllipsis to indicate collapsed items.',
+    },
+  },
 } satisfies Meta<typeof Breadcrumb>
 
 export default meta

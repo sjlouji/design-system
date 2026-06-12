@@ -8,10 +8,31 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
   args: { children: null },
+  argTypes: {
+    children: {
+      control: false,
+      description:
+        'Message nodes to render — typically `<ChatMessage>` components or a `<ChatThreadEmpty>` placeholder. The thread auto-scrolls to the bottom when new children are added, but only if the scroll position is within 120 px of the bottom.',
+    },
+    className: {
+      control: 'text',
+      description:
+        'Additional CSS classes on the scrollable container. Use this to set an explicit height (e.g. `h-full`, `h-[400px]`) so the thread can scroll independently.',
+    },
+  },
 } satisfies Meta<typeof ChatThread>
 
 export default meta
 type Story = StoryObj<typeof meta>
+
+export const Default: Story = {
+  render: () => (
+    <ChatThread className="h-[300px] border rounded-lg">
+      <ChatMessage role="user" content="Hello! Can you help me?" avatar={{ fallback: 'U' }} timestamp="Now" />
+      <ChatMessage role="assistant" content="Of course! What would you like to know?" timestamp="Now" />
+    </ChatThread>
+  ),
+}
 
 export const WithMessages: Story = {
   render: () => (

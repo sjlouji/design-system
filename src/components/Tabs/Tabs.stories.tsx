@@ -12,24 +12,28 @@ const meta = {
   argTypes: {
     defaultValue: {
       control: 'text',
-      description: 'The value of the tab that should be active by default (uncontrolled)',
+      description: 'The value of the tab that should be active by default (uncontrolled). Omit when using `value` for controlled mode.',
     },
     value: {
       control: 'text',
-      description: 'Controlled active tab value',
+      description: 'Controlled active tab value. Use with `onValueChange` to manage state externally.',
     },
     onValueChange: {
       action: 'valueChanged',
-      description: 'Callback fired when the active tab changes',
+      description: 'Callback fired when the active tab changes. Receives the new tab value string as its argument.',
     },
     orientation: {
       control: 'select',
       options: ['horizontal', 'vertical'],
-      description: 'Direction of the tab list',
+      description: 'Direction of the tab list and active indicator. `horizontal` stacks tabs in a row with a bottom line indicator; `vertical` stacks them in a column with a right-side indicator.',
     },
     className: {
       control: 'text',
-      description: 'Additional CSS classes on the root element',
+      description: 'Additional CSS classes on the root `Tabs` element.',
+    },
+    children: {
+      control: false,
+      description: 'Compose with TabsList, TabsTrigger, and TabsContent. TabsList accepts a `variant` prop (`default` | `line`) that controls pill vs. underline styling.',
     },
   },
 } satisfies Meta<typeof Tabs>
@@ -38,6 +42,10 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
+  args: {
+    defaultValue: 'account',
+    orientation: 'horizontal',
+  },
   render: () => (
     <Tabs defaultValue="account" className="w-[480px]">
       <TabsList>

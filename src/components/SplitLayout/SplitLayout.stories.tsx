@@ -20,19 +20,23 @@ const meta = {
   argTypes: {
     label: {
       control: 'text',
-      description: 'The field label shown on the left side of the layout.',
+      description: 'Primary label text displayed in the left column as a small bold heading.',
     },
     description: {
       control: 'text',
-      description: 'Optional helper text shown below the label.',
+      description: 'Optional helper text rendered below the label in muted color. Use to clarify purpose or constraints of the field.',
     },
     labelWidth: {
       control: 'text',
-      description: 'Tailwind width class applied to the label column. Defaults to `w-1/3`.',
+      description: 'Tailwind width class controlling how wide the left label column is. Defaults to `w-1/3`. Use any Tailwind width utility such as `w-1/4`, `w-1/2`, or `w-48`.',
     },
     className: {
       control: 'text',
-      description: 'Additional CSS classes on the root element.',
+      description: 'Additional CSS classes on the root container element.',
+    },
+    children: {
+      control: false,
+      description: 'The form control or content placed in the right column. Accepts any React node — inputs, textareas, selects, switches, buttons, etc.',
     },
   },
 } satisfies Meta<typeof SplitLayout>

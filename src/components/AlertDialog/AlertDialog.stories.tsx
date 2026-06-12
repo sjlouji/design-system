@@ -23,9 +23,21 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   argTypes: {
-    open: { control: 'boolean', description: 'Controlled open state' },
-    defaultOpen: { control: 'boolean', description: 'Initial open state (uncontrolled)' },
-    onOpenChange: { action: 'onOpenChange' },
+    open: {
+      control: 'boolean',
+      description:
+        'Controlled open state. When provided, the component becomes controlled and you must handle open/close via onOpenChange.',
+    },
+    defaultOpen: {
+      control: 'boolean',
+      description:
+        'Initial open state for uncontrolled usage. The dialog manages its own state after mount.',
+    },
+    onOpenChange: {
+      action: 'onOpenChange',
+      description:
+        'Fired when the dialog opens or closes. Receives the new boolean open state. Use with the open prop for controlled behaviour.',
+    },
   },
 } satisfies Meta<typeof AlertDialog>
 

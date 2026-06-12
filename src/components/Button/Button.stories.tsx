@@ -22,18 +22,34 @@ const meta = {
     variant: {
       control: 'select',
       options: ['default', 'outline', 'secondary', 'ghost', 'destructive', 'link', 'ai'],
+      description: 'Visual style. "default" — filled primary colour for primary actions. "outline" — bordered, transparent fill for secondary actions. "secondary" — muted filled surface. "ghost" — borderless, hover-only fill for toolbar actions. "destructive" — red fill for irreversible/dangerous actions. "link" — underline-on-hover, no background. "ai" — gradient fill for AI/prominent call-to-action.',
     },
     size: {
       control: 'select',
       options: ['xs', 'sm', 'default', 'lg', 'xl', 'icon', 'icon-xs', 'icon-sm', 'icon-lg'],
+      description: 'Dimensions of the button. Text sizes: "xs" h-6, "sm" h-8, "default" h-9, "lg" h-10, "xl" h-12. Icon-only sizes: "icon-xs" 24 px, "icon-sm" 32 px, "icon" 36 px (default icon), "icon-lg" 40 px.',
     },
     shape: {
       control: 'select',
       options: ['default', 'boxy', 'rounded'],
+      description: 'Corner style. "default" — rounded-lg (matches design tokens). "boxy" — no border radius (sharp corners). "rounded" — fully pill-shaped (rounded-full).',
     },
-    disabled: { control: 'boolean' },
-    asChild: { control: 'boolean' },
-    onClick: { action: 'clicked' },
+    disabled: {
+      control: 'boolean',
+      description: 'When true, disables all pointer events and reduces opacity to 40%.',
+    },
+    asChild: {
+      control: 'boolean',
+      description: 'When true, renders the button styles on the single child element instead of a <button> (Radix Slot pattern). Use with <a>, <Link>, etc. to get button appearance on non-button elements.',
+    },
+    onClick: {
+      action: 'clicked',
+      description: 'Standard button click handler. Fired on mouse click and keyboard activation (Enter/Space). Receives the MouseEvent.',
+    },
+    children: {
+      control: false,
+      description: 'Button label and/or icon(s). SVG children are automatically sized (1 rem) and pointer-events are disabled on them.',
+    },
   },
 } satisfies Meta<typeof Button>
 
@@ -45,7 +61,13 @@ type Story = StoryObj<typeof meta>
 // ---------------------------------------------------------------------------
 
 export const Default: Story = {
-  args: { children: 'Button' },
+  args: {
+    children: 'Button',
+    variant: 'default',
+    size: 'default',
+    shape: 'default',
+    disabled: false,
+  },
 }
 
 export const Outline: Story = {

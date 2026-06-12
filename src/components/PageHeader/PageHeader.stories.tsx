@@ -7,10 +7,39 @@ const meta = {
   component: PageHeader,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
+  argTypes: {
+    title: {
+      control: 'text',
+      description: 'The main heading rendered as an `<h1>`. Required.',
+    },
+    description: {
+      control: 'text',
+      description: 'Optional subtitle rendered below the title in muted text.',
+    },
+    breadcrumb: {
+      control: false,
+      description: 'ReactNode slot rendered above the title row, typically a breadcrumb trail or path string.',
+    },
+    actions: {
+      control: false,
+      description: 'ReactNode slot rendered in the top-right corner of the header, typically one or more action buttons.',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes applied to the root element.',
+    },
+  },
 } satisfies Meta<typeof PageHeader>
 
 export default meta
 type Story = StoryObj<typeof meta>
+
+export const Default: Story = {
+  args: {
+    title: 'Dashboard',
+    description: 'An overview of your account activity and metrics.',
+  },
+}
 
 export const TitleOnly: Story = {
   args: {

@@ -11,37 +11,37 @@ const meta = {
     mode: {
       control: 'select',
       options: ['single', 'multiple', 'range', 'default'],
-      description: 'Selection mode: single date, multiple dates, or a date range',
+      description: 'Selection behaviour. "single" — one date at a time. "multiple" — any number of individual dates. "range" — contiguous from/to date range. "default" — no selection state managed (display only).',
     },
     showOutsideDays: {
       control: 'boolean',
-      description: 'Whether to show days from adjacent months',
+      description: 'When true, days from the previous and next months are shown in the grid to fill the week rows. Defaults to true.',
     },
     captionLayout: {
       control: 'select',
       options: ['label', 'dropdown', 'dropdown-months', 'dropdown-years'],
-      description: 'How the month/year caption is rendered',
+      description: 'How the month/year header is rendered. "label" — static text (default). "dropdown" — both month and year are select dropdowns. "dropdown-months" — only month is a dropdown. "dropdown-years" — only year is a dropdown. Dropdown modes require startMonth/endMonth to bound the range.',
     },
     buttonVariant: {
       control: 'select',
       options: ['default', 'ghost', 'outline', 'secondary', 'destructive', 'link'],
-      description: 'Button variant for prev/next navigation arrows',
+      description: 'Button variant applied to the previous/next month navigation arrow buttons. Defaults to "ghost".',
     },
     showWeekNumber: {
       control: 'boolean',
-      description: 'Show week numbers alongside dates',
+      description: 'When true, an ISO week number column is prepended to the calendar grid.',
     },
     numberOfMonths: {
       control: { type: 'number', min: 1, max: 4 },
-      description: 'Number of months to display at once',
+      description: 'How many month grids to render side-by-side. Useful for range pickers where both the start and end month should be visible simultaneously.',
     },
     disabled: {
       control: false,
-      description: 'Function or matcher to disable specific dates',
+      description: 'Date matcher to disable specific days. Accepts a Date, Date[], or a function (date: Date) => boolean. Disabled days are visually dimmed and not selectable.',
     },
     className: {
       control: 'text',
-      description: 'Additional CSS classes applied to the calendar wrapper',
+      description: 'Additional CSS classes applied to the outermost calendar wrapper element.',
     },
   },
 } satisfies Meta<typeof Calendar>
@@ -52,6 +52,11 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     mode: 'single',
+    showOutsideDays: true,
+    captionLayout: 'label',
+    buttonVariant: 'ghost',
+    showWeekNumber: false,
+    numberOfMonths: 1,
   },
 }
 

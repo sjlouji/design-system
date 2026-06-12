@@ -10,14 +10,38 @@ const meta = {
   argTypes: {
     ratio: {
       control: { type: 'number', min: 0.1, max: 5, step: 0.1 },
-      description: 'Width-to-height ratio (e.g. 16/9, 4/3, 1)',
+      description:
+        'Width-to-height ratio expressed as a number. Common values: 16/9 ≈ 1.78 (widescreen), 4/3 ≈ 1.33 (classic photo), 1 (square), 3/4 = 0.75 (portrait), 9/16 = 0.56 (mobile story). The container height is calculated as width ÷ ratio.',
       table: { defaultValue: { summary: '1' } },
+    },
+    children: {
+      control: false,
+      description:
+        'Content rendered inside the aspect-ratio box. Typically an <img> or <video> with h-full w-full object-cover, or any element that should fill the constrained space.',
     },
   },
 } satisfies Meta<typeof AspectRatio>
 
 export default meta
 type Story = StoryObj<typeof meta>
+
+// --- Default (controllable) ---
+
+export const Default: Story = {
+  args: { ratio: 16 / 9 },
+  render: (args) => (
+    <div className="w-[480px]">
+      <AspectRatio {...args}>
+        <div className="flex h-full w-full flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-border bg-muted/50">
+          <ImageIcon className="size-8 text-muted-foreground" />
+          <span className="text-sm text-muted-foreground">
+            ratio = {args.ratio?.toFixed(2)}
+          </span>
+        </div>
+      </AspectRatio>
+    </div>
+  ),
+}
 
 // --- Common ratios ---
 

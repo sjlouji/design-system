@@ -9,19 +9,31 @@ const meta = {
   argTypes: {
     title: {
       control: 'text',
-      description: 'Short title displayed at the top of the card',
+      description: 'Short title displayed at the top of the card.',
     },
     content: {
       control: 'text',
-      description: 'Prompt body text, line-clamped to 2 lines',
+      description: 'Prompt body text. Rendered line-clamped to 2 lines so long prompts are truncated.',
     },
     category: {
       control: 'text',
-      description: 'Optional badge label shown beside the title',
+      description: 'Optional category label rendered as a secondary badge beside the title.',
+    },
+    onUse: {
+      action: 'onUse',
+      description: 'Fires when the "Use" button is clicked. Providing this prop shows the Use button. No arguments are passed — the parent identifies the prompt by context.',
+    },
+    onCopy: {
+      action: 'onCopy',
+      description: 'Fires when the "Copy" button is clicked. Providing this prop shows the Copy button.',
+    },
+    onDelete: {
+      action: 'onDelete',
+      description: 'Fires when the "Delete" button is clicked. Providing this prop shows the Delete button, styled in destructive red.',
     },
     className: {
       control: 'text',
-      description: 'Additional CSS classes applied to the card root',
+      description: 'Additional CSS classes applied to the card root element.',
     },
   },
 } satisfies Meta<typeof PromptCard>
@@ -33,6 +45,10 @@ export const Default: Story = {
   args: {
     title: 'Summarise article',
     content: 'Please summarise the following article in 3 bullet points, focusing on the key takeaways and actionable insights.',
+    category: 'Writing',
+    onUse: undefined,
+    onCopy: undefined,
+    onDelete: undefined,
   },
 }
 

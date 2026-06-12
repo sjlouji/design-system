@@ -8,6 +8,40 @@ const meta: Meta<typeof Item> = {
   component: Item,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
+  argTypes: {
+    label: {
+      control: 'text',
+      description: 'Primary text displayed in the item row. Always required — rendered in a medium-weight font and truncated if it overflows.',
+    },
+    description: {
+      control: 'text',
+      description: 'Optional secondary text rendered below the label in a smaller, muted style. Truncated on overflow.',
+    },
+    icon: {
+      control: false,
+      description: 'Optional icon element displayed to the left of the label. Pass any 16×16 React element (e.g. a lucide-react icon). Rendered at muted-foreground colour.',
+    },
+    trailing: {
+      control: false,
+      description: 'Optional content rendered at the far right of the row. Use for badges, counts, chevrons, or secondary actions.',
+    },
+    onClick: {
+      action: 'onClick',
+      description: 'When provided, the item becomes interactive — it gains a pointer cursor, hover highlight, `role="button"`, and keyboard support (Enter / Space). Omit for static/display-only items.',
+    },
+    active: {
+      control: 'boolean',
+      description: 'When true, the item is highlighted with the accent background and accent-foreground text to indicate the current selection.',
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'When true, the item is dimmed (50% opacity), pointer events are removed, and `aria-disabled` is set. Clicks are suppressed even if `onClick` is provided.',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes applied to the root `<div>`.',
+    },
+  },
 }
 
 export default meta
@@ -16,6 +50,9 @@ type Story = StoryObj<typeof Item>
 export const Default: Story = {
   args: {
     label: 'Profile',
+    description: undefined,
+    active: false,
+    disabled: false,
   },
 }
 

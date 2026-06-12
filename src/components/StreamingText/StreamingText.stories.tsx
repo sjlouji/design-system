@@ -11,21 +11,29 @@ const meta = {
   argTypes: {
     text: {
       control: 'text',
-      description: 'The text content to display',
+      description: 'The text content to display. Whitespace and newlines are preserved (`whitespace-pre-wrap`).',
     },
     streaming: {
       control: 'boolean',
-      description: 'When true, shows an animated blinking cursor after the text',
+      description: 'When `true`, renders an animated blinking cursor (thin vertical bar) immediately after the text. Set to `false` once the stream is complete to hide the cursor.',
     },
     className: {
       control: 'text',
-      description: 'Additional CSS classes for font, size, color, etc.',
+      description: 'Additional CSS classes on the wrapping `<span>`. Use Tailwind typography utilities such as `text-sm`, `leading-relaxed`, `text-muted-foreground`, or `font-bold`.',
     },
   },
 } satisfies Meta<typeof StreamingText>
 
 export default meta
 type Story = StoryObj<typeof meta>
+
+export const Default: Story = {
+  args: {
+    text: 'The answer to your question is being generated',
+    streaming: true,
+    className: 'text-sm',
+  },
+}
 
 export const Static: Story = {
   args: {

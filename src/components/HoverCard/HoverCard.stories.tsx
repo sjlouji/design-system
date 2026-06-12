@@ -12,23 +12,23 @@ const meta = {
   argTypes: {
     openDelay: {
       control: { type: 'number', min: 0, max: 2000, step: 100 },
-      description: 'Delay in ms before the hover card opens',
+      description: 'Milliseconds to wait after the cursor enters the trigger before the card opens. Default is 700ms. Set to 0 for instant reveal.',
     },
     closeDelay: {
       control: { type: 'number', min: 0, max: 2000, step: 100 },
-      description: 'Delay in ms before the hover card closes',
+      description: 'Milliseconds to wait after the cursor leaves the trigger or content before the card closes. Default is 300ms.',
     },
     open: {
       control: 'boolean',
-      description: 'Controlled open state',
+      description: 'Controlled open state. When provided, you must also handle `onOpenChange` to update it — the component becomes fully controlled.',
     },
     defaultOpen: {
       control: 'boolean',
-      description: 'Default open state (uncontrolled)',
+      description: 'Initial open state for uncontrolled usage. The component manages its own state after mount.',
     },
     onOpenChange: {
       action: 'onOpenChange',
-      description: 'Callback when open state changes',
+      description: 'Fired whenever the open state changes. Receives the new boolean value. Required when using the controlled `open` prop.',
     },
   },
 } satisfies Meta<typeof HoverCard>

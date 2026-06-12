@@ -10,6 +10,21 @@ const meta = {
   parameters: { layout: 'centered' },
   // children is required by type but always provided via render
   args: { children: null },
+  argTypes: {
+    orientation: {
+      control: 'select',
+      options: ['horizontal', 'vertical'],
+      description: 'Layout direction. "horizontal" — buttons sit side-by-side, left/right corners flattened on inner edges (default). "vertical" — buttons stack top-to-bottom, top/bottom corners flattened on inner edges.',
+    },
+    children: {
+      control: false,
+      description: 'One or more <Button> elements. Adjacent border radii are removed automatically via CSS sibling selectors. Any Button variant and size are supported.',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes applied to the wrapper div.',
+    },
+  },
 } satisfies Meta<typeof ButtonGroup>
 
 export default meta
@@ -18,7 +33,7 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: { orientation: 'horizontal' },
   render: (args) => (
-    <ButtonGroup {...args}>
+    <ButtonGroup orientation={args.orientation}>
       <Button variant="outline">One</Button>
       <Button variant="outline">Two</Button>
       <Button variant="outline">Three</Button>

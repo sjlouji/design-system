@@ -10,35 +10,35 @@ const meta: Meta<typeof Combobox> = {
   argTypes: {
     options: {
       control: false,
-      description: 'Array of options to display, each with value, label, and optional description',
+      description: 'Array of options to display. Each entry has a required `value` (unique key used in selection), a required `label` (display text), and an optional `description` (secondary line shown beneath the label).',
     },
     value: {
       control: 'text',
-      description: 'Currently selected option value (controlled)',
+      description: 'Currently selected option value (controlled). Must match one of the `value` strings in `options`. Pass an empty string or omit to show the placeholder.',
     },
     onChange: {
-      action: 'changed',
-      description: 'Callback fired when selection changes. Receives the selected value string.',
+      action: 'onChange',
+      description: 'Fired when the user selects or deselects an option. Receives the selected value string. Clicking the already-selected item passes an empty string (toggle/deselect behaviour).',
     },
     placeholder: {
       control: 'text',
-      description: 'Placeholder shown on the trigger button when nothing is selected',
+      description: 'Text shown on the trigger button when no option is selected. Defaults to "Select an option...".',
     },
     searchPlaceholder: {
       control: 'text',
-      description: 'Placeholder shown in the search input inside the dropdown',
+      description: 'Placeholder shown inside the search input within the dropdown. Defaults to "Search...".',
     },
     emptyMessage: {
       control: 'text',
-      description: 'Message shown when no options match the search query',
+      description: 'Message rendered in the dropdown when the search query produces no matching options. Defaults to "No results found.".',
     },
     disabled: {
       control: 'boolean',
-      description: 'Disables the trigger button',
+      description: 'When true, disables the trigger button — the dropdown cannot be opened and the button is visually dimmed.',
     },
     className: {
       control: 'text',
-      description: 'Additional CSS classes applied to the trigger button',
+      description: 'Additional CSS classes applied to the trigger button. Use to override the default `w-[240px]` width or add custom styles.',
     },
   },
 }

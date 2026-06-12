@@ -21,8 +21,21 @@ const meta = {
     variant: {
       control: 'select',
       options: ['default', 'secondary', 'destructive', 'success', 'warning', 'outline', 'ghost', 'ai'],
+      description:
+        'Visual style of the badge. "default" — filled primary colour for primary labels. "secondary" — muted fill for neutral tags. "destructive" — red tint for errors or removals. "success" — green tint for positive states. "warning" — amber tint for caution states. "outline" — bordered, transparent fill. "ghost" — borderless, muted text only. "ai" — violet tint for AI/model-related labels.',
+      table: { defaultValue: { summary: 'default' } },
     },
-    asChild: { control: 'boolean' },
+    asChild: {
+      control: 'boolean',
+      description:
+        'When true, the badge renders its child element instead of a <span>, merging badge styles onto it. Use to render a badge as an <a> or <button>.',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    children: {
+      control: false,
+      description:
+        'Badge label text and optional icon. An SVG icon placed before the text is automatically sized to 12 px.',
+    },
   },
 } satisfies Meta<typeof Badge>
 
@@ -34,7 +47,11 @@ type Story = StoryObj<typeof meta>
 // ---------------------------------------------------------------------------
 
 export const Default: Story = {
-  args: { children: 'Default' },
+  args: {
+    variant: 'default',
+    asChild: false,
+    children: 'Default',
+  },
 }
 
 export const Secondary: Story = {

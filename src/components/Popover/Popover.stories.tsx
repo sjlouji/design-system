@@ -21,25 +21,47 @@ const meta = {
   argTypes: {
     open: {
       control: 'boolean',
-      description: 'Controlled open state',
+      description: 'Controlled open state. Use together with `onOpenChange` to manage open state externally. When omitted the component manages state internally.',
     },
     defaultOpen: {
       control: 'boolean',
-      description: 'Default open state (uncontrolled)',
+      description: 'Initial open state for uncontrolled usage. The popover starts open when `true`.',
     },
     modal: {
       control: 'boolean',
-      description: 'When true, interaction outside is disabled',
+      description: 'When `true`, interaction with content outside the popover is blocked and the page is inert until the popover is closed.',
     },
     onOpenChange: {
       action: 'onOpenChange',
-      description: 'Callback when open state changes',
+      description: 'Fires when the open state changes. Receives `open: boolean` — the new open state.',
     },
   },
 } satisfies Meta<typeof Popover>
 
 export default meta
 type Story = StoryObj<typeof meta>
+
+export const Default: Story = {
+  args: {
+    defaultOpen: false,
+    modal: false,
+  },
+  render: (args) => (
+    <Popover {...args}>
+      <PopoverTrigger asChild>
+        <Button variant="outline">Open popover</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <PopoverHeader>
+          <PopoverTitle>Popover title</PopoverTitle>
+          <PopoverDescription>
+            This is a short description of the popover content.
+          </PopoverDescription>
+        </PopoverHeader>
+      </PopoverContent>
+    </Popover>
+  ),
+}
 
 export const Basic: Story = {
   render: () => (

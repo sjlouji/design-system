@@ -9,7 +9,8 @@ const meta = {
   argTypes: {
     className: {
       control: 'text',
-      description: 'Additional CSS classes for sizing, spacing, or overrides',
+      description:
+        'Additional CSS classes applied to the wrapping `<span>` element. Use this to adjust outer padding/margin or override gap between dots. Dot size can be targeted with the `[&>span]` selector (e.g. `[&>span]:size-3`).',
     },
   },
 } satisfies Meta<typeof TypingIndicator>
@@ -17,7 +18,11 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {}
+export const Default: Story = {
+  args: {
+    className: undefined,
+  },
+}
 
 export const WithCustomPadding: Story = {
   args: {

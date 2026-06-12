@@ -9,9 +9,13 @@ const meta = {
   parameters: { layout: 'centered' },
   args: { onSubmit: () => {} },
   argTypes: {
+    onSubmit: {
+      action: 'onSubmit',
+      description: 'Called when the user submits their feedback. Receives two arguments: rating ("positive" | "negative") and an optional comment string. The component transitions to a "Thanks for your feedback!" message after submission.',
+    },
     className: {
       control: 'text',
-      description: 'Additional CSS classes on the root wrapper',
+      description: 'Additional CSS classes on the root wrapper div.',
     },
   },
 } satisfies Meta<typeof MessageFeedback>
@@ -19,7 +23,11 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {}
+export const Default: Story = {
+  args: {
+    className: '',
+  },
+}
 
 export const WithOnSubmitCallback: Story = {
   args: {

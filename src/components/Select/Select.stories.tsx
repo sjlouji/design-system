@@ -19,23 +19,43 @@ const meta = {
   argTypes: {
     disabled: {
       control: 'boolean',
-      description: 'Disables the entire select',
+      description:
+        'Disables the entire select — the trigger becomes unclickable and renders with reduced opacity.',
     },
     value: {
       control: 'text',
-      description: 'Controlled selected value',
+      description:
+        'Controlled selected value. When set, the component is controlled — you must also provide onValueChange to update it.',
     },
     defaultValue: {
       control: 'text',
-      description: 'Default uncontrolled value',
+      description:
+        'Initial selected value for uncontrolled usage. The component manages its own state after mount.',
     },
     onValueChange: {
       action: 'onValueChange',
-      description: 'Callback fired when the value changes',
+      description:
+        'Fires whenever the user selects a new item. Receives the string value of the chosen SelectItem.',
     },
     open: {
       control: 'boolean',
-      description: 'Controlled open state',
+      description:
+        'Controlled open/closed state of the dropdown. When set, also provide onOpenChange to keep it in sync.',
+    },
+    onOpenChange: {
+      action: 'onOpenChange',
+      description:
+        'Fires when the dropdown opens or closes. Receives a boolean — true when opening, false when closing.',
+    },
+    name: {
+      control: 'text',
+      description:
+        'Name attribute for the hidden input element submitted with a native HTML form.',
+    },
+    required: {
+      control: 'boolean',
+      description:
+        'Marks the select as required. The trigger gains aria-required and native form validation applies.',
     },
   },
 } satisfies Meta<typeof Select>
@@ -44,8 +64,12 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  render: () => (
-    <Select>
+  args: {
+    disabled: false,
+    required: false,
+  },
+  render: (args) => (
+    <Select {...args}>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Select a fruit" />
       </SelectTrigger>

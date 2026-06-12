@@ -23,33 +23,65 @@ const meta = {
     direction: {
       control: 'select',
       options: ['top', 'right', 'bottom', 'left'],
-      description: 'The direction from which the drawer slides in',
+      description: 'Side from which the drawer slides in. "bottom" — slides up from the bottom edge, shows a drag handle (default). "top" — slides down from the top. "left" — slides in from the left, full height. "right" — slides in from the right, full height.',
     },
     open: {
       control: 'boolean',
-      description: 'Controlled open state',
+      description: 'Controlled open state. When provided, pair with `onOpenChange` to drive open/close externally.',
     },
     defaultOpen: {
       control: 'boolean',
-      description: 'Default open state (uncontrolled)',
+      description: 'Initial open state for uncontrolled usage. The drawer manages its own state after mount.',
     },
     shouldScaleBackground: {
       control: 'boolean',
-      description: 'Whether to scale the background when the drawer is open',
+      description: 'When true, the page content behind the drawer is scaled down while the drawer is open, giving a depth effect.',
     },
     dismissible: {
       control: 'boolean',
-      description: 'Whether the drawer can be dismissed by dragging',
+      description: 'When true (default), the drawer can be closed by swiping the drag handle or clicking the overlay. Set to false to require an explicit close action.',
     },
     onOpenChange: {
       action: 'onOpenChange',
-      description: 'Callback when open state changes',
+      description: 'Fired when the open state changes. Receives the new boolean open value. Required when using the controlled `open` prop.',
     },
   },
 } satisfies Meta<typeof Drawer>
 
 export default meta
 type Story = StoryObj<typeof meta>
+
+export const Default: Story = {
+  args: {
+    direction: 'bottom',
+    dismissible: true,
+    shouldScaleBackground: false,
+    defaultOpen: false,
+  },
+  render: (args) => (
+    <Drawer {...args}>
+      <DrawerTrigger asChild>
+        <Button variant="outline">Open Drawer</Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Drawer</DrawerTitle>
+          <DrawerDescription>
+            Swipe or click outside to close.
+          </DrawerDescription>
+        </DrawerHeader>
+        <div className="px-4 pb-4">
+          <p className="text-sm text-muted-foreground">Drawer content goes here.</p>
+        </div>
+        <DrawerFooter>
+          <DrawerClose asChild>
+            <Button variant="outline">Close</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  ),
+}
 
 export const Bottom: Story = {
   name: 'Bottom (default)',

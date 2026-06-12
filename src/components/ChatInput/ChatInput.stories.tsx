@@ -28,11 +28,37 @@ const meta = {
     },
     maxLength: {
       control: 'number',
-      description: 'Character limit — shows a counter when set',
+      description:
+        'Maximum character count. When set, a `current/max` counter appears in the toolbar. The counter turns amber when within 10% of the limit and red when over. The send button is disabled while over the limit.',
+    },
+    onChange: {
+      action: 'onChange',
+      description:
+        'Fired on every keystroke with the current textarea value string. Required when using the component in controlled mode (i.e. when `value` is provided).',
+    },
+    onSubmit: {
+      action: 'onSubmit',
+      description:
+        'Fired when the user clicks the send button or presses Enter (without Shift). Receives the current value string. Not called when the input is empty, loading, disabled, or over `maxLength`.',
+    },
+    onStop: {
+      action: 'onStop',
+      description:
+        'Fired when the user clicks the stop button during generation. When both `loading` is true and `onStop` is provided, a square stop button replaces the send button.',
+    },
+    attachSlot: {
+      control: false,
+      description:
+        'React node rendered in the left side of the toolbar, intended for file attachment or media upload buttons. Renders before `actionsSlot`.',
+    },
+    actionsSlot: {
+      control: false,
+      description:
+        'React node rendered in the left side of the toolbar after `attachSlot`, intended for secondary action buttons such as microphone or AI suggestions.',
     },
     className: {
       control: 'text',
-      description: 'Additional CSS classes on the root container',
+      description: 'Additional CSS classes on the root container.',
     },
   },
 } satisfies Meta<typeof ChatInput>
@@ -43,7 +69,8 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     placeholder: 'Message the AI…',
-    onSubmit: (value) => console.log('Sent:', value),
+    disabled: false,
+    loading: false,
   },
 }
 

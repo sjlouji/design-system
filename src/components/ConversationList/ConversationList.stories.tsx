@@ -9,9 +9,29 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
   argTypes: {
+    conversations: {
+      control: false,
+      description: 'Array of conversation objects to render. Each entry has a required `id` and `title`. Optional fields: `preview` (secondary text line), `timestamp` (shown on hover when no action buttons are present), `active` (highlights the item as the current conversation), `group` (string label — when any item has a group, the list renders grouped sections with headings).',
+    },
+    onNew: {
+      action: 'onNew',
+      description: 'Fired when the user clicks the "New chat" button at the top of the list. No arguments.',
+    },
+    onSelect: {
+      action: 'onSelect',
+      description: 'Fired when the user clicks or presses Enter on a conversation item. Receives the conversation `id` string.',
+    },
+    onDelete: {
+      action: 'onDelete',
+      description: 'When provided, shows a delete (trash) icon button on each item on hover. Fired when the user clicks it. Receives the conversation `id` string.',
+    },
+    onRename: {
+      action: 'onRename',
+      description: 'When provided, shows a rename (pencil) icon button on each item on hover. Clicking it puts the item into an inline edit mode. Fired when the user commits the edit (Enter or blur). Receives `(id: string, newTitle: string)`.',
+    },
     className: {
       control: 'text',
-      description: 'Additional CSS classes on the root wrapper',
+      description: 'Additional CSS classes applied to the root wrapper `div`. Useful for controlling height and overflow when the list is inside a sidebar.',
     },
   },
 } satisfies Meta<typeof ConversationList>

@@ -54,6 +54,35 @@ const meta = {
   component: Sidebar,
   tags: ['autodocs'],
   parameters: { layout: 'fullscreen' },
+  argTypes: {
+    side: {
+      control: 'select',
+      options: ['left', 'right'],
+      description:
+        'Which edge of the viewport the sidebar is anchored to. "left" is the standard app navigation position; "right" can be used for detail panels or secondary navigation.',
+    },
+    variant: {
+      control: 'select',
+      options: ['sidebar', 'floating', 'inset'],
+      description:
+        '"sidebar" — flush against the edge with a border; "floating" — elevated panel with rounded corners and shadow, padded from the edge; "inset" — the main content area is inset and the sidebar underlaps it, creating a card-in-canvas effect.',
+    },
+    collapsible: {
+      control: 'select',
+      options: ['offcanvas', 'icon', 'none'],
+      description:
+        '"offcanvas" — sidebar slides fully off-screen when collapsed; "icon" — sidebar narrows to icon-only width showing tooltips for labels; "none" — sidebar is always expanded and cannot be toggled.',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes on the sidebar container.',
+    },
+    children: {
+      control: false,
+      description:
+        'Sidebar sub-components: SidebarHeader, SidebarContent, SidebarFooter, SidebarRail, etc. Use SidebarContent as the primary scrollable region.',
+    },
+  },
 } satisfies Meta<typeof Sidebar>
 
 export default meta
@@ -166,9 +195,14 @@ const AppFooter = () => (
 // ─── Stories ─────────────────────────────────────────────────────────────────
 
 export const Default: Story = {
-  render: () => (
+  args: {
+    side: 'left',
+    variant: 'sidebar',
+    collapsible: 'icon',
+  },
+  render: (args) => (
     <SidebarProvider>
-      <Sidebar collapsible="icon">
+      <Sidebar {...args}>
         <AppHeader />
         <SidebarContent>
           <SidebarGroup>
