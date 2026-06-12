@@ -9,31 +9,30 @@ export interface ChatShellProps {
   className?: string
 }
 
-function ChatShell({
-  sidebar,
-  header,
-  children,
-  footer,
-  className,
-}: ChatShellProps) {
+function ChatShell({ sidebar, header, children, footer, className }: ChatShellProps) {
   return (
-    <div className={cn('flex h-screen bg-background', className)}>
+    <div className={cn('flex h-screen overflow-hidden bg-background', className)}>
+      {/* Sidebar */}
       {sidebar && (
-        <aside className="w-64 border-r border-border bg-sidebar flex-shrink-0 flex flex-col">
+        <aside className="w-[260px] flex-shrink-0 flex flex-col bg-sidebar border-r border-sidebar-border">
           {sidebar}
         </aside>
       )}
+
+      {/* Main column */}
       <div className="flex flex-col flex-1 min-w-0">
         {header && (
-          <header className="border-b border-border px-4 py-3 flex-shrink-0">
+          <header className="flex-shrink-0 flex items-center px-4 h-14 border-b border-border/60 bg-background/80 backdrop-blur-sm">
             {header}
           </header>
         )}
+
         <main className="flex-1 overflow-hidden">
           {children}
         </main>
+
         {footer && (
-          <footer className="border-t border-border p-4 flex-shrink-0">
+          <footer className="flex-shrink-0 px-4 py-3 border-t border-border/40 bg-background/80 backdrop-blur-sm">
             {footer}
           </footer>
         )}

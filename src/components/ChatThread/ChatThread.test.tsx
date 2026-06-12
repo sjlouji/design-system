@@ -18,6 +18,6 @@ describe('ChatThread', () => {
 describe('ChatThreadEmpty', () => {
   it('renders empty state', () => {
     render(<ChatThreadEmpty />)
-    expect(screen.getByText('No messages yet')).toBeInTheDocument()
+    expect(screen.getByText('How can I help you today?')).toBeInTheDocument()
   })
 })

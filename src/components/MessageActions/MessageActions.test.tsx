@@ -22,7 +22,7 @@ describe('MessageActions', () => {
     const user = userEvent.setup()
     const onThumbsUp = vi.fn()
     render(<MessageActions onThumbsUp={onThumbsUp} />)
-    await user.click(screen.getByRole('button', { name: 'Thumbs up' }))
+    await user.click(screen.getByRole('button', { name: 'Good response' }))
     expect(onThumbsUp).toHaveBeenCalledOnce()
   })
 
@@ -37,7 +37,7 @@ describe('MessageActions', () => {
     )
     expect(screen.getByRole('button', { name: 'Copy' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Regenerate' })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Thumbs up' })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Thumbs down' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Good response' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Bad response' })).toBeInTheDocument()
   })
 })

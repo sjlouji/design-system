@@ -1,5 +1,6 @@
+import * as React from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { PaperclipIcon } from 'lucide-react'
+import { PaperclipIcon, MicIcon, ImageIcon, SparklesIcon } from 'lucide-react'
 import { ChatInput } from './ChatInput'
 import { Button } from '@/components/Button'
 
@@ -8,6 +9,32 @@ const meta = {
   component: ChatInput,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
+  argTypes: {
+    value: {
+      control: 'text',
+      description: 'Controlled value of the textarea',
+    },
+    placeholder: {
+      control: 'text',
+      description: 'Placeholder text shown when input is empty',
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Disables the input and send button',
+    },
+    loading: {
+      control: 'boolean',
+      description: 'Shows a spinner and stop button instead of send',
+    },
+    maxLength: {
+      control: 'number',
+      description: 'Character limit — shows a counter when set',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes on the root container',
+    },
+  },
 } satisfies Meta<typeof ChatInput>
 
 export default meta
@@ -16,7 +43,15 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     placeholder: 'Message the AI…',
-    onSubmit: (value) => alert(`Sent: ${value}`),
+    onSubmit: (value) => console.log('Sent:', value),
+  },
+}
+
+export const WithValue: Story = {
+  args: {
+    value: 'Explain how transformers work in machine learning',
+    placeholder: 'Message…',
+    onSubmit: (value) => console.log('Sent:', value),
   },
 }
 
@@ -24,24 +59,184 @@ export const Loading: Story = {
   args: {
     value: 'Waiting for response...',
     loading: true,
+    onStop: () => console.log('Stopped'),
+  },
+}
+
+export const LoadingWithStop: Story = {
+  name: 'Loading — With Stop Button',
+  args: {
+    loading: true,
+    onStop: () => console.log('Generation stopped'),
+    placeholder: 'Message…',
+  },
+}
+
+export const Disabled: Story = {
+  args: {
+    placeholder: 'Chat is unavailable…',
+    disabled: true,
   },
 }
 
 export const WithMaxLength: Story = {
+  name: 'With Max Length',
   args: {
-    placeholder: 'Type your message…',
+    placeholder: 'Type your message… (200 char limit)',
     maxLength: 200,
-    onSubmit: (value) => alert(`Sent: ${value}`),
+    onSubmit: (value) => console.log('Sent:', value),
+  },
+}
+
+export const NearMaxLength: Story = {
+  name: 'Near Max Length (Warning)',
+  args: {
+    value: 'This message is getting very long and is approaching the character limit set on this input. Almost there!',
+    maxLength: 120,
+    onSubmit: (value) => console.log('Sent:', value),
+  },
+}
+
+export const OverMaxLength: Story = {
+  name: 'Over Max Length (Error)',
+  args: {
+    value: 'This message has exceeded the character limit and the text should turn red to indicate that the user needs to shorten their message before it can be submitted.',
+    maxLength: 100,
+    onSubmit: (value) => console.log('Sent:', value),
   },
 }
 
 export const WithAttachSlot: Story = {
+  name: 'With Attach Slot',
   args: {
     placeholder: 'Message…',
-    onSubmit: (value) => alert(`Sent: ${value}`),
+    onSubmit: (value) => console.log('Sent:', value),
     attachSlot: (
       <Button variant="ghost" size="icon-sm" aria-label="Attach file">
         <PaperclipIcon />
+      </Button>
+    ),
+  },
+}
+
+export const WithActionsSlot: Story = {
+  name: 'With Actions Slot',
+  args: {
+    placeholder: 'Message…',
+    onSubmit: (value) => console.log('Sent:', value),
+    actionsSlot: (
+      <Button variant="ghost" size="icon-sm" aria-label="Use microphone">
+        <MicIcon />
+      </Button>
+    ),
+  },
+}
+
+export const WithMultipleSlots: Story = {
+  name: 'With Multiple Action Slots',
+  args: {
+    placeholder: 'Message…',
+    onSubmit: (value) => console.log('Sent:', value),
+    attachSlot: (
+      <>
+        <Button variant="ghost" size="icon-sm" aria-label="Attach file">
+          <PaperclipIcon />
+        </Button>
+        <Button variant="ghost" size="icon-sm" aria-label="Attach image">
+          <ImageIcon />
+        </Button>
+      </>
+    ),
+    actionsSlot: (
+      <Button variant="ghost" size="icon-sm" aria-label="AI suggestions">
+        <SparklesIcon />
+      </Button>
+    ),
+  },
+}
+
+export const CustomPlaceholder: Story = {
+  args: {
+    placeholder: 'Ask me anything about your codebase…',
+    onSubmit: (value) => console.log('Sent:', value),
+  },
+}
+
+export const Controlled: Story = {
+  render: () => {
+    const [value, setValue] = React.useState('')
+    const [messages, setMessages] = React.useState<string[]>([])
+
+    const handleSubmit = (v: string) => {
+      setMessages((prev) => [...prev, v])
+      setValue('')
+    }
+
+    return (
+      <div className="flex flex-col gap-4 max-w-xl">
+        <div className="flex flex-col gap-2 min-h-[80px]">
+          {messages.length === 0 ? (
+            <p className="text-sm text-muted-foreground">No messages yet. Type something below.</p>
+          ) : (
+            messages.map((msg, i) => (
+              <div key={i} className="rounded-lg bg-primary px-3 py-2 text-sm text-primary-foreground w-fit ml-auto">
+                {msg}
+              </div>
+            ))
+          )}
+        </div>
+        <ChatInput
+          value={value}
+          onChange={setValue}
+          onSubmit={handleSubmit}
+          placeholder="Type a message and press Enter…"
+        />
+      </div>
+    )
+  },
+}
+
+export const LoadingToggle: Story = {
+  name: 'Loading Toggle (Interactive)',
+  render: () => {
+    const [loading, setLoading] = React.useState(false)
+
+    const handleSubmit = () => {
+      setLoading(true)
+      setTimeout(() => setLoading(false), 3000)
+    }
+
+    return (
+      <div className="max-w-xl">
+        <ChatInput
+          loading={loading}
+          onSubmit={handleSubmit}
+          onStop={() => setLoading(false)}
+          placeholder="Submit to simulate 3s generation…"
+        />
+        <p className="mt-2 text-xs text-muted-foreground">
+          {loading ? 'Generating… click stop to cancel.' : 'Type something and submit.'}
+        </p>
+      </div>
+    )
+  },
+}
+
+export const WithAllFeatures: Story = {
+  name: 'With All Features',
+  args: {
+    placeholder: 'Message Claude…',
+    maxLength: 4000,
+    onSubmit: (value) => console.log('Sent:', value),
+    onStop: () => console.log('Stopped'),
+    attachSlot: (
+      <Button variant="ghost" size="icon-sm" aria-label="Attach file">
+        <PaperclipIcon />
+      </Button>
+    ),
+    actionsSlot: (
+      <Button variant="ghost" size="icon-sm" aria-label="AI suggestions">
+        <SparklesIcon />
       </Button>
     ),
   },

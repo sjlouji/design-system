@@ -5,7 +5,9 @@ import { TypingIndicator } from './TypingIndicator'
 describe('TypingIndicator', () => {
   it('renders 3 dots', () => {
     const { container } = render(<TypingIndicator />)
-    const dots = container.querySelectorAll('.animate-bounce')
+    const status = container.querySelector('[role="status"]')
+    expect(status).toBeInTheDocument()
+    const dots = status!.querySelectorAll('span')
     expect(dots).toHaveLength(3)
   })
 })

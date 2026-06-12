@@ -27,7 +27,7 @@ describe('ChatMessage', () => {
     const { container } = render(
       <ChatMessage role="assistant" content="" streaming={true} />
     )
-    expect(container.querySelector('.animate-bounce')).toBeInTheDocument()
+    expect(container.querySelector('[role="status"]')).toBeInTheDocument()
   })
 
   it('renders system message', () => {

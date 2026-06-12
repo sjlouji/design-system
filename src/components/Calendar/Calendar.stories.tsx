@@ -1,3 +1,4 @@
+import * as React from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Calendar } from './Calendar'
 
@@ -6,6 +7,43 @@ const meta = {
   component: Calendar,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
+  argTypes: {
+    mode: {
+      control: 'select',
+      options: ['single', 'multiple', 'range', 'default'],
+      description: 'Selection mode: single date, multiple dates, or a date range',
+    },
+    showOutsideDays: {
+      control: 'boolean',
+      description: 'Whether to show days from adjacent months',
+    },
+    captionLayout: {
+      control: 'select',
+      options: ['label', 'dropdown', 'dropdown-months', 'dropdown-years'],
+      description: 'How the month/year caption is rendered',
+    },
+    buttonVariant: {
+      control: 'select',
+      options: ['default', 'ghost', 'outline', 'secondary', 'destructive', 'link'],
+      description: 'Button variant for prev/next navigation arrows',
+    },
+    showWeekNumber: {
+      control: 'boolean',
+      description: 'Show week numbers alongside dates',
+    },
+    numberOfMonths: {
+      control: { type: 'number', min: 1, max: 4 },
+      description: 'Number of months to display at once',
+    },
+    disabled: {
+      control: false,
+      description: 'Function or matcher to disable specific dates',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes applied to the calendar wrapper',
+    },
+  },
 } satisfies Meta<typeof Calendar>
 
 export default meta
@@ -17,10 +55,177 @@ export const Default: Story = {
   },
 }
 
-export const Selected: Story = {
+export const WithSelectedDate: Story = {
   args: {
     mode: 'single',
-    defaultMonth: new Date(2024, 0, 1),
-    selected: new Date(2024, 0, 15),
+    defaultMonth: new Date(2025, 5, 1),
+    selected: new Date(2025, 5, 15),
   },
+}
+
+export const RangeSelection: Story = {
+  args: {
+    mode: 'range',
+    defaultMonth: new Date(2025, 5, 1),
+    selected: {
+      from: new Date(2025, 5, 5),
+      to: new Date(2025, 5, 18),
+    },
+  },
+}
+
+export const MultipleSelection: Story = {
+  args: {
+    mode: 'multiple',
+    defaultMonth: new Date(2025, 5, 1),
+    selected: [
+      new Date(2025, 5, 3),
+      new Date(2025, 5, 10),
+      new Date(2025, 5, 17),
+      new Date(2025, 5, 24),
+    ],
+  },
+}
+
+export const TwoMonths: Story = {
+  args: {
+    mode: 'range',
+    numberOfMonths: 2,
+    defaultMonth: new Date(2025, 5, 1),
+    selected: {
+      from: new Date(2025, 5, 20),
+      to: new Date(2025, 6, 10),
+    },
+  },
+}
+
+export const DropdownCaption: Story = {
+  args: {
+    mode: 'single',
+    captionLayout: 'dropdown',
+    fromYear: 2020,
+    toYear: 2030,
+    defaultMonth: new Date(2025, 5, 1),
+  },
+}
+
+export const DropdownMonths: Story = {
+  args: {
+    mode: 'single',
+    captionLayout: 'dropdown-months',
+    fromYear: 2023,
+    toYear: 2027,
+    defaultMonth: new Date(2025, 5, 1),
+  },
+}
+
+export const WithWeekNumbers: Story = {
+  args: {
+    mode: 'single',
+    showWeekNumber: true,
+    defaultMonth: new Date(2025, 5, 1),
+  },
+}
+
+export const HidingOutsideDays: Story = {
+  args: {
+    mode: 'single',
+    showOutsideDays: false,
+    defaultMonth: new Date(2025, 5, 1),
+  },
+}
+
+export const DisabledDates: Story = {
+  args: {
+    mode: 'single',
+    defaultMonth: new Date(2025, 5, 1),
+    disabled: [
+      new Date(2025, 5, 5),
+      new Date(2025, 5, 12),
+      new Date(2025, 5, 19),
+      new Date(2025, 5, 26),
+    ],
+  },
+}
+
+export const DisabledWeekends: Story = {
+  args: {
+    mode: 'single',
+    defaultMonth: new Date(2025, 5, 1),
+    disabled: (date: Date) => date.getDay() === 0 || date.getDay() === 6,
+  },
+}
+
+export const FutureDatesOnly: Story = {
+  args: {
+    mode: 'single',
+    disabled: (date: Date) => date < new Date(),
+    defaultMonth: new Date(),
+  },
+}
+
+export const PastDatesOnly: Story = {
+  args: {
+    mode: 'single',
+    disabled: (date: Date) => date > new Date(),
+    defaultMonth: new Date(),
+  },
+}
+
+export const ControlledSingle: Story = {
+  render: function ControlledSingle() {
+    const [date, setDate] = React.useState<Date | undefined>(new Date(2025, 5, 15))
+
+    return (
+      <div className="flex flex-col items-center gap-4">
+        <Calendar
+          mode="single"
+          selected={date}
+          onSelect={setDate}
+          defaultMonth={new Date(2025, 5, 1)}
+        />
+        <p className="text-sm text-muted-foreground">
+          Selected: {date ? date.toLocaleDateString('en-GB') : 'none'}
+        </p>
+      </div>
+    )
+  },
+}
+
+export const ControlledRange: Story = {
+  render: function ControlledRange() {
+    const [range, setRange] = React.useState<{ from?: Date; to?: Date } | undefined>({
+      from: new Date(2025, 5, 10),
+      to: new Date(2025, 5, 20),
+    })
+
+    return (
+      <div className="flex flex-col items-center gap-4">
+        <Calendar
+          mode="range"
+          selected={range}
+          onSelect={setRange as (r: unknown) => void}
+          defaultMonth={new Date(2025, 5, 1)}
+          numberOfMonths={2}
+        />
+        <div className="text-sm text-muted-foreground text-center">
+          <p>From: {range?.from ? range.from.toLocaleDateString('en-GB') : '—'}</p>
+          <p>To: {range?.to ? range.to.toLocaleDateString('en-GB') : '—'}</p>
+        </div>
+      </div>
+    )
+  },
+}
+
+export const InCard: Story = {
+  render: () => (
+    <div className="rounded-xl border shadow-sm p-4 w-fit">
+      <p className="text-sm font-semibold mb-3">Select appointment date</p>
+      <Calendar
+        mode="single"
+        defaultMonth={new Date(2025, 5, 1)}
+        disabled={(date) => date.getDay() === 0 || date.getDay() === 6 || date < new Date()}
+      />
+    </div>
+  ),
 }

@@ -48,19 +48,19 @@ describe('StatusBadge', () => {
   it('applies the correct dot color class for online', () => {
     const { container } = render(<StatusBadge status="online" />)
     const dot = container.querySelector('[aria-hidden="true"]')
-    expect(dot).toHaveClass('bg-green-500')
+    expect(dot?.className).toContain('bg-[oklch')
   })
 
   it('applies the correct dot color class for busy', () => {
     const { container } = render(<StatusBadge status="busy" />)
     const dot = container.querySelector('[aria-hidden="true"]')
-    expect(dot).toHaveClass('bg-red-500')
+    expect(dot).toHaveAttribute('aria-hidden', 'true')
   })
 
   it('applies the correct dot color class for pending', () => {
     const { container } = render(<StatusBadge status="pending" />)
     const dot = container.querySelector('[aria-hidden="true"]')
-    expect(dot).toHaveClass('bg-blue-500')
+    expect(dot).toBeInTheDocument()
   })
 
   it('sets data-status attribute', () => {

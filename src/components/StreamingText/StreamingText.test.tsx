@@ -10,13 +10,13 @@ describe('StreamingText', () => {
 
   it('shows cursor when streaming', () => {
     const { container } = render(<StreamingText text="Hello" streaming={true} />)
-    const cursor = container.querySelector('.animate-pulse')
+    const cursor = container.querySelector('[aria-hidden="true"]')
     expect(cursor).toBeInTheDocument()
   })
 
   it('does not show cursor when not streaming', () => {
     const { container } = render(<StreamingText text="Hello" streaming={false} />)
-    const cursor = container.querySelector('.animate-pulse')
+    const cursor = container.querySelector('[aria-hidden="true"]')
     expect(cursor).toBeNull()
   })
 })

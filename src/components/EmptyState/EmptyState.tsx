@@ -12,57 +12,56 @@ interface EmptyStateProps {
   size?: EmptyStateSize
 }
 
-const iconBoxSize: Record<EmptyStateSize, string> = {
-  sm: 'size-8',
-  md: 'size-12',
-  lg: 'size-16',
+const iconWrapSize: Record<EmptyStateSize, string> = {
+  sm: 'size-10',
+  md: 'size-14',
+  lg: 'size-20',
+}
+
+const iconSize: Record<EmptyStateSize, string> = {
+  sm: '[&_svg]:size-5',
+  md: '[&_svg]:size-7',
+  lg: '[&_svg]:size-9',
 }
 
 const titleSize: Record<EmptyStateSize, string> = {
-  sm: 'text-base',
-  md: 'text-lg',
-  lg: 'text-xl',
+  sm: 'text-sm font-semibold',
+  md: 'text-base font-semibold',
+  lg: 'text-lg font-semibold',
 }
 
 const spacing: Record<EmptyStateSize, string> = {
-  sm: 'gap-2 py-6',
-  md: 'gap-3 py-10',
-  lg: 'gap-4 py-16',
+  sm: 'gap-3 py-8',
+  md: 'gap-4 py-12',
+  lg: 'gap-5 py-20',
 }
 
-function EmptyState({
-  icon,
-  title,
-  description,
-  action,
-  className,
-  size = 'md',
-}: EmptyStateProps) {
+function EmptyState({ icon, title, description, action, className, size = 'md' }: EmptyStateProps) {
   return (
-    <div
-      className={cn(
-        'flex flex-col items-center justify-center text-center',
-        spacing[size],
-        className
-      )}
-    >
+    <div className={cn(
+      'flex flex-col items-center justify-center text-center',
+      spacing[size],
+      className
+    )}>
       {icon && (
-        <div
-          className={cn(
-            'flex items-center justify-center rounded-lg bg-muted text-muted-foreground',
-            iconBoxSize[size]
-          )}
-        >
+        <div className={cn(
+          'flex items-center justify-center rounded-2xl',
+          'bg-[linear-gradient(135deg,oklch(0.541_0.191_259),oklch(0.552_0.094_225))]',
+          'dark:bg-[linear-gradient(135deg,oklch(0.633_0.165_259),oklch(0.635_0.110_225))]',
+          'text-white shadow-lg shadow-primary/20',
+          iconWrapSize[size],
+          iconSize[size],
+        )}>
           {icon}
         </div>
       )}
-      <div className="flex flex-col gap-1">
-        <p className={cn('font-semibold', titleSize[size])}>{title}</p>
+      <div className="flex flex-col gap-1.5 max-w-xs">
+        <p className={titleSize[size]}>{title}</p>
         {description && (
-          <p className="text-sm text-muted-foreground">{description}</p>
+          <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
         )}
       </div>
-      {action && <div>{action}</div>}
+      {action && <div className="mt-1">{action}</div>}
     </div>
   )
 }
