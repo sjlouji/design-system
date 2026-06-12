@@ -10,8 +10,6 @@ import { Skeleton } from '@/components/Skeleton'
 import { Field } from '@/components/Field'
 import { cn } from '@/lib/utils'
 
-// ── Brand icons ────────────────────────────────────────────────────────────────
-
 function GoogleIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden>
@@ -52,8 +50,6 @@ function SlackIcon() {
     </svg>
   )
 }
-
-// ── Board background ───────────────────────────────────────────────────────────
 
 function BoardBackground() {
   const columns = [{ count: 4 }, { count: 3 }, { count: 2 }, { count: 5 }]
@@ -110,8 +106,6 @@ function BoardBackground() {
   )
 }
 
-// ── Registration card ──────────────────────────────────────────────────────────
-
 function InlineDivider({ label }: { label: string }) {
   return (
     <div className="flex items-center gap-2">
@@ -136,7 +130,6 @@ function RegistrationCard() {
 
   return (
     <div className="bg-white dark:bg-card rounded-lg shadow-2xl w-[400px] px-10 py-8 flex flex-col gap-3.5 max-h-[90vh] overflow-y-auto">
-      {/* Logo */}
       <div className="flex flex-col items-center gap-1.5 mb-1">
         <div className="h-10 w-10 rounded-lg bg-[#0052CC] flex items-center justify-center">
           <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden>
@@ -152,7 +145,6 @@ function RegistrationCard() {
         <h1 className="text-sm font-semibold text-foreground">Create your account</h1>
       </div>
 
-      {/* Social sign-up */}
       <div className="flex flex-col gap-2">
         <SocialButton icon={<GoogleIcon />}    label="Sign up with Google" />
         <SocialButton icon={<MicrosoftIcon />} label="Sign up with Microsoft" />
@@ -162,7 +154,6 @@ function RegistrationCard() {
 
       <InlineDivider label="Or sign up with email" />
 
-      {/* Form */}
       <div className="flex gap-3">
         <Field label="First name" htmlFor="reg-first" required className="flex-1">
           <Input id="reg-first" placeholder="Joan" />
@@ -194,7 +185,6 @@ function RegistrationCard() {
         </div>
       </Field>
 
-      {/* Terms */}
       <div className="flex items-start gap-2">
         <Checkbox id="reg-terms" className="mt-0.5" />
         <Label htmlFor="reg-terms" className="font-normal text-sm cursor-pointer leading-snug">
@@ -215,10 +205,8 @@ function RegistrationCard() {
   )
 }
 
-// ── Story ──────────────────────────────────────────────────────────────────────
-
 const meta = {
-  title: 'Pages/Registration',
+  title: 'Pages/Auth/Register',
   parameters: {
     layout: 'fullscreen',
     docs: { story: { height: '900px' } },

@@ -7,8 +7,6 @@ import { Skeleton } from '@/components/Skeleton'
 import { Field } from '@/components/Field'
 import { cn } from '@/lib/utils'
 
-// ── Board background ───────────────────────────────────────────────────────────
-
 function BoardBackground() {
   const columns = [{ count: 4 }, { count: 3 }, { count: 2 }, { count: 5 }]
   return (
@@ -64,8 +62,6 @@ function BoardBackground() {
   )
 }
 
-// ── Nexus logo ──────────────────────────────────────────────────────────────────
-
 function NexusLogo() {
   return (
     <div className="flex flex-col items-center gap-1.5 mb-1">
@@ -86,13 +82,10 @@ function NexusLogo() {
 
 type Step = 'request' | 'sent' | 'reset'
 
-// ── Cards per step ─────────────────────────────────────────────────────────────
-
 function RequestCard({ onSent }: { onSent: () => void }) {
   return (
     <div className="bg-white dark:bg-card rounded-lg shadow-2xl w-[400px] px-10 py-8 flex flex-col gap-4">
       <NexusLogo />
-
       <div className="flex flex-col items-center gap-1 mb-1">
         <div className="h-11 w-11 rounded-full bg-blue-50 dark:bg-blue-950 flex items-center justify-center">
           <MailIcon className="h-5 w-5 text-[#0052CC]" />
@@ -100,15 +93,12 @@ function RequestCard({ onSent }: { onSent: () => void }) {
         <h1 className="text-sm font-semibold text-foreground mt-1">Forgot your password?</h1>
         <p className="text-xs text-muted-foreground text-center">Enter your email and we'll send you a reset link</p>
       </div>
-
       <Field label="Email" htmlFor="fp-email" required>
         <Input id="fp-email" type="email" placeholder="you@example.com" autoComplete="email" />
       </Field>
-
       <Button className="w-full bg-[#0052CC] hover:bg-[#0065FF] text-white" onClick={onSent}>
         Send reset link
       </Button>
-
       <p className="text-center text-sm">
         <a href="#" className="text-[#0052CC] hover:underline inline-flex items-center gap-1">
           <ArrowLeftIcon className="size-3" /> Back to log in
@@ -122,11 +112,9 @@ function SentCard({ email, onReset }: { email: string; onReset: () => void }) {
   return (
     <div className="bg-white dark:bg-card rounded-lg shadow-2xl w-[400px] px-10 py-8 flex flex-col gap-4 items-center text-center">
       <NexusLogo />
-
       <div className="h-14 w-14 rounded-full bg-green-50 dark:bg-green-950 flex items-center justify-center">
         <CheckCircleIcon className="h-7 w-7 text-green-600 dark:text-green-400" />
       </div>
-
       <div className="space-y-1">
         <h1 className="text-sm font-semibold text-foreground">Check your email</h1>
         <p className="text-xs text-muted-foreground">
@@ -135,20 +123,17 @@ function SentCard({ email, onReset }: { email: string; onReset: () => void }) {
         </p>
         <p className="text-xs text-muted-foreground">The link expires in 1 hour.</p>
       </div>
-
       <Button
         variant="outline"
-        className="w-full h-10 rounded-[3px] border-border bg-background text-foreground font-bold shadow-none px-[10px] hover:bg-muted transition-colors"
+        className="w-full"
         onClick={onReset}
       >
         Open reset form (demo)
       </Button>
-
       <p className="text-xs text-muted-foreground">
         Didn't receive an email?{' '}
         <button className="text-[#0052CC] hover:underline font-medium">Resend</button>
       </p>
-
       <p className="text-sm">
         <a href="#" className="text-[#0052CC] hover:underline inline-flex items-center gap-1">
           <ArrowLeftIcon className="size-3" /> Back to log in
@@ -165,12 +150,10 @@ function ResetCard() {
   return (
     <div className="bg-white dark:bg-card rounded-lg shadow-2xl w-[400px] px-10 py-8 flex flex-col gap-4">
       <NexusLogo />
-
       <div className="flex flex-col items-center gap-1 mb-1">
         <h1 className="text-sm font-semibold text-foreground">Set new password</h1>
         <p className="text-xs text-muted-foreground">Must be at least 8 characters</p>
       </div>
-
       <Field label="New password" htmlFor="reset-pwd" required>
         <div className="relative">
           <Input id="reset-pwd" type={showPwd ? 'text' : 'password'} placeholder="Min. 8 characters" className="pr-9" />
@@ -179,7 +162,6 @@ function ResetCard() {
           </button>
         </div>
       </Field>
-
       <Field label="Confirm password" htmlFor="reset-confirm" required>
         <div className="relative">
           <Input id="reset-confirm" type={showConfirm ? 'text' : 'password'} placeholder="Re-enter password" className="pr-9" />
@@ -188,13 +170,10 @@ function ResetCard() {
           </button>
         </div>
       </Field>
-
       <Button className="w-full bg-[#0052CC] hover:bg-[#0065FF] text-white">Reset password</Button>
     </div>
   )
 }
-
-// ── Interactive flow ───────────────────────────────────────────────────────────
 
 function ForgotPasswordFlow({ initialStep = 'request' }: { initialStep?: Step }) {
   const [step, setStep] = React.useState<Step>(initialStep)
@@ -217,10 +196,8 @@ function ForgotPasswordFlow({ initialStep = 'request' }: { initialStep?: Step })
   )
 }
 
-// ── Story ──────────────────────────────────────────────────────────────────────
-
 const meta = {
-  title: 'Pages/Forgot Password',
+  title: 'Pages/Auth/Forgot Password',
   parameters: {
     layout: 'fullscreen',
     docs: { story: { height: '700px' } },

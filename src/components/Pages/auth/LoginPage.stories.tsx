@@ -10,8 +10,6 @@ import { Skeleton } from '@/components/Skeleton'
 import { Field } from '@/components/Field'
 import { cn } from '@/lib/utils'
 
-// ── Brand icons ────────────────────────────────────────────────────────────────
-
 function GoogleIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden>
@@ -57,17 +55,17 @@ function NexusIcon() {
   return (
     <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden>
       <defs>
-        <linearGradient id="nexus-a" x1="100%" x2="32.7%" y1="13%" y2="75%">
+        <linearGradient id="login-nexus-a" x1="100%" x2="32.7%" y1="13%" y2="75%">
           <stop offset="0%" stopColor="#0052CC"/>
           <stop offset="100%" stopColor="#2684FF"/>
         </linearGradient>
-        <linearGradient id="nexus-b" x1="0%" x2="67.3%" y1="87%" y2="25%">
+        <linearGradient id="login-nexus-b" x1="0%" x2="67.3%" y1="87%" y2="25%">
           <stop offset="0%" stopColor="#0052CC"/>
           <stop offset="100%" stopColor="#2684FF"/>
         </linearGradient>
       </defs>
-      <path fill="url(#nexus-a)" d="M16.24 15.52L9.4 8.65 3 2.24A1.08 1.08 0 001.47 3.8l6 6 6.85 6.86a.53.53 0 010 .75L7.48 24.2l-6 6A1.08 1.08 0 003 31.76l6.41-6.41 6.84-6.84a1.08 1.08 0 00-.01-1z"/>
-      <path fill="url(#nexus-b)" d="M15.76 16.48l6.84 6.87 6.41 6.41a1.08 1.08 0 001.52-1.52l-6-6-6.85-6.86a.53.53 0 010-.75l6.84-6.84 6-6A1.08 1.08 0 0029 .24l-6.41 6.41-6.84 6.84a1.08 1.08 0 00.01 0z"/>
+      <path fill="url(#login-nexus-a)" d="M16.24 15.52L9.4 8.65 3 2.24A1.08 1.08 0 001.47 3.8l6 6 6.85 6.86a.53.53 0 010 .75L7.48 24.2l-6 6A1.08 1.08 0 003 31.76l6.41-6.41 6.84-6.84a1.08 1.08 0 00-.01-1z"/>
+      <path fill="url(#login-nexus-b)" d="M15.76 16.48l6.84 6.87 6.41 6.41a1.08 1.08 0 001.52-1.52l-6-6-6.85-6.86a.53.53 0 010-.75l6.84-6.84 6-6A1.08 1.08 0 0029 .24l-6.41 6.41-6.84 6.84a1.08 1.08 0 00.01 0z"/>
     </svg>
   )
 }
@@ -76,9 +74,9 @@ function AtlassianLogo() {
   return (
     <svg width="14" height="14" viewBox="0 0 32 32" fill="none" aria-hidden>
       <path d="M11.5 17.9c-.3-.4-.9-.3-1.1.2L6.1 27.4c-.2.5.1 1 .7 1h8.5c.3 0 .6-.2.7-.5 1.5-3.6.6-7.3-2.5-10z" fill="#2684FF"/>
-      <path d="M15.5 5.1c-4 5.8-3.8 12.1-.4 16.4l5.8 10.4c.2.4.6.5.9.5h8.5c.5 0 .9-.5.7-1L16.6 5.3c-.3-.5-1-.5-1.1-.2z" fill="url(#atl-g)"/>
+      <path d="M15.5 5.1c-4 5.8-3.8 12.1-.4 16.4l5.8 10.4c.2.4.6.5.9.5h8.5c.5 0 .9-.5.7-1L16.6 5.3c-.3-.5-1-.5-1.1-.2z" fill="url(#atl-login-g)"/>
       <defs>
-        <linearGradient id="atl-g" x1="24" y1="9" x2="14" y2="24" gradientUnits="userSpaceOnUse">
+        <linearGradient id="atl-login-g" x1="24" y1="9" x2="14" y2="24" gradientUnits="userSpaceOnUse">
           <stop stopColor="#0052CC"/>
           <stop offset="1" stopColor="#2684FF"/>
         </linearGradient>
@@ -86,8 +84,6 @@ function AtlassianLogo() {
     </svg>
   )
 }
-
-// ── Blurred board background ───────────────────────────────────────────────────
 
 function BoardBackground() {
   const columns = [
@@ -99,7 +95,6 @@ function BoardBackground() {
 
   return (
     <div className="h-screen w-full bg-background overflow-hidden select-none">
-      {/* Top nav */}
       <div className="h-11 border-b border-border px-3 flex items-center gap-2 bg-background">
         <Skeleton className="h-6 w-6 rounded" />
         <Skeleton className="h-6 w-6 rounded" />
@@ -118,16 +113,12 @@ function BoardBackground() {
           <Skeleton className="h-7 w-7 rounded-full" />
         </div>
       </div>
-
       <div className="flex h-[calc(100vh-44px)]">
-        {/* Sidebar */}
         <div className="w-52 border-r border-border p-3 flex flex-col gap-2 bg-background flex-shrink-0">
           {[0.7, 1, 0.6, 0.85, 0.5, 0.75, 0.9, 0.65].map((w, i) => (
             <Skeleton key={i} className="h-4 rounded" style={{ width: `${w * 100}%` }} />
           ))}
         </div>
-
-        {/* Main content */}
         <div className="flex-1 p-4 overflow-hidden bg-background">
           <div className="flex items-center gap-4 mb-5">
             <Skeleton className="h-5 w-28" />
@@ -167,8 +158,6 @@ function BoardBackground() {
   )
 }
 
-// ── Login card ─────────────────────────────────────────────────────────────────
-
 function InlineDivider({ label }: { label: string }) {
   return (
     <div className="flex items-center gap-2 py-0.5">
@@ -191,7 +180,6 @@ function SocialButton({ icon, label }: { icon: React.ReactNode; label: string })
 function LoginCard() {
   return (
     <div className="bg-white dark:bg-card rounded-lg shadow-2xl w-[400px] px-10 py-8 flex flex-col gap-3.5">
-      {/* Logo */}
       <div className="flex flex-col items-center gap-1.5 mb-1">
         <div className="h-10 w-10 rounded-lg bg-[#0052CC] flex items-center justify-center">
           <NexusIcon />
@@ -200,29 +188,24 @@ function LoginCard() {
         <h1 className="text-sm font-semibold text-foreground">Log in to continue</h1>
       </div>
 
-      {/* Email */}
       <Field label="Email" htmlFor="login-email" required>
         <Input id="login-email" type="email" placeholder="Enter your email" autoComplete="email" />
       </Field>
 
-      {/* Remember me */}
       <div className="flex items-center gap-2">
         <Checkbox id="remember" />
         <Label htmlFor="remember" className="text-sm font-normal cursor-pointer">Remember me</Label>
         <InfoIcon className="h-3.5 w-3.5 text-blue-500 cursor-help flex-shrink-0" />
       </div>
 
-      {/* Continue */}
       <Button className="w-full bg-[#0052CC] hover:bg-[#0065FF] text-white">Continue</Button>
 
       <InlineDivider label="Or login with:" />
 
-      {/* Passkey */}
       <SocialButton icon={<KeyRoundIcon className="h-4 w-4" />} label="Passkey" />
 
       <InlineDivider label="Or continue with:" />
 
-      {/* Social */}
       <div className="flex flex-col gap-2">
         <SocialButton icon={<GoogleIcon />}    label="Google" />
         <SocialButton icon={<MicrosoftIcon />} label="Microsoft" />
@@ -230,7 +213,6 @@ function LoginCard() {
         <SocialButton icon={<SlackIcon />}     label="Slack" />
       </div>
 
-      {/* Links */}
       <div className="text-center text-sm">
         <a href="#" className="text-[#0052CC] hover:underline">Can't log in?</a>
         <span className="text-muted-foreground mx-2">·</span>
@@ -239,7 +221,6 @@ function LoginCard() {
 
       <Separator />
 
-      {/* Atlassian branding */}
       <div className="flex flex-col items-center gap-1">
         <div className="flex items-center gap-1.5">
           <AtlassianLogo />
@@ -258,10 +239,8 @@ function LoginCard() {
   )
 }
 
-// ── Story ──────────────────────────────────────────────────────────────────────
-
 const meta = {
-  title: 'Pages/Login',
+  title: 'Pages/Auth/Login',
   parameters: {
     layout: 'fullscreen',
     docs: { story: { height: '800px' } },

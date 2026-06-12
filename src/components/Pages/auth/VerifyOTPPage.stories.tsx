@@ -6,8 +6,6 @@ import { Skeleton } from '@/components/Skeleton'
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/InputOTP'
 import { cn } from '@/lib/utils'
 
-// ── Board background ───────────────────────────────────────────────────────────
-
 function BoardBackground() {
   const columns = [{ count: 4 }, { count: 3 }, { count: 2 }, { count: 5 }]
   return (
@@ -62,8 +60,6 @@ function BoardBackground() {
   )
 }
 
-// ── OTP card ───────────────────────────────────────────────────────────────────
-
 function OTPCard() {
   const [value, setValue] = React.useState('')
   const [resendTimer, setResendTimer] = React.useState(30)
@@ -76,7 +72,6 @@ function OTPCard() {
 
   return (
     <div className="bg-white dark:bg-card rounded-lg shadow-2xl w-[400px] px-10 py-8 flex flex-col gap-4 items-center text-center">
-      {/* Logo */}
       <div className="flex flex-col items-center gap-1.5">
         <div className="h-10 w-10 rounded-lg bg-[#0052CC] flex items-center justify-center">
           <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden>
@@ -91,13 +86,12 @@ function OTPCard() {
         <span className="text-lg font-bold text-foreground">Nexus</span>
       </div>
 
-      {/* Shield icon */}
       <div className="h-14 w-14 rounded-full bg-blue-50 dark:bg-blue-950 flex items-center justify-center">
         <ShieldCheckIcon className="h-7 w-7 text-[#0052CC]" />
       </div>
 
       <div className="space-y-1">
-        <h1 className="text-sm font-semibold text-foreground">Verify your email</h1>
+        <h1 className="text-sm font-semibold text-foreground">Verify your identity</h1>
         <p className="text-xs text-muted-foreground">
           We've sent a 6-digit code to{' '}
           <span className="font-medium text-foreground">you@example.com</span>
@@ -105,7 +99,6 @@ function OTPCard() {
         <p className="text-xs text-muted-foreground">The code expires in 10 minutes.</p>
       </div>
 
-      {/* OTP input */}
       <div className="flex flex-col items-center gap-2 w-full">
         <InputOTP maxLength={6} value={value} onChange={setValue}>
           <InputOTPGroup>
@@ -151,10 +144,8 @@ function OTPCard() {
   )
 }
 
-// ── Story ──────────────────────────────────────────────────────────────────────
-
 const meta = {
-  title: 'Pages/OTP Verification',
+  title: 'Pages/Auth/Verify OTP',
   parameters: {
     layout: 'fullscreen',
     docs: { story: { height: '700px' } },
