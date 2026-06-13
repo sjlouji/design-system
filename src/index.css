@@ -42,6 +42,11 @@
   /* Glow shadows for AI elements */
   --shadow-glow-primary: 0 0 0 1px var(--primary), 0 0 20px -4px var(--primary);
   --shadow-glow-sm: 0 0 12px -2px var(--primary);
+
+  /* Custom easing curves — use these in components instead of built-in ease-* */
+  --ease-snappy:  cubic-bezier(0.23, 1, 0.32, 1);   /* strong ease-out for UI interactions */
+  --ease-smooth:  cubic-bezier(0.77, 0, 0.175, 1);   /* strong ease-in-out for on-screen movement */
+  --ease-drawer:  cubic-bezier(0.32, 0.72, 0, 1);    /* iOS-like drawer curve */
 }
 
 /* ─── Theme inline: maps CSS vars → Tailwind utility classes ─────────────── */
@@ -293,6 +298,17 @@
 @keyframes glow-pulse {
   0%, 100% { box-shadow: 0 0 8px -2px var(--primary); }
   50%       { box-shadow: 0 0 20px -2px var(--primary); }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ─── Interactive cursor ──────────────────────────────────────────────────── */

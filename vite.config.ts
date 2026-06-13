@@ -19,6 +19,9 @@ export default defineConfig({
       '@': path.resolve(dirname, './src'),
     },
   },
+  optimizeDeps: {
+    include: ['react-markdown'],
+  },
   build: {
     lib: {
       entry: path.resolve(dirname, 'src/index.ts'),

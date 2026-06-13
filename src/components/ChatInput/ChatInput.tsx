@@ -135,7 +135,7 @@ function ChatInput({
               disabled={isEmpty || loading || disabled || isOverLimit}
               aria-label="Send message"
               className={cn(
-                'flex size-8 items-center justify-center rounded-lg transition-all duration-150',
+                'flex size-8 items-center justify-center rounded-lg transition-[transform,background-color,color,opacity,box-shadow] duration-150 active:scale-[0.93]',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60',
                 'disabled:pointer-events-none disabled:opacity-40',
                 isEmpty

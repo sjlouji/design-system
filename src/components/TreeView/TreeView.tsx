@@ -154,7 +154,7 @@ function TreeNodeItem({
       {hasChildren && isExpanded && (
         <ul
           role="group"
-          className="overflow-hidden animate-in fade-in-0"
+          className="overflow-hidden animate-in fade-in-0 duration-150 ease-out"
         >
           {node.children!.map((child) => (
             <TreeNodeItem

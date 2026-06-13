@@ -13,6 +13,15 @@ const config: StorybookConfig = {
     "@storybook/addon-docs",
     "@storybook/addon-mcp"
   ],
-  "framework": "@storybook/react-vite"
+  "framework": "@storybook/react-vite",
+  async viteFinal(config) {
+    // Clear the library build's external function so it doesn't affect Storybook's bundling.
+    // The rollupOptions.external in vite.config.ts is intended only for the ESM library build,
+    // not for Storybook where all deps need to be bundled.
+    if (config.build?.rollupOptions) {
+      config.build.rollupOptions.external = [];
+    }
+    return config;
+  },
 };
 export default config;
