@@ -1,14 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import * as React from 'react'
 import {
   BotIcon,
   ChevronRightIcon,
+  ChevronsUpDownIcon,
   CreditCardIcon,
   FilesIcon,
+  FolderIcon,
   HomeIcon,
   LayoutDashboardIcon,
+  LogOutIcon,
   MessageSquareIcon,
+  MoreHorizontalIcon,
+  PlusIcon,
   SettingsIcon,
+  ShareIcon,
   SparklesIcon,
+  TrashIcon,
   UsersIcon,
 } from 'lucide-react'
 import { Avatar, AvatarFallback } from '@/components/Avatar'
@@ -423,6 +431,225 @@ export const OffcanvasCollapse: Story = {
         <AppFooter />
       </Sidebar>
       <Content title="Click trigger to slide sidebar in/out" />
+    </SidebarProvider>
+  ),
+}
+
+// ─── Sidebar-08: team switcher + projects ─────────────────────────────────────
+
+const teams = [
+  { name: 'Acme Corp', plan: 'Enterprise', initials: 'AC' },
+  { name: 'Side Project', plan: 'Free', initials: 'SP' },
+  { name: 'Personal', plan: 'Pro', initials: 'ME' },
+]
+
+const s08Projects = [
+  { name: 'Design System', emoji: '🎨' },
+  { name: 'Marketing Site', emoji: '🌐' },
+  { name: 'API Gateway', emoji: '⚡' },
+  { name: 'Mobile App', emoji: '📱' },
+  { name: 'Data Pipeline', emoji: '🔄' },
+]
+
+const nav08Main = [
+  { title: 'Dashboard', icon: LayoutDashboardIcon, href: '#', active: true },
+  { title: 'Chats', icon: MessageSquareIcon, href: '#', active: false },
+  { title: 'Models', icon: BotIcon, href: '#', active: false },
+  { title: 'Documents', icon: FilesIcon, href: '#', active: false },
+  { title: 'Team', icon: UsersIcon, href: '#', active: false },
+]
+
+const nav08Secondary = [
+  { title: 'Settings', icon: SettingsIcon, href: '#' },
+  { title: 'Billing', icon: CreditCardIcon, href: '#' },
+]
+
+function TeamSwitcherHeader() {
+  const [activeTeam, setActiveTeam] = React.useState(teams[0])
+  return (
+    <SidebarHeader>
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <SidebarMenuButton size="lg" className="data-[state=open]:bg-sidebar-accent">
+                <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground text-xs font-bold">
+                  {activeTeam.initials}
+                </div>
+                <div className="grid flex-1 text-left leading-tight">
+                  <span className="truncate text-sm font-semibold">{activeTeam.name}</span>
+                  <span className="truncate text-xs text-muted-foreground">{activeTeam.plan}</span>
+                </div>
+                <ChevronsUpDownIcon className="ml-auto size-4 shrink-0 opacity-50" />
+              </SidebarMenuButton>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56" align="start" side="bottom" sideOffset={4}>
+              <DropdownMenuLabel className="text-xs text-muted-foreground">Workspaces</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              {teams.map((team) => (
+                <DropdownMenuItem key={team.name} onClick={() => setActiveTeam(team)} className="gap-2 p-2">
+                  <div className="flex size-6 shrink-0 items-center justify-center rounded-md border bg-background text-[10px] font-bold">
+                    {team.initials}
+                  </div>
+                  <div className="grid flex-1">
+                    <span className="text-sm font-medium">{team.name}</span>
+                    <span className="text-xs text-muted-foreground">{team.plan}</span>
+                  </div>
+                </DropdownMenuItem>
+              ))}
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="gap-2 p-2">
+                <div className="flex size-6 shrink-0 items-center justify-center rounded-md border bg-background">
+                  <PlusIcon className="size-3.5" />
+                </div>
+                <span className="font-medium">New workspace</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </SidebarMenuItem>
+      </SidebarMenu>
+    </SidebarHeader>
+  )
+}
+
+function UserFooter08() {
+  return (
+    <SidebarFooter>
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <SidebarMenuButton size="lg" className="data-[state=open]:bg-sidebar-accent">
+                <Avatar className="size-8 rounded-lg shrink-0">
+                  <AvatarFallback className="rounded-lg text-xs font-semibold bg-primary/10 text-primary">
+                    JL
+                  </AvatarFallback>
+                </Avatar>
+                <div className="grid flex-1 text-left leading-tight">
+                  <span className="truncate text-sm font-semibold">Joan Louji</span>
+                  <span className="truncate text-xs text-muted-foreground">joan@acme.com</span>
+                </div>
+                <ChevronsUpDownIcon className="ml-auto size-4 shrink-0 opacity-50" />
+              </SidebarMenuButton>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56" align="end" side="bottom" sideOffset={4}>
+              <DropdownMenuLabel className="flex items-center gap-2 p-2">
+                <Avatar className="size-8 rounded-lg shrink-0">
+                  <AvatarFallback className="rounded-lg text-xs font-semibold bg-primary/10 text-primary">JL</AvatarFallback>
+                </Avatar>
+                <div className="grid flex-1">
+                  <span className="text-sm font-semibold">Joan Louji</span>
+                  <span className="text-xs text-muted-foreground">joan@acme.com</span>
+                </div>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="gap-2"><SparklesIcon className="size-4" /> Upgrade to Pro</DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="gap-2"><SettingsIcon className="size-4" /> Settings</DropdownMenuItem>
+              <DropdownMenuItem className="gap-2"><CreditCardIcon className="size-4" /> Billing</DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="gap-2 text-destructive focus:text-destructive">
+                <LogOutIcon className="size-4" /> Log out
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </SidebarMenuItem>
+      </SidebarMenu>
+    </SidebarFooter>
+  )
+}
+
+export const WithTeamSwitcher: Story = {
+  name: 'Sidebar-08 — team switcher + projects',
+  render: () => (
+    <SidebarProvider>
+      <Sidebar collapsible="icon">
+        <TeamSwitcherHeader />
+
+        <SidebarContent>
+          <SidebarGroup>
+            <SidebarGroupLabel>Platform</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {nav08Main.map((item) => (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton tooltip={item.title} asChild isActive={item.active}>
+                      <a href={item.href}>
+                        <item.icon />
+                        <span>{item.title}</span>
+                      </a>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+
+          <SidebarSeparator />
+
+          <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+            <SidebarGroupLabel className="flex items-center">
+              Projects
+              <button className="ml-auto flex size-5 items-center justify-center rounded-md hover:bg-sidebar-accent hover:text-sidebar-accent-foreground">
+                <PlusIcon className="size-3.5" />
+              </button>
+            </SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {s08Projects.map((project) => (
+                  <SidebarMenuItem key={project.name}>
+                    <SidebarMenuButton asChild>
+                      <a href="#">
+                        <span>{project.emoji}</span>
+                        <span>{project.name}</span>
+                      </a>
+                    </SidebarMenuButton>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <SidebarMenuAction showOnHover>
+                          <MoreHorizontalIcon className="size-4" />
+                        </SidebarMenuAction>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent side="right" align="start" className="w-40">
+                        <DropdownMenuItem className="gap-2"><FolderIcon className="size-4" /> View project</DropdownMenuItem>
+                        <DropdownMenuItem className="gap-2"><ShareIcon className="size-4" /> Share</DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem className="gap-2 text-destructive focus:text-destructive">
+                          <TrashIcon className="size-4" /> Delete
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+
+          <SidebarSeparator />
+
+          <SidebarGroup>
+            <SidebarGroupLabel>Account</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {nav08Secondary.map((item) => (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton tooltip={item.title} asChild>
+                      <a href={item.href}>
+                        <item.icon />
+                        <span>{item.title}</span>
+                      </a>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        </SidebarContent>
+
+        <UserFooter08 />
+        <SidebarRail />
+      </Sidebar>
+      <Content title="Dashboard — Team Switcher + Projects" />
     </SidebarProvider>
   ),
 }
