@@ -8,7 +8,9 @@
       "Bash(npx shadcn@latest diff sidebar)",
       "Bash(curl -s \"https://ui.shadcn.com/registry/styles/new-york/sidebar-08.json\")",
       "Bash(grep -A2 \"--primary\" /Users/joanlouji/Documents/repositories/design-system/src/index.css)",
-      "Bash(npx eslint *)"
+      "Bash(npx eslint *)",
+      "Bash(git pull *)",
+      "Bash(git push *)"
     ]
   }
 }
