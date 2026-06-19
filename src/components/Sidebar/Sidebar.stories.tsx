@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import * as React from 'react'
 import {
+  ActivityIcon,
   BotIcon,
+  ChevronDownIcon,
   ChevronRightIcon,
   ChevronsUpDownIcon,
   CreditCardIcon,
@@ -9,6 +11,7 @@ import {
   FolderIcon,
   HomeIcon,
   LayoutDashboardIcon,
+  LifeBuoyIcon,
   LogOutIcon,
   MessageSquareIcon,
   MoreHorizontalIcon,
@@ -18,6 +21,7 @@ import {
   SparklesIcon,
   TrashIcon,
   UsersIcon,
+  WalletIcon,
 } from 'lucide-react'
 import { Avatar, AvatarFallback } from '@/components/Avatar'
 import { Badge } from '@/components/Badge'
@@ -650,6 +654,185 @@ export const WithTeamSwitcher: Story = {
         <SidebarRail />
       </Sidebar>
       <Content title="Dashboard — Team Switcher + Projects" />
+    </SidebarProvider>
+  ),
+}
+
+// ─── Clean Nav Sidebar ────────────────────────────────────────────────────────
+
+type CleanNavItem =
+  | { kind: 'link'; title: string; icon: React.ElementType; href: string; badge?: string; active?: boolean }
+  | { kind: 'group'; title: string; icon: React.ElementType; defaultOpen?: boolean; children: { title: string; active?: boolean }[] }
+
+const cleanNavItems: CleanNavItem[] = [
+  { kind: 'link', title: 'Activity', icon: ActivityIcon, href: '#', badge: '4' },
+  { kind: 'link', title: 'Dashboard', icon: LayoutDashboardIcon, href: '#' },
+  { kind: 'link', title: 'Chat feed', icon: MessageSquareIcon, href: '#' },
+  {
+    kind: 'group',
+    title: 'Projects',
+    icon: SparklesIcon,
+    defaultOpen: true,
+    children: [
+      { title: 'Overview', active: true },
+      { title: 'Active runs' },
+      { title: 'Pending' },
+      { title: 'Completed' },
+      { title: 'Archived' },
+    ],
+  },
+  {
+    kind: 'group',
+    title: 'Documents',
+    icon: FilesIcon,
+    defaultOpen: false,
+    children: [
+      { title: 'All files' },
+      { title: 'Shared' },
+      { title: 'Drafts' },
+    ],
+  },
+  { kind: 'link', title: 'Usage', icon: WalletIcon, href: '#', badge: '2' },
+]
+
+const cleanWorkspace = { name: 'Acme Corp', subtitle: 'Enterprise · AI', initials: 'AC' }
+
+function CleanNavSidebar() {
+  return (
+    <Sidebar collapsible="none" className="border-r border-border bg-background w-64 h-screen">
+      {/* Workspace header */}
+      <SidebarHeader className="p-3 pb-2">
+        <button className="flex w-full items-center gap-3 rounded-xl px-2.5 py-2.5 hover:bg-muted/60 transition-colors text-left">
+          <div className="size-9 rounded-lg bg-primary flex items-center justify-center shrink-0">
+            <span className="text-[11px] font-bold text-primary-foreground">{cleanWorkspace.initials}</span>
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-semibold text-foreground truncate">{cleanWorkspace.name}</p>
+            <p className="text-xs text-muted-foreground truncate">{cleanWorkspace.subtitle}</p>
+          </div>
+          <ChevronRightIcon className="size-4 text-muted-foreground shrink-0" />
+        </button>
+      </SidebarHeader>
+
+      {/* Nav */}
+      <SidebarContent className="px-3 py-2 flex-1">
+        <SidebarGroup className="p-0">
+          <SidebarGroupContent>
+            <SidebarMenu className="gap-0.5">
+              {cleanNavItems.map((item) => {
+                if (item.kind === 'link') {
+                  return (
+                    <SidebarMenuItem key={item.title}>
+                      <SidebarMenuButton asChild isActive={item.active}>
+                        <a href={item.href ?? '#'}>
+                          <item.icon className="size-4 shrink-0" />
+                          <span className="flex-1">{item.title}</span>
+                        </a>
+                      </SidebarMenuButton>
+                      {item.badge && (
+                        <div className="pointer-events-none absolute right-2 top-2.5 flex size-5 min-w-5 items-center justify-center rounded-md bg-primary text-primary-foreground text-[10px] font-semibold select-none">
+                          {item.badge}
+                        </div>
+                      )}
+                    </SidebarMenuItem>
+                  )
+                }
+                return (
+                  <Collapsible key={item.title} defaultOpen={item.defaultOpen} asChild>
+                    <SidebarMenuItem>
+                      <CollapsibleTrigger asChild>
+                        <SidebarMenuButton>
+                          <item.icon className="size-4 shrink-0" />
+                          <span className="flex-1">{item.title}</span>
+                          <ChevronDownIcon className="size-3.5 text-muted-foreground transition-transform duration-200 group-data-[state=open]/collapsible:rotate-180" />
+                        </SidebarMenuButton>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <SidebarMenuSub>
+                          {item.children.map((child) => (
+                            <SidebarMenuSubItem key={child.title}>
+                              <SidebarMenuSubButton asChild isActive={child.active}>
+                                <a href="#">{child.title}</a>
+                              </SidebarMenuSubButton>
+                            </SidebarMenuSubItem>
+                          ))}
+                        </SidebarMenuSub>
+                      </CollapsibleContent>
+                    </SidebarMenuItem>
+                  </Collapsible>
+                )
+              })}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+
+      {/* Footer */}
+      <SidebarFooter className="p-3 pt-0 gap-0">
+        <SidebarSeparator className="mb-2" />
+
+        <button className="flex w-full items-center gap-3 rounded-xl px-3 h-10 hover:bg-muted/60 transition-colors text-sm font-medium text-muted-foreground hover:text-foreground">
+          <LifeBuoyIcon className="size-4 shrink-0" />
+          Help center
+        </button>
+
+        <SidebarSeparator className="my-2" />
+
+        <button className="flex w-full items-center gap-2.5 rounded-xl px-2.5 py-2 hover:bg-muted/60 transition-colors text-left">
+          <div className="relative shrink-0">
+            <div className="size-8 rounded-full bg-primary/10 flex items-center justify-center">
+              <span className="text-xs font-semibold text-primary">JL</span>
+            </div>
+            <span className="absolute -bottom-0.5 -right-0.5 size-3.5 rounded-full border-2 border-background bg-emerald-500 flex items-center justify-center">
+              <span className="text-[7px] font-bold text-white leading-none">S</span>
+            </span>
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-xs font-semibold text-foreground truncate">Joan Louji</p>
+            <p className="text-[10px] text-muted-foreground truncate">joan@acme.com</p>
+          </div>
+          <ChevronRightIcon className="size-3.5 text-muted-foreground shrink-0" />
+        </button>
+
+        <div className="px-2.5 pt-2 pb-1">
+          <div className="flex items-center justify-between mb-1.5">
+            <span className="text-[11px] font-medium text-muted-foreground">Complete your profile</span>
+            <span className="text-[11px] font-semibold text-foreground">70%</span>
+          </div>
+          <div className="h-1.5 rounded-full bg-muted overflow-hidden">
+            <div className="h-full w-[70%] rounded-full bg-emerald-500" />
+          </div>
+        </div>
+      </SidebarFooter>
+    </Sidebar>
+  )
+}
+
+export const CleanNav: Story = {
+  name: 'Clean Nav — workspace switcher + collapsible groups',
+  render: () => (
+    <SidebarProvider>
+      <CleanNavSidebar />
+      <SidebarInset>
+        <header className="flex h-14 shrink-0 items-center gap-2 border-b border-border/60 px-4">
+          <div className="h-4 w-px bg-border/60" />
+          <span className="text-sm font-medium text-foreground">Dashboard</span>
+          <div className="ml-auto">
+            <Badge variant="ai" className="gap-1 text-xs">
+              <SparklesIcon className="size-3" />
+              AI Ready
+            </Badge>
+          </div>
+        </header>
+        <main className="flex flex-1 flex-col gap-4 p-6">
+          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="aspect-video rounded-xl bg-muted/40 border border-border/40" />
+            ))}
+          </div>
+          <div className="flex-1 rounded-xl bg-muted/40 border border-border/40 min-h-[200px]" />
+        </main>
+      </SidebarInset>
     </SidebarProvider>
   ),
 }
